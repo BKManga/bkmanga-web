@@ -1,0 +1,8 @@
+.loading {
+  padding: 16px;
+  color: black;
+}
+
+.loading ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #000000;
+}

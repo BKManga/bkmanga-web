@@ -1,0 +1,18 @@
+<div class="error-background" fxLayout="column" fxLayoutGap="36px">
+  <div fxLayout="row" fxLayoutAlign="center center" class="error-title" >
+      <span class="error-title-text">
+        {{data.title}}
+      </span>
+  </div>
+
+  <div fxLayout="row" class="error-description" fxLayoutAlign="center center">
+      <span class="error-description-text" [innerHTML]="data.description">
+      </span>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center" style="padding-bottom: 10px">
+    <button mat-raised-button color="warn" mat-dialog-close>
+      {{data.buttonText}}
+    </button>
+  </div>
+</div>

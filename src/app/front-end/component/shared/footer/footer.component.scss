@@ -1,0 +1,61 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.footer {
+  padding: 20px 10px;
+  background-color: $color-242526;
+}
+
+.footer-content {
+  width: $width-large;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer-content__email {
+  color: $color-b0b3b8;
+  line-height: $value-28;
+}
+
+.footer-content__policy {
+  color: $color-e4e6eb;
+  line-height: $value-28;
+  cursor: pointer;
+}
+
+.footer-content__right {
+  width: 50%;
+}
+
+.footer-content__item {
+  padding: 0 5px;
+  background-color: $color-18191a;
+  color: $color-e4e6eb;
+  line-height: $value-28;
+  width: fit-content;
+  margin: 0 8px 8px 0;
+  cursor: pointer;
+}
+
+.footer-content__note {
+  color: $color-e4e6eb;
+}
+
+@mixin styling() {
+  .footer-content__right {
+    width: 100%;
+  }
+
+  .footer-content {
+    flex-direction: column;
+  }
+
+  .footer-content__left {
+    margin-bottom: $value-20;
+  }
+}
+
+@media screen and (max-width: $limit-footer-width-large) {
+  @include styling()
+}

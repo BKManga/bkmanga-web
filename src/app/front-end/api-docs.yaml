@@ -1,0 +1,152 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /api/v1/register:
+    post:
+      tags:
+      - user-controller
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegisterRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseObject'
+  /api/v1/login:
+    post:
+      tags:
+      - user-controller
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseUserLoginResponseDTO'
+  /api/v1/testing:
+    get:
+      tags:
+      - user-controller
+      operationId: test
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseString'
+  /api/v1/test/user:
+    get:
+      tags:
+      - user-controller
+      operationId: testUser
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/test/admin:
+    get:
+      tags:
+      - user-controller
+      operationId: testAdmin
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    UserRegisterRequestDTO:
+      required:
+      - dateOfBirth
+      - email
+      - password
+      - phoneNumber
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        dateOfBirth:
+          type: string
+        phoneNumber:
+          type: string
+    ApiResponseObject:
+      type: object
+      properties:
+        result:
+          type: object
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    UserLoginRequestDTO:
+      required:
+      - loginID
+      - password
+      type: object
+      properties:
+        loginID:
+          type: string
+        password:
+          type: string
+    ApiResponseUserLoginResponseDTO:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/UserLoginResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    UserLoginResponseDTO:
+      type: object
+      properties:
+        tokenBearer:
+          type: string
+    ApiResponseString:
+      type: object
+      properties:
+        result:
+          type: string
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32

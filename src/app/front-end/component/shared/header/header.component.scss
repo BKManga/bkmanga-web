@@ -1,0 +1,134 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.header {
+  background-color: $color-18191a;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-content {
+  max-width: $width-large;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-content__logo__large {
+  cursor: pointer;
+  z-index: 10;
+}
+
+.header-content__logo__short {
+  cursor: pointer;
+  display: none;
+  padding: 9px 0;
+  margin-right: 20px;
+}
+
+.header-content__left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input__relative {
+  position: relative;
+}
+
+.header-content__search {
+  position: absolute;
+  max-width: $width-large;
+  width: 100%;
+}
+
+.header-content__search form {
+  margin-left: $value-160;
+}
+
+.header-content__input {
+  height: $height-search-input-header;
+  outline: none;
+  background-color: $color-3a3b3c;
+  border: none;
+  padding: $padding-search-input-header;
+  color: $color-b0b3b8;
+  width: $width-input-large;
+  border-radius: $width-input-large;
+  position: relative;
+}
+
+.header-content__search__icon {
+  position: absolute;
+  cursor: pointer;
+  padding: 0 10px;
+  color: $color-b0b3b8;
+  transform: scale(1.2);
+}
+
+.header-content__search__short {
+  width: $value-44;
+  height: $value-44;
+  background-color: $color-e4e6eb;
+  border-radius: $value-44;
+  visibility: hidden;
+}
+
+.header-content__search__short__icon {
+  color: $color-242526;
+  cursor: pointer;
+}
+
+@mixin styling() {
+
+  .header-content {
+    width: 100%;
+    align-items: start;
+  }
+
+  .header-content__input {
+    width: 100%;
+  }
+
+  //.header-content__search {
+  //  display: none !important;
+  //}
+
+  .header-content__search__short {
+    visibility: visible;
+  }
+
+  .header-content__left {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .header-content__logo__large {
+    display: none;
+  }
+
+  .header-content__logo__short {
+    display: block;
+  }
+
+  .header-content__right {
+    padding: 9px 0;
+  }
+
+  .header-content__search {
+    width: 100%;
+    position: relative;
+  }
+
+  .header-content__search form {
+    margin-left: 0;
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width: $limit-header-width-large) {
+  @include styling()
+}
+
