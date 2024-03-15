@@ -1,0 +1,54 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.result_search_header {
+  position: absolute;
+  left: $value-160;
+  margin-top: 2px;
+  width: $value-420;
+  max-height: $value-420;
+  background-color: $color-3a3b3c;
+  border-radius: 3px;
+  overflow: auto;
+  z-index: 12;
+}
+
+.result_search_header__item {
+  padding: 10px;
+  border-bottom: 1px solid $color-18191a;
+  cursor: pointer;
+}
+
+.result_search_header__item:hover {
+  background-color: $color-cacece;
+}
+
+.result_search_header__no_result {
+  padding: 10px;
+  color: $color-e4e6eb;
+}
+
+.result_search_header__name {
+  color: $color-e4e6eb;
+}
+
+.result_search_header__other_name {
+  font-size: $value-12;
+  color: $color-e4e6eb;
+}
+
+.result_search_header__last_chapter {
+  font-size: $value-13;
+  color: $color-999999;
+}
+
+@mixin styling() {
+  .result_search_header {
+    width: 100%;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: $limit-header-width-large) {
+  @include styling()
+}

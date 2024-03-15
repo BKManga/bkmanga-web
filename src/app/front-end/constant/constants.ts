@@ -1,5 +1,5 @@
 import {environment} from "../../../environments/environment";
-import {ImageDimension} from "../interface/image-dimension";
+import {ImageData} from "../interface/image-data";
 
 export const ErrorDialogDefaultText = {
   title: "Lỗi",
@@ -18,12 +18,29 @@ export const SnackBarConfig = {
   panelClass: ['snackbar-custom']
 }
 
-export const LogoLarge: ImageDimension = {
+export const LogoLarge: ImageData = {
   width: 146,
-  height: 58
+  height: 58,
+  url: "assets/logo/logo-large.svg"
 }
 
-export const LogoShort: ImageDimension = {
+export const LogoShort: ImageData = {
   width: 40,
-  height: 40
+  height: 40,
+  url: "assets/logo/logo-short.webp"
 }
+
+export const AppRouter = {
+  Auth: "auth",
+  Main: "main",
+  Login: "login",
+  Register: "register",
+  NotFound: "not-found",
+  Error: "error",
+}
+
+export const AppRouterAdmin = {
+  Admin: "admin",
+  ...AppRouter
+}
+

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ImageDimension} from "../../../interface/image-dimension";
+import {ImageData} from "../../../interface/image-data";
 import {LogoLarge, LogoShort} from "../../../constant/constants";
 
 @Component({
@@ -8,7 +8,7 @@ import {LogoLarge, LogoShort} from "../../../constant/constants";
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-  public logoLarge: ImageDimension
+  public logoLarge: ImageData
 
   constructor() {
     this.logoLarge = LogoLarge

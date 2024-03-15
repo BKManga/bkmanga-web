@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './front-end/test/test.component';
-import {RouterModule} from "@angular/router";
 import { ErrorDialogComponent } from './front-end/component/shared/error-dialog/error-dialog.component';
 import { LoadingComponent } from './front-end/component/shared/loading/loading.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -15,7 +14,6 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {ApiModule, Configuration} from "./front-end/bkmanga-svc";
 import {ApiBaseUrl} from "./front-end/constant/constants";
-import { LoginComponent } from './front-end/component/page/login/login.component';
 import { HeaderComponent } from './front-end/component/shared/header/header.component';
 import { FooterComponent } from './front-end/component/shared/footer/footer.component';
 import {FlexLayoutModule, FlexModule} from "@angular/flex-layout";
@@ -26,6 +24,10 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import { ResultSearchHeaderComponent } from './front-end/component/shared/result-search-header/result-search-header.component';
+import { NavigationBarComponent } from './front-end/component/shared/navigation-bar/navigation-bar.component';
+import {LoginComponent} from "./front-end/component/page/auth/login/login.component";
+import { MainComponent } from './front-end/component/page/user/main/main.component';
+import { RegisterComponent } from './front-end/component/page/auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,9 @@ import { ResultSearchHeaderComponent } from './front-end/component/shared/result
     HeaderComponent,
     FooterComponent,
     ResultSearchHeaderComponent,
+    NavigationBarComponent,
+    MainComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

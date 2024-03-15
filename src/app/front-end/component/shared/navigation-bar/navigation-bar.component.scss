@@ -1,0 +1,124 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.navigation-bar {
+  background-color: $color-242526;
+}
+
+.navigation-bar__content {
+  max-width: $width-large;
+  width: 100%;
+  display: flex;
+}
+
+.navigation-bar__icon_extend {
+  padding-right: $value-20;
+  display: none !important;
+  cursor: pointer;
+  color: $color-white;
+  height: $value-52;
+  right: 0;
+  position: absolute;
+}
+
+.navigation-bar__list_content {
+  display: flex;
+  flex-direction: row;
+}
+
+.navigation-bar__item {
+  line-height: $value-52;
+  font-size: $value-15;
+  font-weight: 400;
+  color: $color-e4e6eb;
+  padding: 0 10px;
+  position: relative;
+}
+
+.navigation-bar__extend {
+  display: flex;
+  flex-direction: row;
+}
+
+.navigation-bar__item_genre:hover {
+  .navigation-bar__extend_genre {
+    display: flex !important;
+  }
+}
+
+.navigation-bar__extend_genre {
+  display: none !important;
+  position: absolute;
+  left: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  border-bottom: 1px solid $color-white;
+  border-top: 1px solid $color-white;
+  background-color: $color-242526;
+  padding: 0 $value-20;
+}
+
+.navigation-bar__extend_genre_list {
+  width: 100%;
+  max-width: $width-large;
+  margin: 22px 0;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.navigation-bar__extend_genre_item {
+  line-height: $value-40;
+  color: $color-e4e6eb;
+  cursor: pointer;
+}
+
+.navigation-bar__item:hover{
+  cursor: pointer;
+  background-color: $color-f29c57;
+}
+@mixin styling() {
+  .navigation-bar__content {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navigation-bar__item {
+    padding: 0 $value-20;
+  }
+
+  .navigation-bar__extend {
+    display: none !important;
+    flex-direction: column;
+  }
+
+  .navigation-bar__list_content {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navigation-bar__item_genre {
+    position: relative;
+  }
+
+  .navigation-bar__icon_extend {
+    display: flex !important;
+  }
+
+  .navigation-bar__extend_genre {
+    position: unset;
+  }
+
+  .navigation-bar__extend_genre_list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: $limit-header-width-large) {
+  @include styling()
+}
+
+.navigation-bar__extend_open {
+  display: flex !important;
+}

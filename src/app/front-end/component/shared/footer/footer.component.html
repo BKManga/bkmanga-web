@@ -2,7 +2,7 @@
   <div class="footer-content">
     <div fxLayout="column" class="footer-content__left">
       <img class="footer-content__logo__large"
-           ngSrc="../../../../../assets/logo/logo-large.svg"
+           [ngSrc]="logoLarge.url ?? ''"
            alt=""
            [width]="logoLarge.width"
            [height]="logoLarge.height"

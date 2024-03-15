@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./result-search-header.component.scss']
 })
 export class ResultSearchHeaderComponent {
-
+  public selectItem(event: MouseEvent) {
+    event.stopPropagation()
+    console.log("CLICK")
+  }
 }

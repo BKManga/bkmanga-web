@@ -2,45 +2,53 @@
   <div class="header-content" fxLayout="row" fxLayoutAlign="space-between center">
     <div class="header-content__left" fxLayout fxLayoutAlign="space-between center" fxLayoutGap="20">
       <img class="header-content__logo__large"
-           ngSrc="../../../../../assets/logo/logo-large.svg"
+           [ngSrc]="logoLarge.url ?? ''"
            alt=""
            [width]="logoLarge.width"
            [height]="logoLarge.height"
+           sizes=""
+           loading="lazy"
+           (click)="redirectToMainPage()"
       >
       <img class="header-content__logo__short"
-           ngSrc="../../../../../assets/logo/logo-short.webp"
+           [ngSrc]="logoShort.url ?? ''"
            alt=""
            [width]="logoShort.width"
            [height]="logoShort.height"
+           (click)="redirectToMainPage()"
       >
       <div class="input__relative"></div>
     </div>
-    <div class="header-content__right" fxLayout fxLayoutAlign="center center" fxLayoutGap="8">
-      <div (click)="handleInputShort()" fxLayout fxLayoutAlign="center center" class="header-content__search__short">
-        <mat-icon class="header-content__search__short__icon" fontIcon="search"></mat-icon>
-      </div>
-      <button mat-raised-button color="primary">
+    <ng-template [ngIf]="showAuthButton">
+      <div class="header-content__right" fxLayout fxLayoutAlign="center center" fxLayoutGap="8">
+        <button mat-raised-button color="primary" (click)="redirectToAuthPage(AppRouter.Login)">
         <span>
           {{ 'Register'|translate }}
         </span>
-      </button>
-      <button mat-raised-button color="primary">
+        </button>
+        <button mat-raised-button color="primary" (click)="redirectToAuthPage(AppRouter.Register)">
         <span>
           {{ 'Login'|translate }}
         </span>
-      </button>
-    </div>
+        </button>
+      </div>
+    </ng-template>
   </div>
-  <ng-template [ngIf]="showInputShort">
-    <div class="header-content__search" fxLayoutAlign="start center">
+  <ng-template [ngIf]="showAuthButton">
+    <div class="header-content__search" fxLayout="column" fxLayoutAlign="center start">
       <form [formGroup]="fromGroup" fxLayout="row" (keydown.enter)="search()" fxLayoutAlign="end center">
-            <input formControlName="search" (input)="searchRealTime()" type="text" class="header-content__input" [placeholder]="placeHolder">
-            <mat-icon class="header-content__search__icon" fontIcon="search"></mat-icon>
+        <input formControlName="search"
+               (click)="$event.stopPropagation()"
+               (input)="searchRealTime()"
+               type="text" class="header-content__input"
+               [placeholder]="placeHolder"
+        >
+        <mat-icon class="header-content__search__icon">search</mat-icon>
       </form>
-      <app-result-search-header>
-
-      </app-result-search-header>
+      <ng-template [ngIf]="showResultSearchHeader">
+        <app-result-search-header>
+        </app-result-search-header>
+      </ng-template>
     </div>
   </ng-template>
-
 </header>

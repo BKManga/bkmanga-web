@@ -1,0 +1,50 @@
+<ng-template [ngIf]="showNavigationBar">
+  <div class="navigation-bar" fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayout fxLayoutAlign="space-between" class="navigation-bar__content">
+      <div class="navigation-bar__list_content">
+        <div class="navigation-bar__item" (click)="redirectToMainPage()">
+          {{ "Main Page"|translate }}
+        </div>
+        <div class="navigation-bar__extend" [ngClass]="classShowExtendValue">
+          <div class="navigation-bar__item_genre" (click)="showExtendGenre()">
+            <div fxLayout fxLayoutAlign="start center"
+                 class="navigation-bar__item"
+            >
+              {{ "Genre"|translate }}
+              <mat-icon>arrow_drop_down</mat-icon>
+            </div>
+            <div class="navigation-bar__extend_genre" [ngClass]="">
+              <div class="navigation-bar__extend_genre_list">
+                <ng-template ngFor let-genre [ngForOf]="listGenre">
+                  <div class="navigation-bar__extend_genre_item">
+                    <span>
+                      {{ genre }}
+                    </span>
+                  </div>
+                </ng-template>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="navigation-bar__item">
+            {{ "Search"|translate }}
+          </div>
+          <div class="navigation-bar__item">
+            {{ "Follow"|translate }}
+          </div>
+          <div class="navigation-bar__item">
+            {{ "Fan Page"|translate }}
+          </div>
+          <div class="navigation-bar__item">
+            {{ "Discord"|translate }}
+          </div>
+        </div>
+      </div>
+      <div fxLayout="columm" fxLayoutAlign="center center" class="navigation-bar__icon_extend">
+        <mat-icon (click)="showHideMenuExtend()" [fontIcon]="iconExtend">menu</mat-icon>
+      </div>
+    </div>
+
+  </div>
+</ng-template>
