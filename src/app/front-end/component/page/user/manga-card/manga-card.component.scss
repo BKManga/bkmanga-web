@@ -1,0 +1,66 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.manga-card__image,
+.manga-card__name,
+.manga-card__last__chapter{
+  cursor: pointer;
+}
+
+.manga-card__info {
+  position: relative
+}
+
+.manga-card__name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $color-e4e6eb;
+  margin: 0;
+  line-height: $value-36;
+}
+
+.manga-card__expand {
+  position: absolute;
+  background-color: $color-e4e6eb;
+  z-index: 11;
+  border: 1px solid $color-black;
+  padding: $value-10;
+  display: none;
+  border-radius: $value-10;
+  flex-direction: column;
+  min-width: $value-420;
+}
+
+.manga-card__expand__name {
+  color: $color-f29c57;
+}
+
+.manga-card__expand__show {
+  display: flex !important;
+}
+
+.manga-card__list__genre {
+
+}
+
+.manga-card__genre {
+  background-color: $color-126ff6;
+  color: $color-e4e6eb;
+  padding: $value-5 $value-10;
+  font-size: $value-12;
+  border-radius: $value-5;
+  margin-right: $value-4;
+  margin-bottom: $value-4;
+}
+
+.manga-card__description {
+  max-height: $value-160;
+  overflow: hidden;
+}
+
+.manga-card__last__chapter {
+  color: $color-e4e6eb;
+  font-size: $value-12;
+  font-weight: 600;
+}

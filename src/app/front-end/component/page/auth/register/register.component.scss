@@ -1,0 +1,96 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.register {
+  background-color: $color-242526;
+  padding: $value-75 $value-10;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-content {
+  max-width: $width-large;
+  width: 100%;
+  background-color: $color-e4e6eb;
+  padding: $value-75 0;
+  border-radius: $value-20;
+  box-shadow: 0 0 $value-30 3px $color-white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.register-image {
+  max-width: 80%;
+  height: auto;
+}
+
+.register-content div {
+  width: 50%;
+}
+
+.register-content__form {
+  align-items: end;
+  justify-content: space-between;
+}
+
+.register-content__title {
+  font-weight: 700;
+  color: $color-18191a;
+  font-size: $value-36;
+  margin-bottom: $value-36;
+  width: 90% !important;
+}
+
+.register-content__body {
+  width: 90%;
+}
+
+.button-register {
+  height: 54px;
+}
+
+.redirect-login {
+  font-size: $value-15;
+  color: $color-242526;
+  cursor: pointer;
+  text-decoration: underline;
+  width: 90% !important;
+  font-weight: 700;
+  margin: $value-20 0
+}
+
+@mixin styling() {
+  .register {
+    padding: $value-75 $value-10;
+  }
+
+  .register-image {
+    max-width: 90%;
+  }
+
+  .register-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .register-content div {
+    width: 100%;
+  }
+
+  .register-content__title {
+    width: auto !important;
+  }
+
+  .register-content__form {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .redirect-login {
+    width: fit-content !important;
+  }
+}
+
+@media screen and (max-width: $limit-header-width-large) {
+  @include styling()
+}

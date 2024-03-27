@@ -47,17 +47,20 @@ export class HeaderComponent implements OnInit, AfterViewInit{
     this.showResultSearchHeader = false;
   }
 
+  @HostListener('window:resize', ['$event'])
+  async onResize() {
+  }
+
   public searchRealTime() {
-    console.log(this.fromGroup.controls['search'].value)
     this.showResultSearchHeader = !!this.fromGroup.controls['search'].value;
   }
 
-  ngAfterViewInit(){
-
+  async ngAfterViewInit(){
+    await this.onResize()
   }
 
   ngOnInit(): void {
-    this.sharingService.awaitData().subscribe(result => {
+    this.sharingService.awaitDataShowAuthButton().subscribe(result => {
       this.showAuthButton = result
     })
   }

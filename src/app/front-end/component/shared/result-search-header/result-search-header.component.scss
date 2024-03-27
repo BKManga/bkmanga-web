@@ -14,7 +14,7 @@
 }
 
 .result_search_header__item {
-  padding: 10px;
+  padding: $value-10;
   border-bottom: 1px solid $color-18191a;
   cursor: pointer;
 }
@@ -24,7 +24,7 @@
 }
 
 .result_search_header__no_result {
-  padding: 10px;
+  padding: $value-10;
   color: $color-e4e6eb;
 }
 

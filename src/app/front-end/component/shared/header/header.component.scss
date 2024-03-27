@@ -3,7 +3,7 @@
 
 .header {
   background-color: $color-18191a;
-  padding: 10px;
+  padding: $value-10;
   align-items: center;
   justify-content: center;
 }
@@ -20,10 +20,17 @@
   z-index: 10;
 }
 
+.header-content__contain__logo__short {
+  position: unset;
+}
+
+.header-content__contain__logo__large {
+  position: relative;
+}
+
 .header-content__logo__short {
   cursor: pointer;
   display: none;
-  padding: 9px 0;
   margin-right: 20px;
 }
 
@@ -62,7 +69,7 @@
 .header-content__search__icon {
   position: absolute;
   cursor: pointer;
-  padding: 0 10px;
+  padding: 0 $value-10;
   color: $color-b0b3b8;
   transform: scale(1.2);
 }
@@ -90,10 +97,6 @@
   .header-content__input {
     width: 100%;
   }
-
-  //.header-content__search {
-  //  display: none !important;
-  //}
 
   .header-content__search__short {
     visibility: visible;
@@ -126,9 +129,19 @@
     width: 100%;
   }
 
+  .header-content__contain__logo__short {
+    position: relative;
+  }
+
+  .header-content__contain__logo__large {
+    position: unset;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+  }
+
 }
 
 @media screen and (max-width: $limit-header-width-large) {
   @include styling()
 }
-

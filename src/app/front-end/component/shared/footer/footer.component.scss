@@ -2,8 +2,9 @@
 @import "src/app/front-end/component/common/value";
 
 .footer {
-  padding: 20px 10px;
+  padding: $value-20 $value-10;
   background-color: $color-242526;
+  border-top: $value-5 solid $color-e4e6eb;
 }
 
 .footer-content {
@@ -11,6 +12,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.footer-content__contain__logo__large {
+  position: relative;
 }
 
 .footer-content__email {

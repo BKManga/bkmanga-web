@@ -1,1 +1,23 @@
-<p>main works!</p>
+<div fxLayout="column" class="main">
+  <div class="main-content" fxLayout="column" fxLayoutGap="16">
+    <app-top-manga></app-top-manga>
+    <div class="main-content__newest__update" fxLayout="column" fxLayoutGap="16">
+      <div fxLayout fxLayoutAlign="space-between center">
+        <div class="main-content__newest__update-title" fxLayout fxLayoutAlign="start center" fxLayoutGap="8">
+          <mat-icon>cloud_download</mat-icon>
+          <span>
+          {{ "Truyện mới cập nhật" }}
+        </span>
+        </div>
+        <button mat-mini-fab color="primary" aria-label="Filter manga">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+      </div>
+      <div class="main-content__newest__update-list">
+        <ng-template ngFor let-mangaCard [ngForOf]="mangaCardList">
+          <app-manga-card></app-manga-card>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

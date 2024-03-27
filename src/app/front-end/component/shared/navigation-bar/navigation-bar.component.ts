@@ -110,7 +110,7 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
   }
 
   async ngOnInit(): Promise<void> {
-    this.sharingService.awaitData().subscribe(result => {
+    this.sharingService.awaitDataShowAuthButton().subscribe(result => {
       this.showNavigationBar = result
     })
   }

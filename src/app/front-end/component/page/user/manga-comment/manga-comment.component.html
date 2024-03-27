@@ -1,0 +1,67 @@
+<div class="manga-comment" fxLayout="column" fxLayoutGap="8">
+  <div class="manga-comment__label" fxLayout fxLayoutAlign="start center" fxLayoutGap="8">
+    <mat-icon> mode_comment</mat-icon>
+    <div class="manga-comment__label__title">
+      <span>
+        {{ "Bình luận" }}
+      </span>
+    </div>
+  </div>
+
+  <form [formGroup]="formGroup" fxLayout="column" (keydown.enter)="postComment()">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ "Leave a comment" }}</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"
+        maxlength="255"
+        formControlName="comment"></textarea>
+    </mat-form-field>
+  </form>
+
+  <div class="manga-comment__list" fxLayout="column" fxLayoutGap="8">
+    <ng-template ngFor let-comment [ngForOf]="listComment">
+      <div class="manga-content__element" fxLayout fxLayoutAlign="start cenrer" fxLayoutGap="8">
+        <div class="manga-comment__element-avatar">
+          <img ngSrc="assets/logo/logo-short.webp" alt="" fill>
+        </div>
+        <div class="manga-comment__element-content" fxFlex fxLayout="column" fxLayoutGap="8">
+          <div fxLayout fxLayoutAlign="space-between center">
+            <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8">
+            <span>
+              Lmao
+            </span>
+              <span>
+              Lmao level
+            </span>
+            </div>
+            <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8">
+            <span>
+              {{ "27/03/2024" }}
+            </span>
+              <mat-icon>delete</mat-icon>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div>
+          <span>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto consequatur culpa eveniet fugiat itaque ratione reiciendis voluptatibus? Aliquid deserunt ducimus hic incidunt ipsum libero nesciunt, provident quaerat? Ex, possimus!
+          </span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <mat-paginator [length]="length.getValue()"
+                   [pageSize]="pageSize"
+                   [showFirstLastButtons]="showFirstLastButtons"
+                   [hidePageSize]="hidePageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="paginationComment($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>

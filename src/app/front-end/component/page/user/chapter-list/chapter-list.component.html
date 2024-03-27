@@ -1,0 +1,23 @@
+<div class="chapter-list" fxLayout="column">
+  <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8">
+    <mat-icon>storage</mat-icon>
+    <span class="chapter-list__title">
+      {{ "Danh sách chương" }}
+    </span>
+  </div>
+  <div class="chapter-list__content" fxLayout="column">
+    <mat-list>
+      <ng-template ngFor let-chapter let-i [ngForOf]="listChapter">
+        <mat-list-item>
+          <div class="chapter-list__content-element" fxLayout fxLayoutAlign="space-between center">
+            <span class="chapter-list__content-title">{{ "Pepper" + " " + i }}</span>
+            <span>27/03/2024</span>
+          </div>
+        </mat-list-item>
+        <div class="mat-divider__contain">
+          <mat-divider></mat-divider>
+        </div>
+      </ng-template>
+    </mat-list>
+  </div>
+</div>

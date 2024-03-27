@@ -28,6 +28,20 @@ import { NavigationBarComponent } from './front-end/component/shared/navigation-
 import {LoginComponent} from "./front-end/component/page/auth/login/login.component";
 import { MainComponent } from './front-end/component/page/user/main/main.component';
 import { RegisterComponent } from './front-end/component/page/auth/register/register.component';
+import {MatInputModule} from "@angular/material/input";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatRadioModule} from "@angular/material/radio";
+import { MangaCardComponent } from './front-end/component/page/user/manga-card/manga-card.component';
+import { SeparateStringPipe } from './front-end/pipe/separate-string.pipe';
+import { TopMangaComponent } from './front-end/component/page/user/top-manga/top-manga.component';
+import { MangaDetailComponent } from './front-end/component/page/user/manga-detail/manga-detail.component';
+import { ChapterDetailComponent } from './front-end/component/page/user/chapter-detail/chapter-detail.component';
+import { MangaCommentComponent } from './front-end/component/page/user/manga-comment/manga-comment.component';
+import { ChapterCommentComponent } from './front-end/component/page/user/chapter-comment/chapter-comment.component';
+import { ChapterListComponent } from './front-end/component/page/user/chapter-list/chapter-list.component';
+import {MatListModule} from "@angular/material/list";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -42,6 +56,14 @@ import { RegisterComponent } from './front-end/component/page/auth/register/regi
     NavigationBarComponent,
     MainComponent,
     RegisterComponent,
+    MangaCardComponent,
+    SeparateStringPipe,
+    TopMangaComponent,
+    MangaDetailComponent,
+    ChapterDetailComponent,
+    MangaCommentComponent,
+    ChapterCommentComponent,
+    ChapterListComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +93,14 @@ import { RegisterComponent } from './front-end/component/page/auth/register/regi
     FormsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatListModule,
+    MatPaginatorModule,
   ],
   exports: [
     HeaderComponent,

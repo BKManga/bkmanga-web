@@ -1,12 +1,14 @@
 <footer fxLayout fxLayoutAlign="center center" class="footer">
   <div class="footer-content">
     <div fxLayout="column" class="footer-content__left">
-      <img class="footer-content__logo__large"
-           [ngSrc]="logoLarge.url ?? ''"
-           alt=""
-           [width]="logoLarge.width"
-           [height]="logoLarge.height"
-      >
+      <div class="footer-content__contain__logo__large" [ngStyle]="{'width': logoLarge.width + 'px', 'height': logoLarge.height + 'px'}">
+        <img class="header-content__logo__large"
+             [ngSrc]="logoLarge.url ?? ''"
+             alt=""
+             sizes=""
+             fill
+        >
+      </div>
       <span class="footer-content__email">
         nghia.nn260701@gmail.com
       </span>

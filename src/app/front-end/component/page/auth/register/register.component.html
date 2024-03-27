@@ -1,1 +1,68 @@
-<p>register works!</p>
+<div fxLayout="column" class="register">
+  <div class="register-content">
+    <div fxLayout="column" class="register-content__form">
+      <div class="register-content__title">
+        <span>
+          {{ "Register"|translate }}
+        </span>
+      </div>
+      <form [formGroup]="formGroup" (keydown.enter)="submitValueRegisterForm()" class="register-content__body" fxLayout="column">
+        <mat-form-field appearance="outline">
+          <mat-label>
+            {{ "Full name" }}
+          </mat-label>
+          <input formControlName="fullName" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>
+            {{ "LoginID"|translate }}
+          </mat-label>
+          <input formControlName="loginID" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>
+            {{ "Email" }}
+          </mat-label>
+          <input formControlName="email" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput formControlName="dateOfBirth" [matDatepicker]="picker">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>
+            {{ "Phone number" }}
+          </mat-label>
+          <input formControlName="phoneNumber" type="number" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Gender</mat-label>
+          <select matNativeControl formControlName="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>
+            {{ "Password"|translate }}
+          </mat-label>
+          <input type="password" formControlName="password" matInput>
+        </mat-form-field>
+        <button class="button-register" (click)="submitValueRegisterForm()" mat-raised-button color="primary">
+          {{ "Register"|translate }}
+        </button>
+      </form>
+      <div class="redirect-login" (click)="redirectToLoginPage()">
+        <span>
+          I am already member
+        </span>
+      </div>
+    </div>
+    <div fxLayout fxLayoutAlign="center center">
+      <img class="register-image" src="assets/images/register.gif" alt="">
+    </div>
+  </div>
+</div>

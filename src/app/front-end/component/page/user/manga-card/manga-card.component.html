@@ -1,0 +1,66 @@
+<div class="manga-card" fxLayout="column" fxLayoutAlign="center center">
+  <div class="manga-card__image">
+    <img src="/assets/manga/image_logo.jpg" alt="">
+  </div>
+  <div class="manga-card__info">
+    <h3 #mangaCardName class="manga-card__name">
+      One Piece
+    </h3>
+    <div
+      #mangaCardExpand
+      class="manga-card__expand"
+      fxLayoutGap="8"
+      [ngStyle]="{
+        left: offsetLeft,
+        right: offsetRight,
+        top: offsetTop,
+        bottom: offsetBottom
+      }"
+    >
+      <div>
+        <span class="manga-card__expand__name">One Piece</span>
+      </div>
+      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8">
+        <span>Tình trạng: </span>
+        <span> Đang tiến hành </span>
+      </div>
+      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8">
+        <span>Lượt xem: </span>
+        <span> {{ 696969696969|separateString }} </span>
+      </div>
+      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8">
+        <span>Lượt theo dõi: </span>
+        <span> {{ 696969696969|separateString }} </span>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="start center" class="manga-card__list__genre">
+        <div class="manga-card__genre">
+          Lmao Lmao Lmao Lmao Lmao Lmao
+        </div>
+        <div class="manga-card__genre">
+          Lmao
+        </div>
+        <div class="manga-card__genre">
+          Lmao
+        </div>
+        <div class="manga-card__genre">
+          Lmao
+        </div>
+        <div class="manga-card__genre">
+          Lmao
+        </div>
+        <div class="manga-card__genre">
+          Lmao
+        </div>
+      </div>
+      <div class="manga-card__description">
+        <span>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium facilis id, ipsam perferendis quibusdam quidem sunt? Dolor dolores, ex excepturi fugit incidunt libero modi molestias quam quibusdam temporibus vitae.
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <span class="manga-card__last__chapter">
+    Chapter 1000
+  </span>
+</div>

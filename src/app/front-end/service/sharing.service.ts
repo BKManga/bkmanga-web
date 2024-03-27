@@ -10,15 +10,15 @@ export class SharingService {
   constructor() {
   }
 
-  async setShowAuthButton(value: boolean) {
+  setShowAuthButton = async (value: boolean): Promise<void> => {
     this.showAuthButton.next(value)
   }
 
-  private getShowAuthButtonValue() {
+  private getShowAuthButtonValue = (): Observable<boolean> => {
     return this.showAuthButton.asObservable()
   }
 
-  awaitData(): Observable<boolean> {
+  awaitDataShowAuthButton(): Observable<boolean> {
     return this.getShowAuthButtonValue()
   }
 }

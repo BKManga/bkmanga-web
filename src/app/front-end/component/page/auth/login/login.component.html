@@ -1,1 +1,36 @@
-<p>Login works!</p>
+<div fxLayout="column" class="login">
+  <div class="login-content">
+    <div fxLayout fxLayoutAlign="center center">
+      <img class="login-image" src="assets/images/login.gif" alt="">
+    </div>
+    <div fxLayout="column" class="login-content__form">
+      <div class="login-content__title">
+        <span>
+          {{ "Login"|translate }}
+        </span>
+      </div>
+      <form [formGroup]="formGroup" (keydown.enter)="submitValueLoginForm()" class="login-content__body" fxLayout="column">
+          <mat-form-field appearance="outline">
+            <mat-label>
+              {{ "LoginID"|translate }}
+            </mat-label>
+            <input formControlName="loginID" matInput>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>
+              {{ "Password"|translate }}
+            </mat-label>
+            <input type="password" formControlName="password" matInput>
+          </mat-form-field>
+        <button class="button-login" (click)="submitValueLoginForm()" mat-raised-button color="primary">
+          {{ "Login"|translate }}
+        </button>
+      </form>
+      <div class="create-account" (click)="redirectToRegisterPage()">
+        <span>
+          Create an account
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

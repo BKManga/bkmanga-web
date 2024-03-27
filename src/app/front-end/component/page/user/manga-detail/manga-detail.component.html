@@ -1,0 +1,154 @@
+<div fxLayout="column" class="manga">
+  <div fxLayout="column" class="manga-content" fxLayoutGap="8">
+    <div class="manga-content__info">
+      <div class="manga-content__info__avatar">
+        <img ngSrc="/assets/manga/image_logo.jpg" alt="" fill priority>
+      </div>
+      <div class="manga-content__info__other" fxLayout="column">
+        <h1>
+          Lmao lmao Lmao lmao Lmao lmao Lmao lmao Lmao lmao
+        </h1>
+        <div fxLayout="column" fxLayoutGap="8">
+          <div class="manga-content__info__other-content">
+            <div class="manga-content__info__other-label">
+              <mat-icon>add</mat-icon>
+              <span>
+                {{ "Tên khác" }}
+              </span>
+            </div>
+            <span>
+              Lmao lmao Lmao lmao Lmao lmao Lmao lmao Lmao lmao
+            </span>
+          </div>
+          <div class="manga-content__info__other-content">
+            <div class="manga-content__info__other-label">
+              <mat-icon>person</mat-icon>
+              <span>
+                {{ "Tác giả" }}
+              </span>
+            </div>
+            <span>
+              {{ "Lmao lmao Lmao lmao Lmao lmao Lmao lmao Lmao lmao" }}
+            </span>
+          </div>
+          <div class="manga-content__info__other-content">
+            <div class="manga-content__info__other-label">
+              <mat-icon> rss_feed</mat-icon>
+              <span>
+                {{ "Tình trạng" }}
+              </span>
+            </div>
+            <span>
+              {{ "Lmao lmao Lmao lmao Lmao lmao Lmao lmao Lmao lmao" }}
+            </span>
+          </div>
+          <div class="manga-content__info__other-content">
+            <div class="manga-content__info__other-label">
+              <mat-icon>thumb_up</mat-icon>
+              <span>
+                {{ "Lượt thích" }}
+              </span>
+            </div>
+            <span>
+              {{ 6969|separateString}}
+            </span>
+          </div>
+          <div class="manga-content__info__other-content">
+            <div class="manga-content__info__other-label">
+              <mat-icon>favorite</mat-icon>
+              <span>
+                {{ "Lượt theo dõi" }}
+              </span>
+            </div>
+            <span>
+              {{ 10000|separateString}}
+            </span>
+          </div>
+          <div class="manga-content__info__other-content">
+            <div class="manga-content__info__other-label">
+              <mat-icon>remove_red_eye</mat-icon>
+              <span>
+                {{ "Lượt xem" }}
+              </span>
+            </div>
+            <span>
+              {{ 100000|separateString}}
+            </span>
+          </div>
+          <div class="manga-content__info_genre" fxLayout="row wrap" fxLayoutAlign="start center">
+            <div class="manga-content__info_genre-element">
+              <span>
+                Lmao
+              </span>
+            </div>
+            <div class="manga-content__info_genre-element">
+              <span>
+                Lmao
+              </span>
+            </div>
+            <div class="manga-content__info_genre-element">
+              <span>
+                Lmao
+              </span>
+            </div>
+            <div class="manga-content__info_genre-element">
+              <span>
+                Lmao
+              </span>
+            </div>
+            <div class="manga-content__info_genre-element">
+              <span>
+                Lmao
+              </span>
+            </div>
+            <div class="manga-content__info_genre-element">
+              <span>
+                Lmao
+              </span>
+            </div>
+            <div class="manga-content__info_genre-element">
+              <span>
+                Lmao Lmao Lmao Lmao Lmao
+              </span>
+            </div>
+          </div>
+          <div class="manga-content__info__list-button">
+            <div class="manga-content__info__button-element manga-content__info__button-read">
+              <mat-icon>library_books</mat-icon>
+              <span>
+                {{ "Đọc từ đầu" }}
+              </span>
+            </div>
+            <div class="manga-content__info__button-element manga-content__info__button-favorite">
+              <mat-icon>favorite</mat-icon>
+              <span>
+                {{ "Theo dõi" }}
+              </span>
+            </div>
+            <div class="manga-content__info__button-element manga-content__info__button-like">
+              <mat-icon>thumb_up</mat-icon>
+              <span>
+                {{ "Thích" }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" class="manga-description">
+      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8">
+        <mat-icon>info</mat-icon>
+        <span class="manga-description__title">
+          {{ "Giới thiệu" }}
+        </span>
+      </div>
+      <div class="manga-description__content">
+        <span>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi deleniti dolores, est facilis laboriosam nobis quo rem voluptate. Consectetur est magni necessitatibus non pariatur quaerat quidem recusandae reprehenderit saepe suscipit.
+        </span>
+      </div>
+    </div>
+    <app-chapter-list></app-chapter-list>
+    <app-manga-comment></app-manga-comment>
+  </div>
+</div>

@@ -1,32 +1,35 @@
 <header fxLayout="column" class="header">
   <div class="header-content" fxLayout="row" fxLayoutAlign="space-between center">
     <div class="header-content__left" fxLayout fxLayoutAlign="space-between center" fxLayoutGap="20">
-      <img class="header-content__logo__large"
-           [ngSrc]="logoLarge.url ?? ''"
-           alt=""
-           [width]="logoLarge.width"
-           [height]="logoLarge.height"
-           sizes=""
-           loading="lazy"
-           (click)="redirectToMainPage()"
-      >
-      <img class="header-content__logo__short"
-           [ngSrc]="logoShort.url ?? ''"
-           alt=""
-           [width]="logoShort.width"
-           [height]="logoShort.height"
-           (click)="redirectToMainPage()"
-      >
+
+      <div class="header-content__contain__logo__large" [ngStyle]="{'width': logoLarge.width + 'px', 'height': logoLarge.height + 'px'}">
+        <img class="header-content__logo__large"
+             [ngSrc]="logoLarge.url ?? ''"
+             alt=""
+             sizes=""
+             fill
+             (click)="redirectToMainPage()"
+        >
+      </div>
+
+      <div class="header-content__contain__logo__short" [ngStyle]="{'width': logoShort.width + 'px', 'height': logoShort.height + 'px'}">
+        <img class="header-content__logo__short"
+             [ngSrc]="logoShort.url ?? ''"
+             alt=""
+             fill
+             (click)="redirectToMainPage()"
+        >
+      </div>
       <div class="input__relative"></div>
     </div>
     <ng-template [ngIf]="showAuthButton">
       <div class="header-content__right" fxLayout fxLayoutAlign="center center" fxLayoutGap="8">
-        <button mat-raised-button color="primary" (click)="redirectToAuthPage(AppRouter.Login)">
+        <button mat-raised-button color="primary" (click)="redirectToAuthPage(AppRouter.Register)">
         <span>
           {{ 'Register'|translate }}
         </span>
         </button>
-        <button mat-raised-button color="primary" (click)="redirectToAuthPage(AppRouter.Register)">
+        <button mat-raised-button color="primary" (click)="redirectToAuthPage(AppRouter.Login)">
         <span>
           {{ 'Login'|translate }}
         </span>

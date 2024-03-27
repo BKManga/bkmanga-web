@@ -1,0 +1,155 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.manga {
+  background-color: $color-18191a;
+  padding: $value-10;
+  align-items: center;
+  justify-content: center;
+}
+
+.manga-content {
+  max-width: $width-large;
+  width: 100%;
+  background-color: $color-242526;
+  padding: $value-15;
+  border-radius: $value-5;
+
+  .manga-content__info {
+    display: flex;
+    padding: $value-15;
+    justify-content: space-between;
+  }
+
+  .manga-content__info__avatar {
+    height: $value-250;
+    width: $value-190;
+    position: relative;
+  }
+
+  .manga-content__info__other {
+    width: calc(100% - $value-250);
+    color: $color-e4e6eb;
+  }
+
+  .manga-content__info__other-content {
+    font-size: $value-15;
+    display: flex;
+    align-items: center;
+  }
+
+  .manga-content__info__other-label {
+    display: flex;
+    gap: $value-4;
+    align-items: center;
+    width: 17%;
+  }
+
+  .manga-content__info_genre {
+
+  }
+
+  .manga-content__info_genre-element {
+    margin-right: $value-5;
+    margin-bottom: $value-5;
+    padding: $value-4 $value-5;
+    border-radius: $value-4;
+    border: 1px solid $color-f18121;
+    cursor: pointer;
+  }
+
+  .manga-content__info_genre-element:hover {
+    background-color: $color-f18121;
+  }
+
+  .manga-content__info__list-button {
+    display: flex;
+    align-items: center;
+    column-gap: $value-10;
+  }
+
+  .manga-content__info__button-element
+  {
+    display: flex;
+    align-items: center;
+    column-gap: $value-4;
+    min-width: $value-125;
+    justify-content: center;
+    padding: $value-10;
+    border-radius: $value-5;
+    font-size: $value-15;
+    cursor: pointer;
+  }
+
+  .manga-content__info__button-element:hover {
+    opacity: 0.6;
+  }
+
+  .manga-content__info__button-read {
+    background-color: $color-8bc34a;
+  }
+
+  .manga-content__info__button-favorite {
+    background-color: $color-ff2853;
+  }
+
+  .manga-content__info__button-like {
+    background-color: $color-bd10e0;
+  }
+}
+
+.manga-description {
+  color: $color-e4e6eb;
+  margin-top: $value-10;
+
+  .manga-description__title {
+    font-size: $value-18;
+  }
+
+  .manga-description__content {
+    font-size: $value-16;
+    margin: $value-16 0;
+  }
+}
+
+@mixin stylingHeaderWidthLarge() {
+
+  .manga-content {
+    .manga-content__info {
+      flex-direction: column;
+      align-items: center;
+      row-gap: $value-10;
+    }
+
+    .manga-content__info__other {
+      width: 100%;
+    }
+
+    .manga-content__info__list-button {
+      justify-content: center;
+    }
+
+    .manga-content__info__button-element {
+      min-width: auto;
+      width: 100%;
+    }
+
+    .manga-content__info__other-label {
+      min-width: 20%;
+    }
+  }
+}
+
+@mixin stylingFooterWidthLarge() {
+  .manga-content__info__other-label {
+    min-width: 30%;
+  }
+}
+
+@media screen and (max-width: $limit-header-width-large) {
+  @include stylingHeaderWidthLarge()
+}
+
+@media screen and (max-width: $limit-footer-width-large) {
+  @include stylingFooterWidthLarge()
+}

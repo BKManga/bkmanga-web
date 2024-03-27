@@ -31,11 +31,14 @@ export const LogoShort: ImageData = {
 }
 
 export const AppRouter = {
+  Empty: '',
   Auth: "auth",
   Main: "main",
   Login: "login",
   Register: "register",
   NotFound: "not-found",
+  MangaDetail: "manga",
+  ChapterDetail: "chapter",
   Error: "error",
 }
 
@@ -44,3 +47,10 @@ export const AppRouterAdmin = {
   ...AppRouter
 }
 
+export const RouteManga = {
+  Param: 'idManga'
+}
+
+export const RouteChapter = {
+  Param: 'idChapter'
+}

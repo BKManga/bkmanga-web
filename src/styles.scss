@@ -2,3 +2,6 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
