@@ -5,7 +5,6 @@ import {MainComponent} from "./front-end/component/page/user/main/main.component
 import {AppRouter, RouteChapter, RouteManga} from "./front-end/constant/constants";
 import {RegisterComponent} from "./front-end/component/page/auth/register/register.component";
 import {MangaDetailComponent} from "./front-end/component/page/user/manga-detail/manga-detail.component";
-import {ChapterCommentComponent} from "./front-end/component/page/user/chapter-comment/chapter-comment.component";
 import {ChapterDetailComponent} from "./front-end/component/page/user/chapter-detail/chapter-detail.component";
 
 const routes: Routes = [

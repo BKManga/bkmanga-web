@@ -149,6 +149,6 @@
       </div>
     </div>
     <app-chapter-list></app-chapter-list>
-    <app-manga-comment></app-manga-comment>
+    <app-block-comment [listComment]="this.listComment" (pagePaginationEmitEvent)="commentPaginationEvent($event)"></app-block-comment>
   </div>
 </div>

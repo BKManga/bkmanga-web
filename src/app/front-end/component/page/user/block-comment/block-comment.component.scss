@@ -1,0 +1,73 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.block-comment {
+
+  margin-top: $value-10;
+
+  .block-comment__label {
+    color: $color-f18121;
+
+    .block-comment__label__title {
+      font-size: $value-18;
+      line-height: $value-30;
+    }
+  }
+
+  .block-comment__list {
+    padding: $value-10;
+    color: $color-e4e6eb;
+
+    .block-content__element {
+
+      .block-comment__element-avatar {
+        width: $value-44;
+        height: $value-44;
+        border: 1px solod $color-eeeeee;
+        background-color: $color-white;
+        border-radius: calc($value-44 / 2);
+        position: relative;
+      }
+
+      .block-comment__element-avatar img{
+        border-radius: calc($value-44 / 2);
+      }
+
+      .block-comment__element-content {
+        padding: $value-10;
+        background-color: $color-423e3e;
+        border-radius: $value-10;
+
+        .block-comment__element-delete {
+          cursor: pointer;
+        }
+      }
+
+      .block-comment__element-name {
+      }
+
+      .block-comment__element-level {
+        padding: $value-4 $value-5;
+        font-size: $value-12;
+        border-radius: $value-4;
+        border: 1px solid $color-e4e6eb;
+        color: transparent;
+        -webkit-background-clip: text;
+      }
+
+      .block-comment__element-level span {
+      }
+
+      .mat-divider {
+        border-top-color: $color-f18121;
+      }
+    }
+
+    mat-paginator {
+      background-color: $color-423e3e;
+      border: 1px solid $color-e4e6eb;
+      border-radius: $value-4;
+      color: $color-e4e6eb;
+    }
+  }
+}

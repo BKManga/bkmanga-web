@@ -37,11 +37,12 @@ import { SeparateStringPipe } from './front-end/pipe/separate-string.pipe';
 import { TopMangaComponent } from './front-end/component/page/user/top-manga/top-manga.component';
 import { MangaDetailComponent } from './front-end/component/page/user/manga-detail/manga-detail.component';
 import { ChapterDetailComponent } from './front-end/component/page/user/chapter-detail/chapter-detail.component';
-import { MangaCommentComponent } from './front-end/component/page/user/manga-comment/manga-comment.component';
-import { ChapterCommentComponent } from './front-end/component/page/user/chapter-comment/chapter-comment.component';
 import { ChapterListComponent } from './front-end/component/page/user/chapter-list/chapter-list.component';
 import {MatListModule} from "@angular/material/list";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { LevelDecorationDirective } from './front-end/directive/level-decoration.directive';
+import {MatTooltipModule} from "@angular/material/tooltip";
+import { BlockCommentComponent } from './front-end/component/page/user/block-comment/block-comment.component';
 
 @NgModule({
   declarations: [
@@ -61,9 +62,9 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     TopMangaComponent,
     MangaDetailComponent,
     ChapterDetailComponent,
-    MangaCommentComponent,
-    ChapterCommentComponent,
     ChapterListComponent,
+    LevelDecorationDirective,
+    BlockCommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,6 +102,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatRadioModule,
     MatListModule,
     MatPaginatorModule,
+    MatTooltipModule,
   ],
   exports: [
     HeaderComponent,

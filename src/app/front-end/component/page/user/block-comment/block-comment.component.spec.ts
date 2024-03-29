@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChapterCommentComponent } from './chapter-comment.component';
+import { BlockCommentComponent } from './block-comment.component';
 
-describe('ChapterCommentComponent', () => {
-  let component: ChapterCommentComponent;
-  let fixture: ComponentFixture<ChapterCommentComponent>;
+describe('BlockCommentComponent', () => {
+  let component: BlockCommentComponent;
+  let fixture: ComponentFixture<BlockCommentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChapterCommentComponent ]
+      declarations: [ BlockCommentComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ChapterCommentComponent);
+    fixture = TestBed.createComponent(BlockCommentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

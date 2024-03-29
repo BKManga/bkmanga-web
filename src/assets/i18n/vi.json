@@ -8,5 +8,8 @@
   "Fan Page": "Fanpage",
   "Discord": "Discord",
   "LoginID": "Tên đăng nhập",
-  "Password": "Mật khẩu"
+  "Password": "Mật khẩu",
+  "delete": {
+    "comment": "Delete comment"
+  }
 }

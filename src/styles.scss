@@ -5,3 +5,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import "src/app/front-end/component/common/color";
 @import "src/app/front-end/component/common/value";
+
+.mat-mdc-paginator-icon {
+  fill: $color-e4e6eb !important;
+}
+
+.mat-mdc-icon-button[disabled] .mat-mdc-paginator-icon {
+  fill: $color-999999 !important;
+}
+
+.mat-mdc-paginator-range-label {
+  font-weight: 600;
+}
