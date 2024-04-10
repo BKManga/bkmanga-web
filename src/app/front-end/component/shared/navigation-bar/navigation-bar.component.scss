@@ -73,6 +73,10 @@
   line-height: $value-40;
   color: $color-e4e6eb;
   cursor: pointer;
+
+  span {
+    text-transform: capitalize;
+  }
 }
 
 .navigation-bar__item:hover{

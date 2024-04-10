@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 import {DialogService} from "../service/dialog.service";
 import {CookieService} from "ngx-cookie-service";
 import {AuthToken, TokenPrefix} from "../constant/constants";
+import {JwtDecodeService} from "../service/jwt-decode.service";
 
 @Injectable()
 export class RequestHandleInterceptor implements HttpInterceptor {
@@ -18,16 +19,19 @@ export class RequestHandleInterceptor implements HttpInterceptor {
   private cookieService: CookieService
   private router: Router
   private dialogService: DialogService
+  private jwtDecodeService: JwtDecodeService
 
   constructor(
     cookieService: CookieService,
     router: Router,
-    dialogService: DialogService
+    dialogService: DialogService,
+    jwtDecodeService: JwtDecodeService
   ) {
     this.cookieService = cookieService
     this.router = router
     this.totalRequest = 0
     this.dialogService = dialogService
+    this.jwtDecodeService = jwtDecodeService
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {

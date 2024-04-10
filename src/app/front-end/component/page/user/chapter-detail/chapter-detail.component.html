@@ -1,3 +1,44 @@
-<div>
-
+<div fxLayout="column" class="chapter">
+  <div class="chapter-detail" fxLayout="column">
+    <div class="chapter-detail__title" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8">
+      <h1>
+        Lmao lmao Lmao lmao Lmao lmao Lmao lmao Lmao lmao
+      </h1>
+      <h1>
+        -
+      </h1>
+      <h1>
+        Chapter 1
+      </h1>
+      <span>
+        (Cập nhật lúc 0:00 02/04/2024)
+      </span>
+    </div>
+    <div fxLayout fxLayoutAlign="center center">
+      <div class="button-element button-report__error">
+        <mat-icon>warning</mat-icon>
+        <span>
+          Báo lỗi chương
+        </span>
+      </div>
+    </div>
+    <ng-container *ngTemplateOutlet="actionChapter"></ng-container>
+  </div>
 </div>
+
+<ng-template #actionChapter>
+  <div class="list-button__action" fxLayout fxLayoutAlign="center center" fxLayoutGap="4">
+    <div class="button-element button-previous__chapter">
+      <mat-icon>arrow_back</mat-icon>
+      <span>
+        Previous chapter
+      </span>
+    </div>
+    <div class="button-element button-next__chapter">
+      <span>
+        Previous chapter
+      </span>
+      <mat-icon>arrow_forward</mat-icon>
+    </div>
+  </div>
+</ng-template>

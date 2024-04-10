@@ -2,6 +2,7 @@ import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
 import {AppRouter} from "../../../constant/constants";
 import {Router} from "@angular/router";
 import {SharingService} from "../../../service/sharing.service";
+import {ApiResponseListGenre, Genre, GenreControllerService} from "../../../bkmanga-svc";
 
 @Component({
   selector: 'app-navigation-bar',
@@ -11,60 +12,10 @@ import {SharingService} from "../../../service/sharing.service";
 export class NavigationBarComponent implements OnInit, AfterViewInit{
 
   iconExtend: string
-
   isOpenMenu: boolean
-
   showExtendMenu: boolean
-
-  listGenre: Array<string> = [
-    "Action",
-    "Adventure",
-    "Anime",
-    "Chuyển",
-    "Sinh",
-    "Cổ Đại",
-    "Comedy",
-    "Comic",
-    "Demons",
-    "Detective",
-    "Doujinshi",
-    "Drama",
-    "Fantasy",
-    "Gender Bender",
-    "Harem",
-    "Historical",
-    "Horror",
-    "Huyền Huyễn",
-    "Isekai",
-    "Josei",
-    "Mafia",
-    "Magic",
-    "Manhua",
-    "Manhwa",
-    "Martial",
-    "Arts",
-    "Military",
-    "Mystery",
-    "Ngôn Tình",
-    "Oneshot",
-    "Psychological",
-    "Romance",
-    "School Life",
-    "Sci-fi",
-    "Seinen",
-    "Shoujo",
-    "Shoujo Ai",
-    "Shounen",
-    "Shounen Ai",
-    "Slice of life",
-    "Sports",
-    "Supernatural",
-    "Tragedy",
-    "Trọng Sinh",
-    "Truyện Màu",
-    "Webtoon",
-    "Xuyên Không",
-  ]
+  private genreControllerService: GenreControllerService
+  listGenre: Array<Genre> = Array<Genre>()
 
   classShowExtendValue: string = ''
 
@@ -72,12 +23,14 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
 
   constructor(
     private router: Router,
-    private sharingService: SharingService
+    private sharingService: SharingService,
+    genreControllerService: GenreControllerService
   ) {
     this.iconExtend = "menu"
     this.isOpenMenu = true
     this.showExtendMenu = true
     this.showNavigationBar = true
+    this.genreControllerService = genreControllerService
   }
 
   async showHideMenuExtend() {
@@ -101,7 +54,7 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
       this.isOpenMenu = false
       this.showExtendMenu = false
       this.setIconExtend()
-      await this.setClassShowExtendValue();
+      await this.setClassShowExtendValue()
     }
   }
 
@@ -113,6 +66,12 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
     this.sharingService.awaitDataShowAuthButton().subscribe(result => {
       this.showNavigationBar = result
     })
+
+    // this.genreControllerService.getAllGenre().subscribe((result: ApiResponseListGenre) => {
+    //   if (result?.responseCode === 200) {
+    //     this.listGenre = result?.result ?? []
+    //   }
+    // })
   }
 
   public async redirectToMainPage() {
@@ -122,6 +81,4 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
   public showExtendGenre() {
 
   }
-
-
 }

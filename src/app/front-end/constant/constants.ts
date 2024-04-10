@@ -54,3 +54,9 @@ export const RouteManga = {
 export const RouteChapter = {
   Param: 'idChapter'
 }
+
+export const Role = {
+  User: "USER",
+  Moderator: "MODERATOR",
+  Admin: "ADMIN"
+}

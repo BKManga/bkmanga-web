@@ -12,7 +12,7 @@ export class MangaDetailComponent implements OnInit{
 
   private activatedRoute: ActivatedRoute
 
-  listComment: Array<number> = [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
+  listComment: Array<number> = [1, 2, 3]
 
   constructor(activatedRoute: ActivatedRoute) {
     this.activatedRoute = activatedRoute;

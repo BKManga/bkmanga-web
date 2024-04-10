@@ -7,7 +7,7 @@ import { TestComponent } from './front-end/test/test.component';
 import { ErrorDialogComponent } from './front-end/component/shared/error-dialog/error-dialog.component';
 import { LoadingComponent } from './front-end/component/shared/loading/loading.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
@@ -43,6 +43,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import { LevelDecorationDirective } from './front-end/directive/level-decoration.directive';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { BlockCommentComponent } from './front-end/component/page/user/block-comment/block-comment.component';
+import {RequestHandleInterceptor} from "./front-end/interceptor/request-handle.interceptor";
+import {CookieService} from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -108,7 +110,14 @@ import { BlockCommentComponent } from './front-end/component/page/user/block-com
     HeaderComponent,
     FooterComponent,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestHandleInterceptor,
+      multi: true
+    },
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,7 +5,7 @@ import {AfterViewInit, Directive, ElementRef, Input} from '@angular/core';
 })
 export class LevelDecorationDirective implements AfterViewInit{
 
-   @Input() appLevelDecoration: string | undefined
+  @Input() appLevelDecoration: string | undefined
 
   constructor(private elementRef: ElementRef) {}
 

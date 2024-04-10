@@ -1,0 +1,57 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.chapter {
+  background-color: $color-18191a;
+  padding: $value-10;
+  align-items: center;
+  justify-content: center;
+
+  .chapter-detail {
+    max-width: $width-large;
+    width: 100%;
+    background-color: $color-242526;
+    padding: $value-15;
+    border-radius: $value-5;
+
+    .chapter-detail__title {
+      color: $color-e4e6eb;
+      margin-bottom: $value-12;
+      h1 {
+        margin: 0;
+        font-size: $value-18;
+        font-weight: 600;
+      }
+    }
+
+    .button-element {
+      padding: $value-5 $value-10;
+      cursor: pointer;
+      border-radius: $value-4;
+      font-size: $value-14;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: $value-8;
+    }
+
+    .button-report__error {
+      background-color: $color-f0ad4e;
+      color:$color-e4e6eb;
+    }
+
+    .list-button__action {
+      font-weight: 400;
+      margin-top: $value-12;
+      .button-previous__chapter {
+        color: $color-2E2E2E;
+        background-color: $color-DDDDDD;
+      }
+
+      .button-next__chapter {
+        color: $color-e4e6eb;
+        background-color: $color-5bc0de;
+      }
+    }
+  }
+}
