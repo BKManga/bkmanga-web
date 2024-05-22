@@ -10,7 +10,7 @@
       <ng-template ngFor let-chapter let-i [ngForOf]="listChapter">
         <mat-list-item>
           <div class="chapter-list__content-element" fxLayout fxLayoutAlign="space-between center">
-            <span class="chapter-list__content-title">{{ "Pepper" + " " + i }}</span>
+            <span class="chapter-list__content-title" (click)="redirectToChapterDetail(chapter)">{{ "Pepper" + " " + i }}</span>
             <span>27/03/2024</span>
           </div>
         </mat-list-item>

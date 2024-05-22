@@ -1,0 +1,16 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.label-page {
+  color: $color-56ccf2;
+  font-size: $value-20;
+  font-weight: 600;
+  height: $value-60;
+  margin: $value-10 0;
+  align-items: center;
+
+  span {
+    text-transform: capitalize;
+    height: fit-content;
+  }
+}

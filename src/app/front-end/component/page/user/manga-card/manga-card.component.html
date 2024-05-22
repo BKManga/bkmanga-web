@@ -1,9 +1,9 @@
 <div class="manga-card" fxLayout="column" fxLayoutAlign="center center">
-  <div class="manga-card__image">
+  <div class="manga-card__image" (click)="redirectToMangaDetailPage()">
     <img src="/assets/manga/image_logo.jpg" alt="">
   </div>
   <div class="manga-card__info">
-    <h3 #mangaCardName class="manga-card__name">
+    <h3 #mangaCardName class="manga-card__name" (click)="redirectToMangaDetailPage()">
       One Piece
     </h3>
     <div

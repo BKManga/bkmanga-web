@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {SharingService} from "../../../../service/sharing.service";
+import {AppRouter} from "../../../../constant/constants";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-main',
@@ -10,7 +12,10 @@ export class MainComponent implements OnInit, AfterViewInit{
   private sharingService: SharingService
   protected mangaCardList: Array<any> = [1, 2, 3, 4, 5, 6, 7, 8, 9,]
 
-  constructor(sharingService: SharingService) {
+  constructor(
+    sharingService: SharingService,
+    private router: Router,
+  ) {
     this.sharingService = sharingService
   }
 
@@ -19,5 +24,9 @@ export class MainComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit(): void {
+  }
+
+  redirectToSearchPage = async () : Promise<void> => {
+    await this.router.navigate([AppRouter.Main, AppRouter.Search])
   }
 }

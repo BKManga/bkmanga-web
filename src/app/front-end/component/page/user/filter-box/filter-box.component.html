@@ -1,0 +1,92 @@
+<div fxLayout="column" class="filter_box">
+  <div fxLayout="column" class="filter_option_explain" fxLayoutGap="2">
+    <div class="expand_element" fxLayout fxFlexAlign="start center" fxLayoutGap="8">
+      <div class="expand-filter icon-checkbox icon-tick">
+      </div>
+      <span>
+        {{ "Tìm trong những thể loại này" }}
+      </span>
+    </div>
+    <div class="expand_element" fxLayout fxFlexAlign="start center" fxLayoutGap="8">
+      <div class="expand-filter icon-checkbox icon-cross">
+      </div>
+      <span>
+        {{ "Loại trừ những thể loại này" }}
+      </span>
+    </div>
+    <div class="expand_element" fxLayout fxFlexAlign="start center" fxLayoutGap="8">
+      <div class="expand-filter icon-checkbox icon-default">
+      </div>
+      <span>
+        {{ "Truyện có thể thuộc hoặc không thuộc thể loại này" }}
+      </span>
+    </div>
+  </div>
+  <div class="search__button-element search__button-reset" (click)="resetFilterBox()">
+    <mat-icon>refresh</mat-icon>
+    <span>
+      {{ "Reset" }}
+    </span>
+  </div>
+  <div fxLayout="column" class="filter-area" fxLayoutGap="12">
+    <div class="filter-list" fxLayout="column" fxLayoutGap="4">
+      <div class="filter-list__label">
+        {{ filterListLabel }}
+      </div>
+      <form class="filter-list__genre">
+        <ng-template ngFor let-filterGenre [ngForOf]="listGenre">
+          <app-filter-genre-element
+            [triggerReset]="triggerReset"
+            [idGenre]="filterGenre.id"
+            [nameGenre]="filterGenre.name"
+            (exportValueListFilter)="setFilterCheckBoxValue($event)"
+          >
+          </app-filter-genre-element>
+        </ng-template>
+      </form>
+    </div>
+    <form [formGroup]="formGroup" class="filter-dropdown">
+      <div class="filter-dropdown__element" fxLayout>
+        <span>
+          {{ "Quốc gia" }}
+        </span>
+        <mat-form-field class="dropdown-custom" appearance="outline">
+          <select matNativeControl formControlName="statusManga">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </mat-form-field>
+      </div>
+      <div class="filter-dropdown__element" fxLayout>
+        <span>
+          {{ "Quốc gia" }}
+        </span>
+        <mat-form-field class="dropdown-custom" appearance="outline">
+          <select matNativeControl formControlName="numberOfChapter">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </mat-form-field>
+      </div>
+      <div class="filter-dropdown__element" fxLayout>
+        <span>
+          {{ "Quốc gia" }}
+        </span>
+        <mat-form-field class="dropdown-custom" appearance="outline">
+          <select matNativeControl formControlName="orderManga">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </mat-form-field>
+      </div>
+    </form>
+    <div class="search__button-element search__button-find" (click)="getFilterValue()">
+      <span>
+        {{ "Tìm kiếm" }}
+      </span>
+    </div>
+  </div>
+</div>

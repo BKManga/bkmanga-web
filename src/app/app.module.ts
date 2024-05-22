@@ -22,7 +22,7 @@ import {NgOptimizedImage} from "@angular/common";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
 import { ResultSearchHeaderComponent } from './front-end/component/shared/result-search-header/result-search-header.component';
 import { NavigationBarComponent } from './front-end/component/shared/navigation-bar/navigation-bar.component';
 import {LoginComponent} from "./front-end/component/page/auth/login/login.component";
@@ -45,6 +45,17 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import { BlockCommentComponent } from './front-end/component/page/user/block-comment/block-comment.component';
 import {RequestHandleInterceptor} from "./front-end/interceptor/request-handle.interceptor";
 import {CookieService} from "ngx-cookie-service";
+import {LazyLoadImageModule} from "ng-lazyload-image";
+import { MangaListComponent } from './front-end/component/page/user/manga-list/manga-list.component';
+import { SearchComponent } from './front-end/component/page/user/search/search.component';
+import { LabelPageComponent } from './front-end/component/page/user/label-page/label-page.component';
+import { FilterBoxComponent } from './front-end/component/page/user/filter-box/filter-box.component';
+import { FilterGenreElementComponent } from './front-end/component/page/user/filter-genre-element/filter-genre-element.component';
+import { HistoryComponent } from './front-end/component/page/user/history/history.component';
+import { FollowComponent } from './front-end/component/page/user/follow/follow.component';
+import { GenreComponent } from './front-end/component/page/user/genre/genre.component';
+import { PrivacyPolicyComponent } from './front-end/component/page/user/privacy-policy/privacy-policy.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
   declarations: [
@@ -67,45 +78,56 @@ import {CookieService} from "ngx-cookie-service";
     ChapterListComponent,
     LevelDecorationDirective,
     BlockCommentComponent,
+    MangaListComponent,
+    SearchComponent,
+    LabelPageComponent,
+    FilterBoxComponent,
+    FilterGenreElementComponent,
+    HistoryComponent,
+    FollowComponent,
+    GenreComponent,
+    PrivacyPolicyComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FlexModule,
-    MatButtonModule,
-    MatDialogModule,
-    HttpClientModule,
-    MatProgressSpinnerModule,
-    MatSnackBarModule,
-    ApiModule.forRoot(() => {
-      return new Configuration({
-        basePath: `${ApiBaseUrl}`
-      })
-    }),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpTranslateLoader,
-        deps: [HttpClient]
-      }
-    }),
-    MatIconModule,
-    NgOptimizedImage,
-    FlexLayoutModule,
-    FormsModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    MatRadioModule,
-    MatListModule,
-    MatPaginatorModule,
-    MatTooltipModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FlexModule,
+        MatButtonModule,
+        MatDialogModule,
+        HttpClientModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule,
+        ApiModule.forRoot(() => {
+            return new Configuration({
+                basePath: `${ApiBaseUrl}`
+            })
+        }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
+        MatIconModule,
+        NgOptimizedImage,
+        FlexLayoutModule,
+        FormsModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        MatRadioModule,
+        MatListModule,
+        MatPaginatorModule,
+        MatTooltipModule,
+        LazyLoadImageModule,
+        MatExpansionModule,
+    ],
   exports: [
     HeaderComponent,
     FooterComponent,
@@ -116,7 +138,13 @@ import {CookieService} from "ngx-cookie-service";
       useClass: RequestHandleInterceptor,
       multi: true
     },
-    CookieService
+    CookieService,
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: {
+        subscriptSizing: 'dynamic'
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })

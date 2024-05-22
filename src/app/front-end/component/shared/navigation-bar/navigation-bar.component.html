@@ -13,24 +13,26 @@
               {{ "Genre"|translate }}
               <mat-icon>arrow_drop_down</mat-icon>
             </div>
-            <div class="navigation-bar__extend_genre" [ngClass]="">
+            <div #extendGenre class="navigation-bar__extend_genre" [ngClass]="">
               <div class="navigation-bar__extend_genre_list">
                 <ng-template ngFor let-genre [ngForOf]="listGenre">
-                  <div class="navigation-bar__extend_genre_item">
+                  <div class="navigation-bar__extend_genre_item" (click)="redirectToGenrePage(genre.id)">
                     <span>
                       {{ genre.name ?? ""|translate }}
                     </span>
                   </div>
                 </ng-template>
-
               </div>
             </div>
           </div>
 
-          <div class="navigation-bar__item">
+          <div class="navigation-bar__item" (click)="redirectToSearchPage()">
             {{ "Search"|translate }}
           </div>
-          <div class="navigation-bar__item">
+          <div class="navigation-bar__item" (click)="redirectToHistoryPage()">
+            {{ "History"|translate }}
+          </div>
+          <div class="navigation-bar__item" (click)="redirectToFollowPage()">
             {{ "Follow"|translate }}
           </div>
           <div class="navigation-bar__item">

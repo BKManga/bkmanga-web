@@ -12,8 +12,8 @@
       <span class="footer-content__email">
         nghia.nn260701@gmail.com
       </span>
-      <span class="footer-content__policy">
-        Chính sách bảo mật
+      <span class="footer-content__policy" (click)="redirectToPrivacyPolicyPage()">
+        {{ 'label.privacyPolicy'|translate }}
       </span>
     </div>
     <div class="footer-content__right" fxLayout="column" >

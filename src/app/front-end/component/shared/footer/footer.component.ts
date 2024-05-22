@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {ImageData} from "../../../interface/image-data";
-import {LogoLarge, LogoShort} from "../../../constant/constants";
+import {AppRouter, LogoLarge, LogoShort} from "../../../constant/constants";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-footer',
@@ -10,7 +11,13 @@ import {LogoLarge, LogoShort} from "../../../constant/constants";
 export class FooterComponent {
   public logoLarge: ImageData
 
-  constructor() {
+  constructor(
+    private router: Router,
+  ) {
     this.logoLarge = LogoLarge
+  }
+
+  redirectToPrivacyPolicyPage = async () : Promise<void> => {
+    await this.router.navigate([AppRouter.Main, AppRouter.PrivacyPolicy])
   }
 }

@@ -1,0 +1,9 @@
+<div fxLayout="column" class="genre-page">
+  <div fxLayout="column" class="genre-page-content">
+    <app-label-page [labelPage]="genreData?.name ?? ''"></app-label-page>
+    <div class="genre-description">
+      {{ genreData?.description }}
+    </div>
+    <app-manga-list [mangaList]="listMangaFound"></app-manga-list>
+  </div>
+</div>

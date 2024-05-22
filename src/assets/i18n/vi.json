@@ -2,15 +2,22 @@
   "Login": "Đăng nhập",
   "Register": "Đăng ký",
   "Main Page": "Trang chủ",
-  "Genre": "Thể loại",
-  "Search": "Tìm kiếm",
-  "Follow": "Theo dõi",
-  "Fan Page": "Fanpage",
-  "Discord": "Discord",
+  "Genre": "thể loại",
+  "Search": "tìm kiếm",
+  "History": "lịch sử",
+  "Follow": "theo dõi",
+  "Fan Page": "fanpage",
+  "Discord": "discord",
   "LoginID": "Tên đăng nhập",
   "Password": "Mật khẩu",
   "delete": {
     "comment": "Delete comment"
+  },
+  "label": {
+    "search": "tìm kiếm nâng cao",
+    "history": "lịch sử đọc truyện",
+    "follow": "truyện đang theo dõi",
+    "privacyPolicy": "chính sách bảo mật"
   },
   "action": "action",
   "adventure": "adventure",

@@ -1,10 +1,12 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
+  ElementRef, Input,
   OnInit,
   ViewChild,
 } from '@angular/core';
+import {Router} from "@angular/router";
+import {AppRouter} from "../../../../constant/constants";
 
 @Component({
   selector: 'app-manga-card',
@@ -15,6 +17,7 @@ export class MangaCardComponent implements OnInit, AfterViewInit{
 
   @ViewChild('mangaCardExpand') mangaCardExpand: ElementRef
   @ViewChild('mangaCardName') mangaCardName: ElementRef
+  @Input() idManga: number | undefined
 
   private classShowMangaCard: string = 'manga-card__expand__show'
 
@@ -23,12 +26,13 @@ export class MangaCardComponent implements OnInit, AfterViewInit{
   offsetTop: string = `unset`
   offsetBottom: string = `unset`
 
-  private readonly gapHorizontal = 12
-  private readonly gapVertical = 12
+  private readonly gapHorizontal: number = 12
+  private readonly gapVertical: number = 12
 
   constructor(
     mangaCardExpand: ElementRef,
     mangaCardName: ElementRef,
+    private readonly router: Router,
   ) {
     this.mangaCardExpand = mangaCardExpand
     this.mangaCardName = mangaCardName
@@ -121,6 +125,23 @@ export class MangaCardComponent implements OnInit, AfterViewInit{
     this.offsetBottom = `${offsetBottom}px`
   }
 
+  redirectToMangaDetailPage = async () : Promise<any> => {
+    if (!this.idManga) return
+
+    await this.router.navigate([AppRouter.Main, AppRouter.MangaDetail, this.idManga])
+  }
+
+  redirectToChapterDetailPage = async (idChapter: number | undefined) : Promise<any> => {
+    if (!this.idManga) return
+
+    await this.router.navigate([
+      AppRouter.Main,
+      AppRouter.MangaDetail,
+      idChapter,
+      AppRouter.ChapterDetail,
+      idChapter
+    ])
+  }
 
   private getWidthScreen = (): number => window.innerWidth
 

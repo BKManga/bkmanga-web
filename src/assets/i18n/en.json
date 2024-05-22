@@ -12,6 +12,12 @@
   "delete": {
     "comment": "Delete comment"
   },
+  "label": {
+    "search": "advance search",
+    "history": "reading history",
+    "follow": "following list",
+    "privacyPolicy": "privacy policy"
+  },
   "action": "action",
   "adventure": "adventure",
   "anime":  "anime",

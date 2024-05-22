@@ -2,7 +2,7 @@
 @import "src/app/front-end/component/common/value";
 
 .chapter {
-  background-color: $color-18191a;
+  background-color: $color-333333;
   padding: $value-10;
   align-items: center;
   justify-content: center;
@@ -10,9 +10,14 @@
   .chapter-detail {
     max-width: $width-large;
     width: 100%;
-    background-color: $color-242526;
     padding: $value-15;
     border-radius: $value-5;
+
+    .chapter-detail__navigation {
+      background-color: $color-242526;
+      border-radius: $value-5;
+      padding: $value-20;
+    }
 
     .chapter-detail__title {
       color: $color-e4e6eb;
@@ -52,6 +57,27 @@
         color: $color-e4e6eb;
         background-color: $color-5bc0de;
       }
+    }
+  }
+
+  .chapter-advertisement {
+    height: $value-300;
+    width: 100%;
+    max-width: $width-large;
+    border: 1px solid $color-e4e6eb;
+    margin: $value-10 0;
+  }
+
+  .chapter-image {
+    width: 100%;
+    max-width: $width-large;
+    justify-content: center;
+    align-items: center;
+    .chapter-image__element {
+      position: relative;
+      width: 100%;
+      max-width: $value-900;
+      height: auto;
     }
   }
 }

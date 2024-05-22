@@ -1,0 +1,41 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.filter_element {
+  color: $color-white;
+
+  .checkbox-filter {
+    width: $value-18;
+    height: $value-18;
+    background-color: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-checkbox {
+    background: url("/assets/images/icon-checkbox.png") no-repeat $color-white;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 15%) inset;
+    cursor: pointer;
+  }
+
+  .icon-default {
+    background-position: 0 (-$value-18);
+  }
+
+  .icon-tick {
+    background-position: 0 (-($value-18 * 2));
+  }
+
+  .icon-cross {
+    background-position: 0 0;
+  }
+
+  span {
+    text-transform: capitalize;
+  }
+}

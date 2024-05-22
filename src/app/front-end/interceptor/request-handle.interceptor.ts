@@ -37,7 +37,7 @@ export class RequestHandleInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.totalRequest++;
     if (this.totalRequest === 1) {
-      this.dialogService.closeLoadingData()
+      this.dialogService.showLoadingData()
     }
 
     const dubReq = request.clone({

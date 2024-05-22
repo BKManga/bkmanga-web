@@ -40,6 +40,11 @@ export const AppRouter = {
   MangaDetail: "manga",
   ChapterDetail: "chapter",
   Error: "error",
+  Search: "search",
+  Follow: "follow",
+  History: "history",
+  Genre: "genre",
+  PrivacyPolicy: "privacy-policy"
 }
 
 export const AppRouterAdmin = {
@@ -55,8 +60,18 @@ export const RouteChapter = {
   Param: 'idChapter'
 }
 
+export const RouteGenre = {
+  Param: 'idGenre'
+}
+
 export const Role = {
   User: "USER",
   Moderator: "MODERATOR",
   Admin: "ADMIN"
+}
+
+export const FilterSearchCheckBox = {
+  Choose: "Choose",
+  Except: "Except",
+  Blank: "Blank"
 }

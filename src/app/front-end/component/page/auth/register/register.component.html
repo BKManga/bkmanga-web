@@ -6,7 +6,7 @@
           {{ "Register"|translate }}
         </span>
       </div>
-      <form [formGroup]="formGroup" (keydown.enter)="submitValueRegisterForm()" class="register-content__body" fxLayout="column">
+      <form [formGroup]="formGroup" (keydown.enter)="submitValueRegisterForm()" fxLayoutGap="16" class="register-content__body" fxLayout="column">
         <mat-form-field appearance="outline">
           <mat-label>
             {{ "Full name" }}

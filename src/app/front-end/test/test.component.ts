@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {DialogService} from "../service/dialog.service";
-import {UserControllerService} from "../bkmanga-svc";
+import {UserControllerService} from "../bkmanga-svc/api/userController.service";
+// import {UserControllerService} from "../bkmanga-svc";
 
 @Component({
   selector: 'app-test',
@@ -10,13 +11,13 @@ import {UserControllerService} from "../bkmanga-svc";
 export class TestComponent {
   private dialogService: DialogService
 
-  private userControllerService: UserControllerService
+  // private userControllerService: UserControllerService
   constructor(
     dialogService: DialogService,
     userControllerService: UserControllerService
   ) {
     this.dialogService = dialogService;
-    this.userControllerService = userControllerService;
+    // this.userControllerService = userControllerService;
   }
 
   ngOnInit() {

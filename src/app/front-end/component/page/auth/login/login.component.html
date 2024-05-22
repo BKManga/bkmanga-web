@@ -9,7 +9,7 @@
           {{ "Login"|translate }}
         </span>
       </div>
-      <form [formGroup]="formGroup" (keydown.enter)="submitValueLoginForm()" class="login-content__body" fxLayout="column">
+      <form [formGroup]="formGroup" (keydown.enter)="submitValueLoginForm()" class="login-content__body" fxLayoutGap="16" fxLayout="column">
           <mat-form-field appearance="outline">
             <mat-label>
               {{ "LoginID"|translate }}

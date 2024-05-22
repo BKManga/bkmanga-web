@@ -1,0 +1,130 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.filter_box {
+  background-color: $color-242526;
+  padding: $value-20;
+  border-radius: $value-5;
+  align-items: center;
+  margin-bottom: $value-16;
+  color: $color-white;
+
+  .filter_option_explain {
+    width: 100%;
+
+    .expand_element {
+      color: $color-white;
+
+      .expand-filter {
+        width: $value-18;
+        height: $value-18;
+        background-color: $color-white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .icon-checkbox {
+        background: url("/assets/images/icon-checkbox.png") no-repeat $color-white;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 15%) inset;
+      }
+
+      .icon-default {
+        background-position: 0 (-$value-18);
+      }
+
+      .icon-tick {
+        background-position: 0 (-($value-18 * 2));
+      }
+
+      .icon-cross {
+        background-position: 0 0;
+      }
+    }
+  }
+
+  .filter-area {
+    width: 100%;
+    align-items: center;
+
+    .filter-list {
+      width: 100%;
+      .filter-list__label {
+        font-weight: 600;
+        font-size: $value-16;
+      }
+    }
+
+    .filter-list__genre {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: $value-4;
+    }
+
+    .filter-dropdown {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: $value-8;
+      column-gap: $value-8;
+      font-weight: 600;
+      font-size: $value-16;
+      width: 100%;
+
+      .filter-dropdown__element {
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    @mixin styling650Width() {
+      .filter-dropdown {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+
+    @mixin styling450Width() {
+      .filter-list__genre {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media screen and (max-width: $value-650) {
+      @include styling650Width()
+    }
+
+    @media screen and (max-width: $value-450) {
+      @include styling450Width()
+    }
+  }
+}
+
+.dropdown-custom {
+  background-color: $color-white;
+  border-radius: $value-4;
+}
+
+.search__button-element {
+  display: flex;
+  align-items: center;
+  column-gap: $value-4;
+  justify-content: center;
+  padding: $value-10;
+  border-radius: $value-5;
+  font-size: $value-15;
+  cursor: pointer;
+  width: fit-content;
+  color: $color-white;
+}
+
+.search__button-reset {
+  margin: $value-10 0;
+  background-color: $color-428bca;
+}
+
+.search__button-find {
+  background-color: $color-8bc34a;
+}
+
+.search__button-element:hover {
+  opacity: 0.6;
+}

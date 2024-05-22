@@ -1,0 +1,17 @@
+<div fxLayout="column" class="privacy-policy">
+  <div fxLayout="column" class="privacy-policy-page-content">
+    <app-label-page [labelPage]="labelPagePrivacyPolicy"></app-label-page>
+    <mat-accordion multi="true">
+      <ng-template ngFor let-privacyPolicy [ngForOf]="privacyPolicyList">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            {{ privacyPolicy.question }}
+          </mat-expansion-panel-header>
+          <p>
+            {{ privacyPolicy.answer }}
+          </p>
+        </mat-expansion-panel>
+      </ng-template>
+    </mat-accordion>
+  </div>
+</div>

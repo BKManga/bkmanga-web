@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {RouteChapter, RouteManga} from "../../../../constant/constants";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-chapter-detail',
@@ -10,6 +11,9 @@ import {RouteChapter, RouteManga} from "../../../../constant/constants";
 export class ChapterDetailComponent implements OnInit{
   private activatedRoute: ActivatedRoute
 
+  listImage: Array<number> = [1, 2, 3, 4, 5]
+  listComment: Array<number> = [1, 2, 3]
+
   constructor(activatedRoute: ActivatedRoute) {
     this.activatedRoute = activatedRoute;
   }
@@ -17,5 +21,9 @@ export class ChapterDetailComponent implements OnInit{
   ngOnInit(): void {
     console.log(this.activatedRoute.snapshot.paramMap.get(RouteManga.Param))
     console.log(this.activatedRoute.snapshot.paramMap.get(RouteChapter.Param))
+  }
+
+  commentPaginationEvent = (pageEvent: PageEvent) => {
+    console.log(pageEvent)
   }
 }

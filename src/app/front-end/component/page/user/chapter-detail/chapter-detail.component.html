@@ -1,28 +1,44 @@
 <div fxLayout="column" class="chapter">
   <div class="chapter-detail" fxLayout="column">
-    <div class="chapter-detail__title" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8">
-      <h1>
-        Lmao lmao Lmao lmao Lmao lmao Lmao lmao Lmao lmao
-      </h1>
-      <h1>
-        -
-      </h1>
-      <h1>
-        Chapter 1
-      </h1>
-      <span>
+    <div class="chapter-detail__navigation">
+      <div class="chapter-detail__title" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8">
+        <h1>
+          Lmao lmao Lmao lmao Lmao lmao Lmao lmao Lmao lmao
+        </h1>
+        <h1>
+          -
+        </h1>
+        <h1>
+          Chapter 1
+        </h1>
+        <span>
         (Cập nhật lúc 0:00 02/04/2024)
       </span>
-    </div>
-    <div fxLayout fxLayoutAlign="center center">
-      <div class="button-element button-report__error">
-        <mat-icon>warning</mat-icon>
-        <span>
+      </div>
+      <div fxLayout fxLayoutAlign="center center">
+        <div class="button-element button-report__error">
+          <mat-icon>warning</mat-icon>
+          <span>
           Báo lỗi chương
         </span>
+        </div>
       </div>
+      <ng-container *ngTemplateOutlet="actionChapter"></ng-container>
     </div>
-    <ng-container *ngTemplateOutlet="actionChapter"></ng-container>
+    <div class="chapter-image" fxLayout="column">
+      <div class="chapter-advertisement"></div>
+      <ng-template ngFor let-image [ngForOf]="listImage">
+        <div class="chapter-image__element">
+          <img lazyLoad="assets/manga/1_usdjq.jpg" width="100%" [useSrcset]="true" alt="">
+        </div>
+      </ng-template>
+      <div class="chapter-advertisement"></div>
+    </div>
+    <div class="chapter-detail__navigation" fxLayout="column">
+      <ng-container *ngTemplateOutlet="actionChapter"></ng-container>
+    </div>
+    <div class="chapter-advertisement"></div>
+    <app-block-comment [listComment]="this.listComment" (pagePaginationEmitEvent)="commentPaginationEvent($event)"></app-block-comment>
   </div>
 </div>
 

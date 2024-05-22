@@ -38,7 +38,10 @@
               "includePaths": [
                 "src/app/component/common"
               ]
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "lodash"
+            ]
           },
           "configurations": {
             "production": {

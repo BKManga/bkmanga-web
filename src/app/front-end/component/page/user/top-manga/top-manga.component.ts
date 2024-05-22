@@ -10,11 +10,11 @@ export class TopMangaComponent implements AfterViewInit{
   protected heightMangaTop: string = '0'
 
   @ViewChild('top_manga')
-  protected topMangaElement: ElementRef;
+  protected topMangaElement: ElementRef
 
 
   constructor(topMangaElement: ElementRef) {
-    this.topMangaElement = topMangaElement;
+    this.topMangaElement = topMangaElement
   }
 
   @HostListener('window:resize', ['$event'])

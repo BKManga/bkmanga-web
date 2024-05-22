@@ -1,0 +1,49 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.manga-list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  row-gap: $value-20;
+}
+
+@mixin style1200Width() {
+  .manga-list {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@mixin style1000Width() {
+  .manga-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@mixin styleFooterWidthLarge() {
+  .manga-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@mixin style600Width() {
+  .manga-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: $width-large)
+{
+  @include style1200Width();
+}
+
+@media screen and (max-width: $width-1000) {
+  @include style1000Width();
+}
+
+@media screen and (max-width: $limit-footer-width-large) {
+  @include styleFooterWidthLarge()
+}
+
+@media screen and (max-width: $width-600) {
+  @include style600Width()
+}

@@ -9,15 +9,11 @@
           {{ "Truyện mới cập nhật" }}
         </span>
         </div>
-        <button mat-mini-fab color="primary" aria-label="Filter manga">
+        <button mat-mini-fab color="primary" aria-label="Filter manga" (click)="redirectToSearchPage()">
           <mat-icon>filter_list</mat-icon>
         </button>
       </div>
-      <div class="main-content__newest__update-list">
-        <ng-template ngFor let-mangaCard [ngForOf]="mangaCardList">
-          <app-manga-card></app-manga-card>
-        </ng-template>
-      </div>
+      <app-manga-list [mangaList]="mangaCardList"></app-manga-list>
     </div>
   </div>
 </div>
