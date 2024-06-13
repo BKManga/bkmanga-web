@@ -13,10 +13,17 @@
     "comment": "Delete comment"
   },
   "label": {
-    "search": "advance search",
+    "filter": "advance search",
     "history": "reading history",
     "follow": "following list",
     "privacyPolicy": "privacy policy"
+  },
+  "manga": {
+    "status": {
+      "in process": "in process",
+      "done": "done",
+      "dropped": "dropped"
+    }
   },
   "action": "action",
   "adventure": "adventure",

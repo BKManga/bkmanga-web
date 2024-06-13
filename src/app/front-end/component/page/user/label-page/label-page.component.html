@@ -3,4 +3,9 @@
   <span>
     {{ labelPage|translate }}
   </span>
+  <ng-template [ngIf]="paramLabel">
+    <span class="label-page__param_label">
+      {{ '"' + paramLabel + '"' }}
+    </span>
+  </ng-template>
 </div>

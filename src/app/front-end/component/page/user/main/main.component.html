@@ -9,11 +9,16 @@
           {{ "Truyện mới cập nhật" }}
         </span>
         </div>
-        <button mat-mini-fab color="primary" aria-label="Filter manga" (click)="redirectToSearchPage()">
+        <button mat-mini-fab color="primary" aria-label="Filter manga" (click)="redirectToFilterPage()">
           <mat-icon>filter_list</mat-icon>
         </button>
       </div>
-      <app-manga-list [mangaList]="mangaCardList"></app-manga-list>
+      <app-manga-list
+        [mangaList]="mangaDataList"
+        [totalElement]="totalElementData"
+        (getPaginatorData)="setPaginatorData($event)"
+        [showPaginator]="true"
+      ></app-manga-list>
     </div>
   </div>
 </div>

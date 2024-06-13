@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AppRouter} from "../../../../constant/constants";
+import {Chapter} from "../../../../bkmanga-svc";
 
 @Component({
   selector: 'app-chapter-list',
@@ -8,17 +9,13 @@ import {AppRouter} from "../../../../constant/constants";
   styleUrls: ['./chapter-list.component.scss']
 })
 export class ChapterListComponent implements OnInit{
-  listChapter: Array<number> = []
+  @Input() listChapter: Array<Chapter> = new Array<Chapter>()
 
   constructor(
     private router : Router
   ) {}
 
-  ngOnInit(): void {
-    for (let i = 1; i <= 10; i++) {
-      this.listChapter.push(i)
-    }
-  }
+  ngOnInit(): void {}
 
   redirectToChapterDetail = async (idChapter: number | undefined) : Promise<void> => {
     if (!idChapter) return

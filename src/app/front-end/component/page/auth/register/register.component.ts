@@ -1,23 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SharingService} from "../../../../service/sharing.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AppRouter} from "../../../../constant/constants";
+import {AuthControllerService} from "../../../../bkmanga-svc";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit, OnDestroy {
 
-  private sharingService: SharingService
   protected formGroup: FormGroup
 
   constructor(
-    sharingService: SharingService,
+    private sharingService: SharingService,
     formBuilder: FormBuilder,
     private router: Router,
+    private authControllerService: AuthControllerService,
   ) {
     this.sharingService = sharingService
 
@@ -44,5 +45,9 @@ export class RegisterComponent implements OnInit{
     if (!this.formGroup.valid) return
 
     console.log(this.formGroup.value)
+  }
+
+  async ngOnDestroy(): Promise<void> {
+    await this.sharingService.setShowAuthButton(true)
   }
 }

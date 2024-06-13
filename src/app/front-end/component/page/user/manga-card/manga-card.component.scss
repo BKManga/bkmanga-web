@@ -17,6 +17,7 @@
   text-overflow: ellipsis;
   color: $color-e4e6eb;
   margin: 0;
+  max-width: $value-190;
   line-height: $value-36;
 }
 
@@ -30,6 +31,14 @@
   border-radius: $value-10;
   flex-direction: column;
   min-width: $value-420;
+
+  .manga-card__expand__status {
+
+    .manga-card__expand__status-content {
+      text-transform: capitalize;
+    }
+
+  }
 }
 
 .manga-card__expand__name {
@@ -52,6 +61,7 @@
   border-radius: $value-5;
   margin-right: $value-4;
   margin-bottom: $value-4;
+  text-transform: capitalize;
 }
 
 .manga-card__description {

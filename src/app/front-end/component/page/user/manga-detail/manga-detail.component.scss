@@ -38,6 +38,12 @@
     align-items: center;
   }
 
+  .manga-content__info__status {
+    .manga-content__info__status-content {
+      text-transform: capitalize;
+    }
+  }
+
   .manga-content__info__other-label {
     display: flex;
     gap: $value-4;
@@ -46,7 +52,8 @@
   }
 
   .manga-content__info_genre {
-
+    display: flex;
+    flex-direction: row;
   }
 
   .manga-content__info_genre-element {
@@ -56,6 +63,7 @@
     border-radius: $value-4;
     border: 1px solid $color-f18121;
     cursor: pointer;
+    text-transform: capitalize;
   }
 
   .manga-content__info_genre-element:hover {

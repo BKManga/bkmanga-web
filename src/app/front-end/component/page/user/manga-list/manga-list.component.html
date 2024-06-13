@@ -1,5 +1,31 @@
-<div class="manga-list">
-  <ng-template ngFor let-manga [ngForOf]="mangaList">
-    <app-manga-card [idManga]="manga"></app-manga-card>
+<div fxLayout="column" fxLayoutGap="10" class="manga-container">
+
+  <ng-container *ngIf="totalElement ?? 0 > 0; then haveResult; else noResult">
+
+  </ng-container>
+
+  <ng-template #haveResult>
+    <div class="manga-list">
+      <ng-template ngFor let-manga [ngForOf]="mangaList">
+        <app-manga-card [inputData]="manga"></app-manga-card>
+      </ng-template>
+    </div>
+    <ng-template [ngIf]="showPaginator">
+      <mat-paginator [length]="totalElement ?? 0"
+                     [pageSize]="paginatorData.pageSize"
+                     [showFirstLastButtons]="paginatorData.showFirstLastButtons"
+                     [hidePageSize]="paginatorData.hidePageSize"
+                     [pageSizeOptions]="paginatorData.pageSizeOptions"
+                     (page)="paginationManga($event)"
+                     aria-label="Select page"
+                     #paginator
+      >
+      </mat-paginator>
+    </ng-template>
+  </ng-template>
+  <ng-template #noResult>
+    <div class="no-result">
+      {{ "Không có kết quả nào được tìm thấy!" }}
+    </div>
   </ng-template>
 </div>

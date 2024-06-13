@@ -1,10 +1,11 @@
 import {AfterViewInit, Component, HostListener, Input, OnInit} from '@angular/core';
 import {ImageData} from "../../../interface/image-data";
-import {AppRouter, LogoLarge, LogoShort} from "../../../constant/constants";
+import {AppRouter, DataOrderBy, LogoLarge, LogoShort} from "../../../constant/constants";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
-import {Observable} from "rxjs";
 import {SharingService} from "../../../service/sharing.service";
+import {GetMangaByNameRequestDTO, GetMangaResponseDTO, MangaControllerService} from "../../../bkmanga-svc";
+import {StatusCodes} from "http-status-codes";
 
 @Component({
   selector: 'app-header',
@@ -16,16 +17,18 @@ export class HeaderComponent implements OnInit, AfterViewInit{
   protected placeHolder: String
   protected logoLarge: ImageData
   protected logoShort: ImageData
+
   protected fromGroup: FormGroup
+
   protected showResultSearchHeader: boolean = false
-  private router: Router
   protected readonly AppRouter = AppRouter;
+
   protected showAuthButton: boolean
-  private sharingService: SharingService
   constructor(
     formBuilder: FormBuilder,
-    router: Router,
-    sharingService: SharingService
+    private router: Router,
+    private sharingService: SharingService,
+    private mangaControllerService: MangaControllerService
   ) {
     this.placeHolder = "Bạn muốn tìm truyện gì"
     this.logoLarge = LogoLarge
@@ -33,14 +36,10 @@ export class HeaderComponent implements OnInit, AfterViewInit{
     this.fromGroup = formBuilder.group({
       search: [""]
     })
-    this.router = router
     this.showAuthButton = true
-    this.sharingService = sharingService
   }
 
-  public search() {
-    console.log(this.fromGroup.controls['search'].value)
-  }
+  mangaList: Array<GetMangaResponseDTO> = new Array<GetMangaResponseDTO>();
 
   @HostListener('document:click', ['$event'])
   onClickOutsideToCloseResultBox() {
@@ -52,7 +51,28 @@ export class HeaderComponent implements OnInit, AfterViewInit{
   }
 
   public searchRealTime() {
-    this.showResultSearchHeader = !!this.fromGroup.controls['search'].value;
+
+    let valueSearch = this.fromGroup.controls['search'].value.trim()
+
+    this.showResultSearchHeader = !!valueSearch
+
+    if (this.showResultSearchHeader) {
+
+      let getMangaByNameRequestDTO: GetMangaByNameRequestDTO = {
+        name: valueSearch,
+        otherName: valueSearch,
+        page: 0,
+        size: 10,
+        orderBy: DataOrderBy.ASC,
+      }
+
+      this.mangaControllerService.searchMangaByName(getMangaByNameRequestDTO).subscribe(
+        (response) => {
+          if (response.responseCode === StatusCodes.OK) {
+            this.mangaList = response.result?.content ?? []
+          }
+      })
+    }
   }
 
   async ngAfterViewInit(){
@@ -65,11 +85,23 @@ export class HeaderComponent implements OnInit, AfterViewInit{
     })
   }
 
-  public async redirectToAuthPage(router: string) {
+  setSearchValueDefault = () => {
+    this.showResultSearchHeader = false
+    this.fromGroup.controls['search'].setValue("")
+  }
+
+  redirectToAuthPage = async (router: string) : Promise<void> => {
     await this.router.navigate([AppRouter.Auth, router])
   }
 
-  public async redirectToMainPage() {
+  redirectToMainPage = async () : Promise<void> => {
     await this.router.navigate([AppRouter.Main])
+  }
+
+  redirectToSearchPage = async () : Promise<void> => {
+    if (this.fromGroup.controls['search'].value.trim()) {
+      this.setSearchValueDefault()
+      await this.router.navigate([AppRouter.Main, AppRouter.Search, this.fromGroup.controls['search'].value])
+    }
   }
 }

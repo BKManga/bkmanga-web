@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {GetListHistoryRequestDTO, HistoryControllerService, HistoryResponse} from "../../../../bkmanga-svc";
+import {StatusCodes} from "http-status-codes";
 
 @Component({
   selector: 'app-history',
@@ -6,16 +8,30 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent implements OnInit{
-  labelPageHistory: string
-  listMangaFound : Array<number> = []
 
-  constructor() {
+  labelPageHistory: string
+  historyResponseList: Array<HistoryResponse> = new Array<HistoryResponse>()
+
+  constructor(
+    private historyControllerService: HistoryControllerService
+  ) {
     this.labelPageHistory = 'label.history'
   }
 
   ngOnInit(): void {
-    for (let i = 1; i < 15; i++) {
-      this.listMangaFound.push(i)
+
+  }
+
+  getHistoryMangaData = async (): Promise<void> => {
+    let getListHistoryRequestDTO: GetListHistoryRequestDTO = {
+      userId: 1
     }
+
+    this.historyControllerService.getAllHistoryByUser(getListHistoryRequestDTO).subscribe(
+      (response) => {
+        if (response.responseCode === StatusCodes.OK) {
+          this.historyResponseList = response.result?.historyResponseList ?? []
+        }
+    })
   }
 }

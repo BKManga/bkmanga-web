@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
+import {Router} from "@angular/router";
+import {AppRouter} from "../../../constant/constants";
+import {GetMangaResponseDTO} from "../../../bkmanga-svc";
 
 @Component({
   selector: 'app-result-search-header',
@@ -6,8 +9,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./result-search-header.component.scss']
 })
 export class ResultSearchHeaderComponent {
-  public selectItem(event: MouseEvent) {
+
+  @Input() mangaList: Array<GetMangaResponseDTO> = new Array<GetMangaResponseDTO>()
+  @ViewChild('contentSearch') contentSearch: TemplateRef<any> | undefined
+  @Output() resetSearching: EventEmitter<boolean> = new EventEmitter<boolean>()
+
+  constructor(
+    private router: Router
+  ) {
+  }
+
+  selectItem = async (event: MouseEvent, id: number | undefined) : Promise<void> => {
     event.stopPropagation()
-    console.log("CLICK")
+
+    if (!id) return
+    // if (this.contentSearch) {
+    //   this.contentSearch.elementRef.nativeElement.classList
+    // }
+
+    this.resetSearching.emit(true)
+
+    await this.router.navigate([AppRouter.Main, AppRouter.MangaDetail, id])
   }
 }

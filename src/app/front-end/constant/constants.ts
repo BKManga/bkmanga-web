@@ -40,10 +40,12 @@ export const AppRouter = {
   MangaDetail: "manga",
   ChapterDetail: "chapter",
   Error: "error",
+  Filter: "filter",
   Search: "search",
   Follow: "follow",
   History: "history",
   Genre: "genre",
+  Author: "author",
   PrivacyPolicy: "privacy-policy"
 }
 
@@ -52,8 +54,16 @@ export const AppRouterAdmin = {
   ...AppRouter
 }
 
+export const RouteSearch = {
+  Param: "search"
+}
+
 export const RouteManga = {
   Param: 'idManga'
+}
+
+export const RouteAuthor = {
+  Param: 'idAuthor'
 }
 
 export const RouteChapter = {
@@ -74,4 +84,20 @@ export const FilterSearchCheckBox = {
   Choose: "Choose",
   Except: "Except",
   Blank: "Blank"
+}
+
+export const CommentBlockArea = {
+  MANGA: "manga",
+  CHAPTER: "chapter"
+}
+
+export const DataOrderBy = {
+  ASC: "ASC",
+  DESC: "DESC"
+}
+
+export const MangaStatus = {
+  DONE: 1,
+  IN_PROCESS: 2,
+  DROPPED: 3
 }

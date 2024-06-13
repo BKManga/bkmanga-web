@@ -2,15 +2,24 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./front-end/component/page/auth/login/login.component";
 import {MainComponent} from "./front-end/component/page/user/main/main.component";
-import {AppRouter, RouteChapter, RouteGenre, RouteManga} from "./front-end/constant/constants";
+import {
+  AppRouter,
+  RouteAuthor,
+  RouteChapter,
+  RouteGenre,
+  RouteManga,
+  RouteSearch
+} from "./front-end/constant/constants";
 import {RegisterComponent} from "./front-end/component/page/auth/register/register.component";
 import {MangaDetailComponent} from "./front-end/component/page/user/manga-detail/manga-detail.component";
 import {ChapterDetailComponent} from "./front-end/component/page/user/chapter-detail/chapter-detail.component";
-import {SearchComponent} from "./front-end/component/page/user/search/search.component";
+import {FilterComponent} from "./front-end/component/page/user/filter/filter.component";
 import {FollowComponent} from "./front-end/component/page/user/follow/follow.component";
 import {HistoryComponent} from "./front-end/component/page/user/history/history.component";
 import {GenreComponent} from "./front-end/component/page/user/genre/genre.component";
 import {PrivacyPolicyComponent} from "./front-end/component/page/user/privacy-policy/privacy-policy.component";
+import {SearchComponent} from "./front-end/component/page/user/search/search.component";
+import {AuthorComponent} from "./front-end/component/page/user/author/author.component";
 
 const routes: Routes = [
   {
@@ -51,7 +60,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: AppRouter.Search,
+        path: `${AppRouter.Search}/:${RouteSearch.Param}`,
         component: SearchComponent,
       },
       {
@@ -61,6 +70,14 @@ const routes: Routes = [
       {
         path: AppRouter.History,
         component: HistoryComponent,
+      },
+      {
+        path: AppRouter.Filter,
+        component: FilterComponent,
+      },
+      {
+        path: `${AppRouter.Author}/:${RouteAuthor.Param}`,
+        component: AuthorComponent,
       },
       {
         path: `${AppRouter.Genre}/:${RouteGenre.Param}`,
@@ -79,8 +96,7 @@ const routes: Routes = [
     routes,
     {
       scrollPositionRestoration: 'enabled'
-    }
-    )
+    })
   ],
   exports: [RouterModule]
 })

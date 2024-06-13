@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import {Router} from "@angular/router";
 import {AppRouter} from "../../../../constant/constants";
+import {Chapter, GetMangaResponseDTO, HistoryResponse} from "../../../../bkmanga-svc";
 
 @Component({
   selector: 'app-manga-card',
@@ -17,7 +18,9 @@ export class MangaCardComponent implements OnInit, AfterViewInit{
 
   @ViewChild('mangaCardExpand') mangaCardExpand: ElementRef
   @ViewChild('mangaCardName') mangaCardName: ElementRef
-  @Input() idManga: number | undefined
+  @Input() inputData?: GetMangaResponseDTO | HistoryResponse
+  manga?: GetMangaResponseDTO
+  lastChapter?: Chapter
 
   private classShowMangaCard: string = 'manga-card__expand__show'
 
@@ -43,6 +46,14 @@ export class MangaCardComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit(): void {
+
+    if (this.isGetMangaResponseDTO(this.inputData)) {
+      this.manga = this.inputData as GetMangaResponseDTO
+      this.lastChapter = this.manga.chapterList?.at(0)
+    } else if (this.isHistoryResponse(this.inputData)) {
+      this.manga = this.inputData.getMangaResponseDTO as GetMangaResponseDTO
+      this.lastChapter = this.inputData.chapter
+    }
   }
 
   private mouseOverMangaName = (): void => {
@@ -126,13 +137,13 @@ export class MangaCardComponent implements OnInit, AfterViewInit{
   }
 
   redirectToMangaDetailPage = async () : Promise<any> => {
-    if (!this.idManga) return
+    if (!this.manga?.id) return
 
-    await this.router.navigate([AppRouter.Main, AppRouter.MangaDetail, this.idManga])
+    await this.router.navigate([AppRouter.Main, AppRouter.MangaDetail, this.manga?.id])
   }
 
   redirectToChapterDetailPage = async (idChapter: number | undefined) : Promise<any> => {
-    if (!this.idManga) return
+    if (!this.manga?.id) return
 
     await this.router.navigate([
       AppRouter.Main,
@@ -143,7 +154,30 @@ export class MangaCardComponent implements OnInit, AfterViewInit{
     ])
   }
 
+  redirectToChapterDetail = async (
+    mangaId: number | undefined,
+    chapterId: number | undefined
+  ) : Promise<void> => {
+    if (!chapterId || !mangaId) return
+
+    await this.router.navigate([
+      AppRouter.Main,
+      AppRouter.MangaDetail,
+      mangaId,
+      AppRouter.ChapterDetail,
+      chapterId
+    ])
+  }
+
   private getWidthScreen = (): number => window.innerWidth
 
   private getHeightScreen = (): number => window.innerHeight
+
+  private isGetMangaResponseDTO = (value: any) : value is GetMangaResponseDTO => {
+    return "name" in value
+  }
+
+  private isHistoryResponse = (value: any) : value is HistoryResponse => {
+    return "manga" in value
+  }
 }

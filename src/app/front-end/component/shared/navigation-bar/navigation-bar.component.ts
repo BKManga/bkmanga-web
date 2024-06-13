@@ -90,9 +90,9 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
     await this.router.navigate([AppRouter.Main])
   }
 
-  redirectToSearchPage = async () : Promise<void> => {
+  redirectToFilterPage = async () : Promise<void> => {
     await this.resetNavigationBarComponentWhenRedirect()
-    await this.router.navigate([AppRouter.Main, AppRouter.Search])
+    await this.router.navigate([AppRouter.Main, AppRouter.Filter])
   }
 
   redirectToFollowPage = async () : Promise<void> => {

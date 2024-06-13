@@ -6,7 +6,7 @@
       </div>
       <div class="manga-content__info__other" fxLayout="column">
         <h1>
-          Lmao lmao Lmao lmao Lmao lmao Lmao lmao Lmao lmao
+          {{ manga?.name }}
         </h1>
         <div fxLayout="column" fxLayoutGap="8">
           <div class="manga-content__info__other-content">
@@ -17,7 +17,7 @@
               </span>
             </div>
             <span>
-              Lmao lmao Lmao lmao Lmao lmao Lmao lmao Lmao lmao
+              {{ manga?.otherName }}
             </span>
           </div>
           <div class="manga-content__info__other-content">
@@ -27,19 +27,22 @@
                 {{ "Tác giả" }}
               </span>
             </div>
-            <span>
-              {{ "Lmao lmao Lmao lmao Lmao lmao Lmao lmao Lmao lmao" }}
-            </span>
+
+            <div fxLayout fxLayoutGap="8">
+              <ng-template ngFor let-mangaAuthor [ngForOf]="manga?.mangaAuthorList">
+                <span> {{ mangaAuthor.author?.name }} </span>
+              </ng-template>
+            </div>
           </div>
-          <div class="manga-content__info__other-content">
+          <div class="manga-content__info__other-content manga-content__info__status">
             <div class="manga-content__info__other-label">
               <mat-icon> rss_feed</mat-icon>
               <span>
                 {{ "Tình trạng" }}
               </span>
             </div>
-            <span>
-              {{ "Lmao lmao Lmao lmao Lmao lmao Lmao lmao Lmao lmao" }}
+            <span class="manga-content__info__status-content">
+              {{ "manga.status." + manga?.mangaStatus?.name | translate }}
             </span>
           </div>
           <div class="manga-content__info__other-content">
@@ -50,7 +53,7 @@
               </span>
             </div>
             <span>
-              {{ 6969|separateString}}
+              {{ manga?.numberOfLikes ?? 0 |separateString }}
             </span>
           </div>
           <div class="manga-content__info__other-content">
@@ -61,7 +64,7 @@
               </span>
             </div>
             <span>
-              {{ 10000|separateString}}
+              {{ manga?.numberOfFollow ?? 0|separateString }}
             </span>
           </div>
           <div class="manga-content__info__other-content">
@@ -72,45 +75,24 @@
               </span>
             </div>
             <span>
-              {{ 100000|separateString}}
+              {{ manga?.viewManga?.numberOfViews ?? 0|separateString}}
             </span>
           </div>
-          <div class="manga-content__info_genre" fxLayout="row wrap" fxLayoutAlign="start center">
-            <div class="manga-content__info_genre-element">
-              <span>
-                Lmao
-              </span>
-            </div>
-            <div class="manga-content__info_genre-element">
-              <span>
-                Lmao
-              </span>
-            </div>
-            <div class="manga-content__info_genre-element">
-              <span>
-                Lmao
-              </span>
-            </div>
-            <div class="manga-content__info_genre-element">
-              <span>
-                Lmao
-              </span>
-            </div>
-            <div class="manga-content__info_genre-element">
-              <span>
-                Lmao
-              </span>
-            </div>
-            <div class="manga-content__info_genre-element">
-              <span>
-                Lmao
-              </span>
-            </div>
-            <div class="manga-content__info_genre-element">
-              <span>
-                Lmao Lmao Lmao Lmao Lmao
-              </span>
-            </div>
+          <div class="manga-content__info_genre"
+               fxLayout="row wrap"
+               fxLayoutAlign="start center"
+          >
+            <ng-template ngFor
+                         let-genreManga
+                         [ngForOf]="manga?.genreMangaList"
+            >
+              <div class="manga-content__info_genre-element" (click)="redirectToGenrePage(genreManga.genre?.id)">
+                <span>
+                  {{ genreManga.genre?.name }}
+                </span>
+              </div>
+            </ng-template>
+
           </div>
           <div class="manga-content__info__list-button">
             <div class="manga-content__info__button-element manga-content__info__button-read">
@@ -143,12 +125,10 @@
         </span>
       </div>
       <div class="manga-description__content">
-        <span>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi deleniti dolores, est facilis laboriosam nobis quo rem voluptate. Consectetur est magni necessitatibus non pariatur quaerat quidem recusandae reprehenderit saepe suscipit.
-        </span>
+        <span>{{ manga?.description }}</span>
       </div>
     </div>
-    <app-chapter-list></app-chapter-list>
-    <app-block-comment [listComment]="this.listComment" (pagePaginationEmitEvent)="commentPaginationEvent($event)"></app-block-comment>
+    <app-chapter-list [listChapter]="manga?.chapterList ?? []"></app-chapter-list>
+    <app-block-comment [commentBlockArea]="commentBlockArea"></app-block-comment>
   </div>
 </div>

@@ -48,37 +48,34 @@
     <form [formGroup]="formGroup" class="filter-dropdown">
       <div class="filter-dropdown__element" fxLayout>
         <span>
-          {{ "Quốc gia" }}
+          {{ "Tình trạng" }}
         </span>
         <mat-form-field class="dropdown-custom" appearance="outline">
-          <select matNativeControl formControlName="statusManga">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
+          <select matNativeControl formControlName="mangaStatus">
+            <option [value]="MangaStatus.DONE">
+              {{ "manga.status.done"|translate }}
+            </option>
+            <option [value]="MangaStatus.IN_PROCESS">
+              {{ "manga.status.in process"|translate }}
+            </option>
+            <option [value]="MangaStatus.DROPPED">
+              {{ "manga.status.dropped"|translate }}
+            </option>
           </select>
         </mat-form-field>
       </div>
       <div class="filter-dropdown__element" fxLayout>
         <span>
-          {{ "Quốc gia" }}
-        </span>
-        <mat-form-field class="dropdown-custom" appearance="outline">
-          <select matNativeControl formControlName="numberOfChapter">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
-        </mat-form-field>
-      </div>
-      <div class="filter-dropdown__element" fxLayout>
-        <span>
-          {{ "Quốc gia" }}
+          {{ "Ngày phát hành" }}
         </span>
         <mat-form-field class="dropdown-custom" appearance="outline">
           <select matNativeControl formControlName="orderManga">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
+            <option value="DESC">
+              {{ "Từ mới nhất tới cũ nhất" }}
+            </option>
+            <option value="ASC">
+              {{ "Từ cũ nhất tới mới nhất" }}
+            </option>
           </select>
         </mat-form-field>
       </div>

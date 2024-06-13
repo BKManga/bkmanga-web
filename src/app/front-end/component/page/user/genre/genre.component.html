@@ -4,6 +4,11 @@
     <div class="genre-description">
       {{ genreData?.description }}
     </div>
-    <app-manga-list [mangaList]="listMangaFound"></app-manga-list>
+    <app-manga-list
+      [mangaList]="mangaFoundList"
+      [totalElement]="0"
+      (getPaginatorData)="setPaginatorData($event)"
+      [showPaginator]="true"
+    ></app-manga-list>
   </div>
 </div>

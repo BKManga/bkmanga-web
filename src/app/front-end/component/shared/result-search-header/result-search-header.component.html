@@ -1,106 +1,30 @@
-<div class="result_search_header" fxLayout="column">
-  <div (click)="selectItem($event)" class="result_search_header__item" fxLayout fxLayoutGap="10">
-    <img ngSrc="../../../../../assets/manga/image_logo.jpg" alt="" [width]="66" [height]="86">
-    <div fxLayout="column">
-      <span class="result_search_header__name">
-        One Piece
-      </span>
-      <span class="result_search_header__other_name">
-        One Piece
-      </span>
-      <span class="result_search_header__last_chapter">
-        Chapter 1100
-      </span>
-    </div>
-  </div>
-  <div (click)="selectItem($event)" class="result_search_header__item" fxLayout fxLayoutGap="10">
-    <img ngSrc="/assets/manga/image_logo.jpg" alt="" [width]="66" [height]="86">
-    <div fxLayout="column">
-      <span class="result_search_header__name">
-        One Piece
-      </span>
-      <span class="result_search_header__other_name">
-        One Piece
-      </span>
-      <span class="result_search_header__last_chapter">
-        Chapter 1100
-      </span>
-    </div>
-  </div>
-  <div (click)="selectItem($event)" class="result_search_header__item" fxLayout fxLayoutGap="10">
-    <img ngSrc="../../../../../assets/manga/image_logo.jpg" alt="" [width]="66" [height]="86">
-    <div fxLayout="column">
-      <span class="result_search_header__name">
-        One Piece
-      </span>
-      <span class="result_search_header__other_name">
-        One Piece
-      </span>
-      <span class="result_search_header__last_chapter">
-        Chapter 1100
-      </span>
-    </div>
-  </div>
-  <div (click)="selectItem($event)" class="result_search_header__item" fxLayout fxLayoutGap="10">
-    <img ngSrc="../../../../../assets/manga/image_logo.jpg" alt="" [width]="66" [height]="86">
-    <div fxLayout="column">
-      <span class="result_search_header__name">
-        One Piece
-      </span>
-      <span class="result_search_header__other_name">
-        One Piece
-      </span>
-      <span class="result_search_header__last_chapter">
-        Chapter 1100
-      </span>
-    </div>
-  </div>
-  <div (click)="selectItem($event)" class="result_search_header__item" fxLayout fxLayoutGap="10">
-    <img ngSrc="../../../../../assets/manga/image_logo.jpg" alt="" [width]="66" [height]="86">
-    <div fxLayout="column">
-      <span class="result_search_header__name">
-        One Piece
-      </span>
-      <span class="result_search_header__other_name">
-        One Piece
-      </span>
-      <span class="result_search_header__last_chapter">
-        Chapter 1100
-      </span>
-    </div>
-  </div>
-  <div (click)="selectItem($event)" class="result_search_header__item" fxLayout fxLayoutGap="10">
-    <img ngSrc="../../../../../assets/manga/image_logo.jpg" alt="" [width]="66" [height]="86">
-    <div fxLayout="column">
-      <span class="result_search_header__name">
-        One Piece
-      </span>
-      <span class="result_search_header__other_name">
-        One Piece
-      </span>
-      <span class="result_search_header__last_chapter">
-        Chapter 1100
-      </span>
-    </div>
-  </div>
-  <div (click)="selectItem($event)" class="result_search_header__item" fxLayout fxLayoutGap="10">
-    <img ngSrc="../../../../../assets/manga/image_logo.jpg" alt="" [width]="66" [height]="86">
-    <div fxLayout="column">
-      <span class="result_search_header__name">
-        One Piece
-      </span>
-      <span class="result_search_header__other_name">
-        One Piece
-      </span>
-      <span class="result_search_header__last_chapter">
-        Chapter 1100
-      </span>
-    </div>
-  </div>
-  <div (click)="selectItem($event)" class="result_search_header__no_result">
-    <span>
-      Khong co ket qua nao!
-    </span>
-  </div>
+<div #contentSearch class="result_search_header" fxLayout="column">
+  <ng-container *ngIf="mangaList.length > 0; then resultSearch; else noResult"></ng-container>
 
+  <ng-template #resultSearch>
+    <ng-template ngFor let-manga [ngForOf]="mangaList">
+      <div (click)="selectItem($event, manga.id)" class="result_search_header__item" fxLayout fxLayoutGap="10">
+        <img ngSrc="../../../../../assets/manga/image_logo.jpg" alt="" [width]="66" [height]="86">
+        <div fxLayout="column">
+          <span class="result_search_header__name">
+            {{ manga.name }}
+          </span>
+          <span class="result_search_header__other_name">
+            {{ manga.otherName }}
+          </span>
+          <span class="result_search_header__last_chapter">
+            {{ manga.chapterList?.at(0)?.name ?? ""}}
+          </span>
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+
+  <ng-template #noResult>
+    <div class="result_search_header__no_result">
+      <span>
+        Khong co ket qua nao!
+      </span>
+    </div>
+  </ng-template>
 </div>

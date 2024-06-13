@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -47,7 +47,7 @@ import {RequestHandleInterceptor} from "./front-end/interceptor/request-handle.i
 import {CookieService} from "ngx-cookie-service";
 import {LazyLoadImageModule} from "ng-lazyload-image";
 import { MangaListComponent } from './front-end/component/page/user/manga-list/manga-list.component';
-import { SearchComponent } from './front-end/component/page/user/search/search.component';
+import { FilterComponent } from './front-end/component/page/user/filter/filter.component';
 import { LabelPageComponent } from './front-end/component/page/user/label-page/label-page.component';
 import { FilterBoxComponent } from './front-end/component/page/user/filter-box/filter-box.component';
 import { FilterGenreElementComponent } from './front-end/component/page/user/filter-genre-element/filter-genre-element.component';
@@ -56,6 +56,9 @@ import { FollowComponent } from './front-end/component/page/user/follow/follow.c
 import { GenreComponent } from './front-end/component/page/user/genre/genre.component';
 import { PrivacyPolicyComponent } from './front-end/component/page/user/privacy-policy/privacy-policy.component';
 import {MatExpansionModule} from "@angular/material/expansion";
+import { AuthorComponent } from './front-end/component/page/user/author/author.component';
+import { SearchComponent } from './front-end/component/page/user/search/search.component';
+import {NavigationEnd, Router} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -79,7 +82,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
     LevelDecorationDirective,
     BlockCommentComponent,
     MangaListComponent,
-    SearchComponent,
+    FilterComponent,
     LabelPageComponent,
     FilterBoxComponent,
     FilterGenreElementComponent,
@@ -87,6 +90,8 @@ import {MatExpansionModule} from "@angular/material/expansion";
     FollowComponent,
     GenreComponent,
     PrivacyPolicyComponent,
+    AuthorComponent,
+    SearchComponent,
   ],
     imports: [
         BrowserModule,

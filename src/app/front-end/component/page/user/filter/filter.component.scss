@@ -1,0 +1,14 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.filter-page {
+  background-color: $color-18191a;
+  padding: $value-10;
+  align-items: center;
+  justify-content: center;
+
+  .filter-page-content {
+    max-width: $width-large;
+    width: 100%;
+  }
+}

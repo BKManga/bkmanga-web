@@ -39,17 +39,24 @@
   </div>
   <ng-template [ngIf]="showAuthButton">
     <div class="header-content__search" fxLayout="column" fxLayoutAlign="center start">
-      <form [formGroup]="fromGroup" fxLayout="row" (keydown.enter)="search()" fxLayoutAlign="end center">
+      <form [formGroup]="fromGroup" fxLayout="row" (keydown.enter)="redirectToSearchPage()" fxLayoutAlign="end center">
         <input formControlName="search"
                (click)="$event.stopPropagation()"
                (input)="searchRealTime()"
                type="text" class="header-content__input"
                [placeholder]="placeHolder"
         >
-        <mat-icon class="header-content__search__icon">search</mat-icon>
+        <mat-icon class="header-content__search__icon"
+                  (click)="redirectToSearchPage()"
+        >
+          search
+        </mat-icon>
       </form>
       <ng-template [ngIf]="showResultSearchHeader">
-        <app-result-search-header>
+        <app-result-search-header
+          [mangaList]="mangaList"
+          (resetSearching)="setSearchValueDefault()"
+        >
         </app-result-search-header>
       </ng-template>
     </div>

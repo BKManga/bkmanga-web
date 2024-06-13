@@ -22,7 +22,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PrivacyPolicyEditRequestDTO'
+              $ref: '#/components/schemas/EditPrivacyPolicyRequestDTO'
         required: true
       responses:
         "200":
@@ -31,6 +31,312 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponsePrivacyPolicy'
+  /api/v1/manga/search/by/name:
+    post:
+      tags:
+      - manga-controller
+      operationId: searchMangaByName
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMangaByNameRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponsePageGetMangaResponseDTO'
+  /api/v1/manga/search/by/genre:
+    post:
+      tags:
+      - manga-controller
+      operationId: searchMangaByGenre
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMangaByGenreRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponsePageGetMangaResponseDTO'
+  /api/v1/manga/search/by/filter:
+    post:
+      tags:
+      - manga-controller
+      operationId: searchMangaByFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMangaByFilterRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponsePageGetMangaResponseDTO'
+  /api/v1/manga/search/by/author:
+    post:
+      tags:
+      - manga-controller
+      operationId: searchMangaByAuthor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMangaByAuthorDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseListGetMangaResponseDTO'
+  /api/v1/manga/get/lastUpload:
+    post:
+      tags:
+      - manga-controller
+      operationId: getMangaListByLastUploadChapter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMangaListByUploadChapterRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponsePageGetMangaResponseDTO'
+  /api/v1/manga/detail:
+    post:
+      tags:
+      - manga-controller
+      operationId: getMangaDetail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMangaRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseGetMangaResponseDTO'
+  /api/v1/like/get:
+    post:
+      tags:
+      - like-controller
+      operationId: getLikeManga
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetLikeMangaRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseGetLikeMangaResponseDTO'
+  /api/v1/like/create:
+    post:
+      tags:
+      - like-controller
+      operationId: createLikeManga
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLikeMangaRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseCreateLikeMangaResponseDTO'
+  /api/v1/history/createOrUpdate:
+    post:
+      tags:
+      - history-controller
+      operationId: createOrEditHistory
+      parameters:
+      - name: createOrEditHistoryRequestDTO
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/CreateOrEditHistoryRequestDTO'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseObject'
+  /api/v1/history/all:
+    post:
+      tags:
+      - history-controller
+      operationId: getAllHistoryByUser
+      parameters:
+      - name: getListHistoryRequestDTO
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/GetListHistoryRequestDTO'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseGetListHistoryResponseDTO'
+  /api/v1/follow/get:
+    post:
+      tags:
+      - follow-controller
+      operationId: getFollow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetFollowRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseGetFollowResponseDTO'
+  /api/v1/follow/create:
+    post:
+      tags:
+      - follow-controller
+      operationId: createFollow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFollowRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseCreateFollowResponseDTO'
+  /api/v1/comment/manga/get:
+    post:
+      tags:
+      - manga-comment-controller
+      operationId: getMangaCommentList
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetListMangaCommentRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponsePageMangaComment'
+  /api/v1/comment/manga/create:
+    post:
+      tags:
+      - manga-comment-controller
+      operationId: createMangaComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMangaCommentRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseCreateMangaCommentResponseDTO'
+  /api/v1/comment/chapter/get:
+    post:
+      tags:
+      - chapter-comment-controller
+      operationId: getChapterCommentList
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetListChapterCommentRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponsePageChapterComment'
+  /api/v1/comment/chapter/create:
+    post:
+      tags:
+      - chapter-comment-controller
+      operationId: createChapterComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateChapterCommentRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseCreateChapterCommentResponseDTO'
+  /api/v1/chapter/get:
+    post:
+      tags:
+      - chapter-controller
+      operationId: getChapterByManga
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetListChapterRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseListChapter'
   /api/v1/auth/register:
     post:
       tags:
@@ -146,9 +452,99 @@ paths:
             application/json:
               schema:
                 type: string
+  /api/v1/like/delete:
+    delete:
+      tags:
+      - like-controller
+      operationId: deleteLikeManga
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteLikeMangaRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseObject'
+  /api/v1/history/delete:
+    delete:
+      tags:
+      - history-controller
+      operationId: deleteHistory
+      parameters:
+      - name: deleteHistoryRequestDTO
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/DeleteHistoryRequestDTO'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseObject'
+  /api/v1/follow/delete:
+    delete:
+      tags:
+      - follow-controller
+      operationId: deleteFollow
+      parameters:
+      - name: deleteFollowRequestDTO
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/DeleteFollowRequestDTO'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseObject'
+  /api/v1/comment/manga/delete:
+    delete:
+      tags:
+      - manga-comment-controller
+      operationId: deleteMangaComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteMangaCommentRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseObject'
+  /api/v1/comment/chapter/delete:
+    delete:
+      tags:
+      - chapter-comment-controller
+      operationId: deleteChapterComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteChapterCommentRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseObject'
 components:
   schemas:
-    PrivacyPolicyEditRequestDTO:
+    EditPrivacyPolicyRequestDTO:
       required:
       - answer
       - question
@@ -190,12 +586,754 @@ components:
         updatedAt:
           type: string
           format: date-time
+    GetMangaByNameRequestDTO:
+      required:
+      - name
+      - orderBy
+      - otherName
+      - page
+      - size
+      type: object
+      properties:
+        name:
+          type: string
+        otherName:
+          type: string
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        orderBy:
+          type: string
+    ApiResponsePageGetMangaResponseDTO:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/PageGetMangaResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    Author:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+    Chapter:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    Genre:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        description:
+          type: string
+    GenreManga:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        genre:
+          $ref: '#/components/schemas/Genre'
+    GetMangaResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        otherName:
+          type: string
+        description:
+          type: string
+        updatedBy:
+          type: integer
+          format: int64
+        mangaStatus:
+          $ref: '#/components/schemas/MangaStatus'
+        viewManga:
+          $ref: '#/components/schemas/ViewManga'
+        genreMangaList:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenreManga'
+        mangaAuthorList:
+          type: array
+          items:
+            $ref: '#/components/schemas/MangaAuthor'
+        chapterList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chapter'
+        numberOfFollow:
+          type: integer
+          format: int32
+        numberOfLikes:
+          type: integer
+          format: int32
+    MangaAuthor:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        author:
+          $ref: '#/components/schemas/Author'
+    MangaStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+    PageGetMangaResponseDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetMangaResponseDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/SortObject'
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        empty:
+          type: boolean
+    PageableObject:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: '#/components/schemas/SortObject'
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+    SortObject:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+    ViewManga:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        numberOfViews:
+          type: integer
+          format: int64
+    GetMangaByGenreRequestDTO:
+      required:
+      - genreId
+      - orderBy
+      - page
+      - size
+      type: object
+      properties:
+        genreId:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        orderBy:
+          type: string
+    GetMangaByFilterRequestDTO:
+      required:
+      - genreApproveList
+      - genreDenyList
+      - mangaStatus
+      - orderBy
+      - page
+      - size
+      type: object
+      properties:
+        genreApproveList:
+          type: array
+          items:
+            type: integer
+            format: int32
+        genreDenyList:
+          type: array
+          items:
+            type: integer
+            format: int32
+        mangaStatus:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        orderBy:
+          type: string
+    GetMangaByAuthorDTO:
+      required:
+      - authorId
+      type: object
+      properties:
+        authorId:
+          type: integer
+          format: int32
+    ApiResponseListGetMangaResponseDTO:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetMangaResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    GetMangaListByUploadChapterRequestDTO:
+      required:
+      - page
+      - size
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+    GetMangaRequestDTO:
+      required:
+      - mangaId
+      type: object
+      properties:
+        mangaId:
+          type: integer
+          format: int64
+    ApiResponseGetMangaResponseDTO:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/GetMangaResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    GetLikeMangaRequestDTO:
+      required:
+      - mangaId
+      - userId
+      type: object
+      properties:
+        mangaId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+    ApiResponseGetLikeMangaResponseDTO:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/GetLikeMangaResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    GetLikeMangaResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    CreateLikeMangaRequestDTO:
+      required:
+      - mangaId
+      - userId
+      type: object
+      properties:
+        mangaId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+    ApiResponseCreateLikeMangaResponseDTO:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/CreateLikeMangaResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    CreateLikeMangaResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    CreateOrEditHistoryRequestDTO:
+      required:
+      - chapterId
+      - mangaId
+      - userId
+      type: object
+      properties:
+        mangaId:
+          type: integer
+          format: int64
+        chapterId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+    ApiResponseObject:
+      type: object
+      properties:
+        result:
+          type: object
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    GetListHistoryRequestDTO:
+      required:
+      - userId
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+    ApiResponseGetListHistoryResponseDTO:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/GetListHistoryResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    GetListHistoryResponseDTO:
+      type: object
+      properties:
+        historyResponseList:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoryResponse'
+    HistoryResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        getMangaResponseDTO:
+          $ref: '#/components/schemas/GetMangaResponseDTO'
+        chapter:
+          $ref: '#/components/schemas/Chapter'
+    GetFollowRequestDTO:
+      required:
+      - mangaId
+      - userId
+      type: object
+      properties:
+        mangaId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+    ApiResponseGetFollowResponseDTO:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/GetFollowResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    GetFollowResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    CreateFollowRequestDTO:
+      required:
+      - mangaId
+      - userId
+      type: object
+      properties:
+        mangaId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+    ApiResponseCreateFollowResponseDTO:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/CreateFollowResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    CreateFollowResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    GetListMangaCommentRequestDTO:
+      required:
+      - mangaId
+      - orderBy
+      - page
+      - size
+      type: object
+      properties:
+        mangaId:
+          type: integer
+          format: int64
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        orderBy:
+          type: string
+    ApiResponsePageMangaComment:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/PageMangaComment'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    MangaComment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/User'
+    PageMangaComment:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/MangaComment'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/SortObject'
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        empty:
+          type: boolean
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        fullName:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+        dateOfBirth:
+          type: string
+        phoneNumber:
+          type: string
+    CreateMangaCommentRequestDTO:
+      required:
+      - content
+      - mangaId
+      - userId
+      type: object
+      properties:
+        content:
+          type: string
+        mangaId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+    ApiResponseCreateMangaCommentResponseDTO:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/CreateMangaCommentResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    CreateMangaCommentResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        content:
+          type: string
+    GetListChapterCommentRequestDTO:
+      required:
+      - chapterId
+      - orderBy
+      - page
+      - size
+      type: object
+      properties:
+        chapterId:
+          type: integer
+          format: int64
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        orderBy:
+          type: string
+    ApiResponsePageChapterComment:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/PageChapterComment'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    ChapterComment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/User'
+    PageChapterComment:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChapterComment'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/SortObject'
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        empty:
+          type: boolean
+    CreateChapterCommentRequestDTO:
+      required:
+      - chapterId
+      - content
+      - userId
+      type: object
+      properties:
+        content:
+          type: string
+        chapterId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+    ApiResponseCreateChapterCommentResponseDTO:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/CreateChapterCommentResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
+    CreateChapterCommentResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        content:
+          type: string
+    GetListChapterRequestDTO:
+      required:
+      - mangaId
+      type: object
+      properties:
+        mangaId:
+          type: integer
+          format: int64
+    ApiResponseListChapter:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chapter'
+        errorCode:
+          type: string
+        message:
+          type: object
+        responseCode:
+          type: integer
+          format: int32
     UserRegisterRequestDTO:
       required:
       - dateOfBirth
       - email
       - fullName
-      - gender
+      - genderId
       - password
       - phoneNumber
       - role
@@ -208,9 +1346,6 @@ components:
           type: string
         role:
           type: string
-        gender:
-          type: integer
-          format: int32
         password:
           type: string
         email:
@@ -219,16 +1354,7 @@ components:
           type: string
         phoneNumber:
           type: string
-    ApiResponseObject:
-      type: object
-      properties:
-        result:
-          type: object
-        errorCode:
-          type: string
-        message:
-          type: object
-        responseCode:
+        genderId:
           type: integer
           format: int32
     UserLoginRequestDTO:
@@ -284,16 +1410,6 @@ components:
         responseCode:
           type: integer
           format: int32
-    Genre:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        description:
-          type: string
     ApiResponseListGenre:
       type: object
       properties:
@@ -320,3 +1436,51 @@ components:
         responseCode:
           type: integer
           format: int32
+    DeleteLikeMangaRequestDTO:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    DeleteHistoryRequestDTO:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    DeleteFollowRequestDTO:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    DeleteMangaCommentRequestDTO:
+      required:
+      - mangaCommentId
+      - userId
+      type: object
+      properties:
+        mangaCommentId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+    DeleteChapterCommentRequestDTO:
+      required:
+      - chapterCommentId
+      - userId
+      type: object
+      properties:
+        chapterCommentId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64

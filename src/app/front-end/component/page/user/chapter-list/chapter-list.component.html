@@ -7,11 +7,13 @@
   </div>
   <div class="chapter-list__content" fxLayout="column">
     <mat-list>
-      <ng-template ngFor let-chapter let-i [ngForOf]="listChapter">
+      <ng-template ngFor let-chapter [ngForOf]="listChapter">
         <mat-list-item>
           <div class="chapter-list__content-element" fxLayout fxLayoutAlign="space-between center">
-            <span class="chapter-list__content-title" (click)="redirectToChapterDetail(chapter)">{{ "Pepper" + " " + i }}</span>
-            <span>27/03/2024</span>
+            <span class="chapter-list__content-title" (click)="redirectToChapterDetail(chapter.id)">
+              {{ chapter.name }}
+            </span>
+            <span> {{ chapter.updatedAt|date:'dd/MM/yyyy' }} </span>
           </div>
         </mat-list-item>
         <div class="mat-divider__contain">

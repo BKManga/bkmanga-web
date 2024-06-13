@@ -1,0 +1,14 @@
+<div fxLayout="column" class="filter-page">
+  <div fxLayout="column" class="filter-page-content">
+    <app-label-page [labelPage]="labelPageFilter"></app-label-page>
+    <app-filter-box
+      (getDataFilter)="setFilterData($event)"
+    ></app-filter-box>
+    <app-manga-list
+      [mangaList]="mangaFoundList"
+      [totalElement]="totalElementData"
+      (getPaginatorData)="setPaginatorData($event)"
+      [showPaginator]="true"
+    ></app-manga-list>
+  </div>
+</div>

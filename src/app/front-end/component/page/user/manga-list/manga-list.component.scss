@@ -7,6 +7,25 @@
   row-gap: $value-20;
 }
 
+mat-paginator {
+  background-color: $color-423e3e;
+  border: 1px solid $color-e4e6eb;
+  border-radius: $value-4;
+  color: $color-e4e6eb;
+}
+
+.no-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $value-20;
+  color: $color-e4e6eb;
+  text-transform: capitalize;
+  font-weight: bold;
+  margin-top: $value-12;
+  margin-bottom: $value-20;
+}
+
 @mixin style1200Width() {
   .manga-list {
     grid-template-columns: repeat(5, 1fr);

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PrivacyPolicy, PrivacyPolicyControllerService} from "../../../../bkmanga-svc";
+import {StatusCodes} from "http-status-codes";
 
 @Component({
   selector: 'app-privacy-policy',
@@ -23,7 +24,7 @@ export class PrivacyPolicyComponent implements OnInit{
 
   private getPrivacyPolicyData = async () : Promise<void> => {
     this.privacyPolicyControllerService.getAllPrivacyPolicy().subscribe((response) => {
-      if (response.responseCode === 200) {
+      if (response.responseCode === StatusCodes.OK) {
         this.privacyPolicyList = response.result ?? []
       }
     })

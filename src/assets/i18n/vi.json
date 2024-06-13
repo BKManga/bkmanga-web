@@ -14,10 +14,18 @@
     "comment": "Delete comment"
   },
   "label": {
-    "search": "tìm kiếm nâng cao",
+    "filter": "tìm kiếm nâng cao",
     "history": "lịch sử đọc truyện",
     "follow": "truyện đang theo dõi",
-    "privacyPolicy": "chính sách bảo mật"
+    "privacyPolicy": "chính sách bảo mật",
+    "search": "tìm kiếm cho kết quả"
+  },
+  "manga": {
+    "status": {
+      "in process": "đang tiến hành",
+      "done": "hoàn thành",
+      "dropped": "tạm ngưng"
+    }
   },
   "action": "action",
   "adventure": "adventure",

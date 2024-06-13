@@ -65,7 +65,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       row-gap: $value-8;
-      column-gap: $value-8;
+      column-gap: $value-20;
       font-weight: 600;
       font-size: $value-16;
       width: 100%;
@@ -76,7 +76,7 @@
       }
     }
 
-    @mixin styling650Width() {
+    @mixin stylingFooterWidthLarge() {
       .filter-dropdown {
         grid-template-columns: repeat(1, 1fr);
       }
@@ -88,8 +88,8 @@
       }
     }
 
-    @media screen and (max-width: $value-650) {
-      @include styling650Width()
+    @media screen and (max-width: $limit-footer-width-large) {
+      @include stylingFooterWidthLarge()
     }
 
     @media screen and (max-width: $value-450) {
@@ -101,6 +101,7 @@
 .dropdown-custom {
   background-color: $color-white;
   border-radius: $value-4;
+  text-transform: capitalize;
 }
 
 .search__button-element {

@@ -1,8 +1,16 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Genre, GenreControllerService} from "../../../../bkmanga-svc";
+import {
+  Genre,
+  GenreControllerService,
+  GetMangaByGenreRequestDTO,
+  GetMangaResponseDTO,
+  MangaControllerService
+} from "../../../../bkmanga-svc";
 import {ActivatedRoute} from "@angular/router";
-import {RouteGenre} from "../../../../constant/constants";
+import {DataOrderBy, RouteGenre} from "../../../../constant/constants";
 import {parseInt} from "lodash";
+import {PageEvent} from "@angular/material/paginator";
+import {StatusCodes} from "http-status-codes";
 
 @Component({
   selector: 'app-genre',
@@ -10,41 +18,71 @@ import {parseInt} from "lodash";
   styleUrls: ['./genre.component.scss']
 })
 export class GenreComponent implements OnInit, OnChanges{
-  listMangaFound : Array<number> = []
+  mangaFoundList : Array<GetMangaResponseDTO>
   private idGenre: string | undefined
-  genreData: Genre | undefined;
+  genreData: Genre | undefined
+
+  totalElementData?: number
+
+  private page: number
+  private size: number
 
   constructor(
     private genreControllerService: GenreControllerService,
     private activatedRoute: ActivatedRoute,
+    private mangaControllerService: MangaControllerService
   ) {
-
+    this.mangaFoundList = new Array<GetMangaResponseDTO>()
+    this.page = 0
+    this.size = 10
   }
 
   async ngOnInit(): Promise<void> {
     this.activatedRoute.params.subscribe(async (param) => {
       this.idGenre = param[RouteGenre.Param]
       await this.getGenreData()
+      await this.getMangaDataByGenre()
     });
-
-    for (let i = 1; i < 15; i++) {
-      this.listMangaFound.push(i)
-    }
   }
 
   private getGenreData = async () : Promise<void> => {
     if (!this.idGenre) return
-    let idGenreTypeNum = parseInt(this.idGenre!);
+    let idGenreTypeNum = parseInt(this.idGenre!)
     this.genreControllerService
       .getGenreById(idGenreTypeNum)
       .subscribe((response) => {
-        if (response.responseCode === 200) {
+        if (response.responseCode === StatusCodes.OK) {
           this.genreData = response.result
         }
       })
   }
 
+  private getMangaDataByGenre = async (): Promise<void> => {
+    if (!this.idGenre) return
+
+    let getMangaByGenreRequestDTO: GetMangaByGenreRequestDTO = {
+      genreId: parseInt(this.idGenre!),
+      page: this.page,
+      size: this.size,
+      orderBy: DataOrderBy.ASC
+    }
+
+    this.mangaControllerService.searchMangaByGenre(getMangaByGenreRequestDTO).subscribe(
+      (response) => {
+        if (response.responseCode === StatusCodes.OK) {
+          this.mangaFoundList = response.result?.content ?? []
+          this.totalElementData = response.result?.totalElements
+        }
+    })
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes)
+  }
+
+  setPaginatorData = async ($event: PageEvent) : Promise<void> => {
+    this.page = $event.pageIndex
+    this.size = $event.pageSize
+    await this.getMangaDataByGenre()
   }
 }

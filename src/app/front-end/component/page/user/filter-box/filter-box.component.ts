@@ -1,20 +1,26 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import * as _ from "lodash";
-import {FilterCheckData} from "../../../../interface/filter-check-data";
-import {FilterSearchCheckBox} from "../../../../constant/constants";
+import {DataOrderBy, FilterSearchCheckBox, MangaStatus} from "../../../../constant/constants";
 import {ApiResponseListGenre, Genre, GenreControllerService} from "../../../../bkmanga-svc";
+import {FilterCheckData} from "../../../../interface/filter-check-data";
+import {FilterData} from "../../../../interface/filter-data";
+import {StatusCodes} from "http-status-codes";
 
 @Component({
   selector: 'app-filter-box',
   templateUrl: './filter-box.component.html',
   styleUrls: ['./filter-box.component.scss']
 })
-export class FilterBoxComponent implements OnInit, AfterViewInit{
+export class FilterBoxComponent implements OnInit {
   formGroup: FormGroup
   filterListLabel: string
   listGenre: Array<Genre> = Array<Genre>()
-  triggerReset : boolean = false;
+  triggerReset: boolean = false
+
+  @Output() getDataFilter: EventEmitter<FilterData> = new EventEmitter<FilterData>()
+
+  protected readonly MangaStatus = MangaStatus
 
   constructor(
     formBuilder: FormBuilder,
@@ -25,25 +31,31 @@ export class FilterBoxComponent implements OnInit, AfterViewInit{
     this.formGroup = formBuilder.group({
       listChooseGenres: [[]],
       listExceptGenres: [[]],
-      statusManga: ["male"],
-      numberOfChapter: ["male"],
-      orderManga: ["male"]
+      mangaStatus: [MangaStatus.IN_PROCESS],
+      orderManga: [DataOrderBy.DESC]
     })
   }
 
   ngOnInit(): void {
     this.genreControllerService.getAllGenre().subscribe((result: ApiResponseListGenre) => {
-      if (result?.responseCode === 200) {
+      if (result?.responseCode === StatusCodes.OK) {
         this.listGenre = result?.result ?? []
       }
     })
   }
 
   getFilterValue = () => {
-    console.log(this.formGroup.value)
+    let filterData: FilterData = {
+      listChooseGenres: this.formGroup.controls['listChooseGenres'].value,
+      listExceptGenres: this.formGroup.controls['listExceptGenres'].value,
+      mangaStatus: this.formGroup.controls['mangaStatus'].value,
+      orderManga: this.formGroup.controls['orderManga'].value,
+    }
+
+    this.getDataFilter.emit(filterData)
   }
 
-  setFilterCheckBoxValue = (exportFilterCheckData: FilterCheckData) : void => {
+  setFilterCheckBoxValue = (exportFilterCheckData: FilterCheckData): void => {
     if (exportFilterCheckData.type === FilterSearchCheckBox.Choose) {
       this.formGroup.controls['listChooseGenres'].value.push(exportFilterCheckData.id)
       _.remove(this.formGroup.controls['listExceptGenres'].value, (element) => {
@@ -64,13 +76,11 @@ export class FilterBoxComponent implements OnInit, AfterViewInit{
     }
   }
 
-  resetFilterBox = () : void => {
+  resetFilterBox = (): void => {
     _.remove(this.formGroup.controls['listExceptGenres'].value, (element) => true)
     _.remove(this.formGroup.controls['listChooseGenres'].value, (element) => true)
     this.triggerReset = !this.triggerReset
-  }
 
-  ngAfterViewInit(): void {
-
+    this.getFilterValue()
   }
 }

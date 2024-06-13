@@ -7,4 +7,5 @@ import {Component, Input} from '@angular/core';
 })
 export class LabelPageComponent {
   @Input() labelPage: string = 'Label Page'
+  @Input() paramLabel?: string
 }
