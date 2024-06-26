@@ -1,11 +1,11 @@
 <div fxLayout class="label-page" fxLayoutGap="8">
   <mat-icon>flag</mat-icon>
-  <span>
-    {{ labelPage|translate }}
+  <span class="label-page__text">
+    {{ labelPage ?? ""|translate }}
   </span>
   <ng-template [ngIf]="paramLabel">
     <span class="label-page__param_label">
-      {{ '"' + paramLabel + '"' }}
+      {{ paramLabel }}
     </span>
   </ng-template>
 </div>

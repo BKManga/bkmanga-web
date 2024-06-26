@@ -1,1 +1,12 @@
-<p>author works!</p>
+<div fxLayout="column" class="author-page">
+  <div fxLayout="column" class="author-page-content">
+    <app-label-page [labelPage]="labelPageAuthor"
+                    [paramLabel]="author?.name"
+    ></app-label-page>
+    <app-manga-list
+      [mangaList]="mangaFoundList"
+      [totalElement]="totalElementData"
+      [showPaginator]="false"
+    ></app-manga-list>
+  </div>
+</div>

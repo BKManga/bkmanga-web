@@ -7,6 +7,8 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class SharingService {
 
   private showAuthButton = new BehaviorSubject(true)
+  private checkAuthentication = new BehaviorSubject(false)
+  private showHeaderSearch = new BehaviorSubject(true)
   constructor() {
   }
 
@@ -20,5 +22,29 @@ export class SharingService {
 
   awaitDataShowAuthButton(): Observable<boolean> {
     return this.getShowAuthButtonValue()
+  }
+
+  setValueCheckAuthentication = async (value: boolean): Promise<void> => {
+    this.checkAuthentication.next(value)
+  }
+
+  private getCheckAuthenticationValue = (): Observable<boolean> => {
+    return this.checkAuthentication.asObservable()
+  }
+
+  awaitCheckAuthentication(): Observable<boolean> {
+    return this.getCheckAuthenticationValue()
+  }
+
+  setHeaderSearch = async (value: boolean): Promise<void> => {
+    this.checkAuthentication.next(value)
+  }
+
+  private getHeaderSearchValue = (): Observable<boolean> => {
+    return this.checkAuthentication.asObservable()
+  }
+
+  awaitHeaderSearchValue(): Observable<boolean> {
+    return this.getCheckAuthenticationValue()
   }
 }

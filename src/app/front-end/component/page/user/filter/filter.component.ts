@@ -8,6 +8,8 @@ import {
 import {PageEvent} from "@angular/material/paginator";
 import {FilterData} from "../../../../interface/filter-data";
 import {StatusCodes} from "http-status-codes";
+import {DialogService} from "../../../../service/dialog.service";
+import {SnackbarData} from "../../../../interface/snackbar-data";
 
 @Component({
   selector: 'app-filter',
@@ -31,6 +33,7 @@ export class FilterComponent implements OnInit {
 
   constructor(
     private mangaControllerService: MangaControllerService,
+    private dialogService: DialogService,
   ) {
     this.labelPageFilter = 'label.filter'
     this.page = 0
@@ -59,6 +62,12 @@ export class FilterComponent implements OnInit {
         if (response.responseCode === StatusCodes.OK) {
           this.mangaFoundList = response.result?.content ?? []
           this.totalElementData = response.result?.totalElements
+        } else {
+          let snackBarData: SnackbarData = {
+            message: response.message ?? "",
+          }
+
+          this.dialogService.showSnackBar(snackBarData)
         }
     })
   }

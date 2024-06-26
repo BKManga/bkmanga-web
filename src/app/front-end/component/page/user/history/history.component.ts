@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {GetListHistoryRequestDTO, HistoryControllerService, HistoryResponse} from "../../../../bkmanga-svc";
+import { HistoryControllerService, HistoryResponse} from "../../../../bkmanga-svc";
 import {StatusCodes} from "http-status-codes";
+import {SnackbarData} from "../../../../interface/snackbar-data";
+import {DialogService} from "../../../../service/dialog.service";
 
 @Component({
   selector: 'app-history',
@@ -10,27 +12,34 @@ import {StatusCodes} from "http-status-codes";
 export class HistoryComponent implements OnInit{
 
   labelPageHistory: string
+
   historyResponseList: Array<HistoryResponse> = new Array<HistoryResponse>()
+  totalElementData: number
 
   constructor(
-    private historyControllerService: HistoryControllerService
+    private historyControllerService: HistoryControllerService,
+    private dialogService: DialogService,
   ) {
     this.labelPageHistory = 'label.history'
+    this.totalElementData = 0
   }
 
-  ngOnInit(): void {
-
+  async ngOnInit(): Promise<void> {
+    await this.getHistoryMangaData()
   }
 
   getHistoryMangaData = async (): Promise<void> => {
-    let getListHistoryRequestDTO: GetListHistoryRequestDTO = {
-      userId: 1
-    }
-
-    this.historyControllerService.getAllHistoryByUser(getListHistoryRequestDTO).subscribe(
+    this.historyControllerService.getListHistoryByUser().subscribe(
       (response) => {
         if (response.responseCode === StatusCodes.OK) {
           this.historyResponseList = response.result?.historyResponseList ?? []
+          this.totalElementData = this.historyResponseList.length
+        } else {
+          let snackBarData: SnackbarData = {
+            message: response.message ?? ""
+          }
+
+          this.dialogService.showSnackBar(snackBarData)
         }
     })
   }

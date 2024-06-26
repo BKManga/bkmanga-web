@@ -15,6 +15,15 @@
   padding: $value-15;
   border-radius: $value-5;
 
+  .manga-content__breadcrumb {
+    padding: $value-8 $value-15;
+    color: $color-e4e6eb;
+
+    .manga-content__breadcrumb-element {
+      cursor: pointer;
+    }
+  }
+
   .manga-content__info {
     display: flex;
     padding: $value-15;
@@ -36,6 +45,10 @@
     font-size: $value-15;
     display: flex;
     align-items: center;
+
+    .manga-content__info__other-content-author {
+      cursor: pointer;
+    }
   }
 
   .manga-content__info__status {
@@ -49,6 +62,7 @@
     gap: $value-4;
     align-items: center;
     width: 17%;
+    min-width: $value-150;
   }
 
   .manga-content__info_genre {
@@ -97,12 +111,20 @@
     background-color: $color-8bc34a;
   }
 
-  .manga-content__info__button-favorite {
+  .manga-content__info__button-follow {
     background-color: $color-ff2853;
+  }
+
+  .manga-content__info__button-unfollow {
+    background-color: $color-50464689;
   }
 
   .manga-content__info__button-like {
     background-color: $color-bd10e0;
+  }
+
+  .manga-content__info__button-unlike {
+    background-color: $color-4F4BB889;
   }
 }
 
@@ -143,7 +165,7 @@
     }
 
     .manga-content__info__other-label {
-      min-width: 20%;
+      min-width: $value-150;
     }
   }
 }

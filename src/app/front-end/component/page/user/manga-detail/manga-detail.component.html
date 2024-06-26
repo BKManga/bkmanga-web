@@ -1,5 +1,14 @@
 <div fxLayout="column" class="manga">
   <div fxLayout="column" class="manga-content" fxLayoutGap="8">
+    <div fxLayout class="manga-content__breadcrumb" fxLayoutGap="8">
+      <span class="manga-content__breadcrumb-element" (click)="redirectToMainPage()">
+        {{ "Trang chủ" }}
+      </span>
+      <span>/</span>
+      <span>
+        {{ manga?.name }}
+      </span>
+    </div>
     <div class="manga-content__info">
       <div class="manga-content__info__avatar">
         <img ngSrc="/assets/manga/image_logo.jpg" alt="" fill priority>
@@ -30,7 +39,11 @@
 
             <div fxLayout fxLayoutGap="8">
               <ng-template ngFor let-mangaAuthor [ngForOf]="manga?.mangaAuthorList">
-                <span> {{ mangaAuthor.author?.name }} </span>
+                <span class="manga-content__info__other-content-author"
+                      (click)="redirectToAuthorPage(mangaAuthor.author?.id)"
+                >
+                  {{ mangaAuthor.author?.name }}
+                </span>
               </ng-template>
             </div>
           </div>
@@ -53,7 +66,7 @@
               </span>
             </div>
             <span>
-              {{ manga?.numberOfLikes ?? 0 |separateString }}
+              {{ mangaFormGroup.controls["numberOfLikes"].value|separateString }}
             </span>
           </div>
           <div class="manga-content__info__other-content">
@@ -64,7 +77,7 @@
               </span>
             </div>
             <span>
-              {{ manga?.numberOfFollow ?? 0|separateString }}
+              {{ mangaFormGroup.controls["numberOfFollows"].value|separateString }}
             </span>
           </div>
           <div class="manga-content__info__other-content">
@@ -95,24 +108,10 @@
 
           </div>
           <div class="manga-content__info__list-button">
-            <div class="manga-content__info__button-element manga-content__info__button-read">
-              <mat-icon>library_books</mat-icon>
-              <span>
-                {{ "Đọc từ đầu" }}
-              </span>
-            </div>
-            <div class="manga-content__info__button-element manga-content__info__button-favorite">
-              <mat-icon>favorite</mat-icon>
-              <span>
-                {{ "Theo dõi" }}
-              </span>
-            </div>
-            <div class="manga-content__info__button-element manga-content__info__button-like">
-              <mat-icon>thumb_up</mat-icon>
-              <span>
-                {{ "Thích" }}
-              </span>
-            </div>
+            <ng-container *ngIf="manga?.chapterList?.length ?? 0 > 0; then readFirstChapter">
+            </ng-container>
+            <ng-container *ngIf="checkAuthentication; then handleManga">
+            </ng-container>
           </div>
         </div>
       </div>
@@ -128,7 +127,69 @@
         <span>{{ manga?.description }}</span>
       </div>
     </div>
-    <app-chapter-list [listChapter]="manga?.chapterList ?? []"></app-chapter-list>
+    <app-chapter-list [listChapter]="manga?.chapterList ?? []"
+                      [mangaId]="manga?.id"
+    ></app-chapter-list>
     <app-block-comment [commentBlockArea]="commentBlockArea"></app-block-comment>
   </div>
 </div>
+
+<ng-template #handleManga>
+  <ng-container *ngIf="followId; then unfollowManga; else followManga"></ng-container>
+  <ng-container *ngIf="likeId; then unlikeManga; else likeManga"></ng-container>
+</ng-template>
+
+<ng-template #followManga>
+  <div class="manga-content__info__button-element manga-content__info__button-follow"
+       (click)="createFollowManga()"
+  >
+    <mat-icon>favorite</mat-icon>
+    <span>
+      {{ "Theo dõi" }}
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #unfollowManga>
+  <div class="manga-content__info__button-element manga-content__info__button-unfollow"
+       (click)="handleUnfollowManga()"
+  >
+    <mat-icon>close</mat-icon>
+    <span>
+      {{ "Hủy theo dõi" }}
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #likeManga>
+  <div class="manga-content__info__button-element manga-content__info__button-like"
+       (click)="createLikeManga()"
+  >
+    <mat-icon>thumb_up</mat-icon>
+    <span>
+      {{ "Thích" }}
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #unlikeManga>
+  <div class="manga-content__info__button-element manga-content__info__button-unlike"
+       (click)="handleUnlikeManga()"
+  >
+    <mat-icon>thumb_down</mat-icon>
+    <span>
+      {{ "Hủy thích" }}
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #readFirstChapter>
+  <div class="manga-content__info__button-element manga-content__info__button-read"
+       (click)="redirectToFirstChapterDetailPage(manga?.chapterList?.at((manga?.chapterList?.length ?? 0) - 1)?.id)"
+  >
+    <mat-icon>library_books</mat-icon>
+    <span>
+      {{ "Đọc từ đầu" }}
+    </span>
+  </div>
+</ng-template>

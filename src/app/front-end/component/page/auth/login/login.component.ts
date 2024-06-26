@@ -6,6 +6,7 @@ import {AppRouter, AuthToken} from "../../../../constant/constants";
 import {AuthControllerService, UserLoginRequestDTO} from "../../../../bkmanga-svc";
 import {CookieService} from "ngx-cookie-service";
 import {StatusCodes} from "http-status-codes";
+import {JwtDecodeService} from "../../../../service/jwt-decode.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit, OnDestroy{
     formBuilder: FormBuilder,
     private router: Router,
     private authControllerService: AuthControllerService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private jwtDecodeService: JwtDecodeService,
   ) {
     this.formGroup = formBuilder.group({
       loginID: ["", Validators.required],
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   async ngOnInit(): Promise<void> {
     await this.sharingService.setShowAuthButton(false)
+    await this.sharingService.setHeaderSearch(false)
   }
 
   async redirectToRegisterPage() {
@@ -47,14 +50,20 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.authControllerService.login(credential).subscribe(
       (response) => {
         if (response.responseCode === StatusCodes.OK) {
-          this.cookieService.set(AuthToken, response.result?.tokenBearer ?? "")
-          this.sharingService.setShowAuthButton(false).then()
-          this.router.navigate([AppRouter.Auth, AppRouter.Register])
+          if (response.result?.tokenBearer) {
+            this.cookieService.set(AuthToken, response.result?.tokenBearer)
+            this.sharingService.setShowAuthButton(false).then()
+            this.router.navigate([AppRouter.Main])
+          }
         }
     })
   }
 
   async ngOnDestroy(): Promise<void> {
-    await this.sharingService.setShowAuthButton(true)
+    if (!this.cookieService.get(AuthToken)) {
+      await this.sharingService.setShowAuthButton(true)
+    }
+
+    this.sharingService.setHeaderSearch(true).then()
   }
 }

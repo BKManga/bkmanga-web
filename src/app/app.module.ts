@@ -59,6 +59,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import { AuthorComponent } from './front-end/component/page/user/author/author.component';
 import { SearchComponent } from './front-end/component/page/user/search/search.component';
 import {NavigationEnd, Router} from "@angular/router";
+import { ProfileComponent } from './front-end/component/page/user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import {NavigationEnd, Router} from "@angular/router";
     PrivacyPolicyComponent,
     AuthorComponent,
     SearchComponent,
+    ProfileComponent,
   ],
     imports: [
         BrowserModule,

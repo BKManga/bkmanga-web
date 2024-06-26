@@ -22,6 +22,7 @@
 .register-image {
   max-width: 80%;
   height: auto;
+  position: relative;
 }
 
 .register-content div {
@@ -43,6 +44,10 @@
 
 .register-content__body {
   width: 90%;
+
+  .register-content__body-gender {
+    text-transform: capitalize;
+  }
 }
 
 .button-register {

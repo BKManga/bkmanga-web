@@ -1,26 +1,35 @@
 <div fxLayout="column" class="chapter">
   <div class="chapter-detail" fxLayout="column">
     <div class="chapter-detail__navigation">
+      <div class="chapter-detail__breadcrumb" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8">
+        <span class="chapter-detail__breadcrumb-element" (click)="redirectToMainPage()">
+          {{ "Trang chủ" }}
+        </span>
+        <span>/</span>
+        <span class="chapter-detail__breadcrumb-element" (click)="redirectToMangaDetailPage(chapterData?.manga?.id)">
+          {{ chapterData?.manga?.name }}
+        </span>
+        <span>/</span>
+        <span>{{ chapterData?.chapter?.name }}</span>
+      </div>
       <div class="chapter-detail__title" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8">
         <h1>
-          Lmao lmao Lmao lmao Lmao lmao Lmao lmao Lmao lmao
+          {{ chapterData?.manga?.name }}
         </h1>
+        <h1>-</h1>
         <h1>
-          -
-        </h1>
-        <h1>
-          Chapter 1
+          {{ chapterData?.chapter?.name }}
         </h1>
         <span>
-        (Cập nhật lúc 0:00 02/04/2024)
-      </span>
+          {{ '(Cập nhật lúc ' }}{{ chapterData?.chapter?.updatedAt ?? "" |date:"HH:mm dd/MM/yyyy" }}{{ ')' }}
+        </span>
       </div>
       <div fxLayout fxLayoutAlign="center center">
         <div class="button-element button-report__error">
           <mat-icon>warning</mat-icon>
           <span>
-          Báo lỗi chương
-        </span>
+            Báo lỗi chương
+          </span>
         </div>
       </div>
       <ng-container *ngTemplateOutlet="actionChapter"></ng-container>
@@ -44,17 +53,50 @@
 
 <ng-template #actionChapter>
   <div class="list-button__action" fxLayout fxLayoutAlign="center center" fxLayoutGap="4">
-    <div class="button-element button-previous__chapter">
-      <mat-icon>arrow_back</mat-icon>
-      <span>
-        Previous chapter
-      </span>
-    </div>
-    <div class="button-element button-next__chapter">
-      <span>
-        Previous chapter
-      </span>
-      <mat-icon>arrow_forward</mat-icon>
-    </div>
+    <ng-container *ngIf="chapterData?.previousChapterId; then previousChapterButton; else previousChapterButtonDisabled">
+    </ng-container>
+    <ng-container *ngIf="chapterData?.nextChapterId; then nextChapterButton; else nextChapterButtonDisabled">
+    </ng-container>
   </div>
 </ng-template>
+
+<ng-template #previousChapterButton>
+  <div class="button-element button-previous__chapter"
+       (click)="redirectToChapterPage(chapterData?.previousChapterId)"
+  >
+    <mat-icon>arrow_back</mat-icon>
+    <span>
+      Previous chapter
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #previousChapterButtonDisabled>
+  <div class="button-element button-previous__chapter button-disabled">
+    <mat-icon>arrow_back</mat-icon>
+    <span>
+      Previous chapter
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #nextChapterButton>
+  <div class="button-element button-next__chapter"
+       (click)="redirectToChapterPage(chapterData?.nextChapterId)"
+  >
+    <span>
+      Next chapter
+    </span>
+    <mat-icon>arrow_forward</mat-icon>
+  </div>
+</ng-template>
+
+<ng-template #nextChapterButtonDisabled>
+  <div class="button-element button-next__chapter button-disabled">
+      <span>
+        Next chapter
+      </span>
+    <mat-icon>arrow_forward</mat-icon>
+  </div>
+</ng-template>
+

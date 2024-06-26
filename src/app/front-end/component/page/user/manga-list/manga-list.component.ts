@@ -1,14 +1,15 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {GetMangaResponseDTO, HistoryResponse} from "../../../../bkmanga-svc";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {PaginatorData} from "../../../../interface/paginator-data";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-manga-list',
   templateUrl: './manga-list.component.html',
   styleUrls: ['./manga-list.component.scss']
 })
-export class MangaListComponent {
+export class MangaListComponent implements OnInit, OnChanges{
 
   @Input() mangaList: Array<GetMangaResponseDTO> | Array<HistoryResponse> = []
   @Input() totalElement?: number
@@ -19,7 +20,9 @@ export class MangaListComponent {
 
   paginatorData: PaginatorData
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     this.paginatorData = {
       pageIndex: 0,
       pageSize: 10,
@@ -33,7 +36,14 @@ export class MangaListComponent {
     this.getPaginatorData.emit(pageEvent)
   }
 
-  resetPaginationData = () => {
+  ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
+  }
+
+  private resetPaginationData = () => {
     this.paginator?.firstPage()
   }
 }

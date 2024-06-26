@@ -11,6 +11,8 @@ import {DataOrderBy, RouteGenre} from "../../../../constant/constants";
 import {parseInt} from "lodash";
 import {PageEvent} from "@angular/material/paginator";
 import {StatusCodes} from "http-status-codes";
+import {SnackbarData} from "../../../../interface/snackbar-data";
+import {DialogService} from "../../../../service/dialog.service";
 
 @Component({
   selector: 'app-genre',
@@ -30,7 +32,8 @@ export class GenreComponent implements OnInit, OnChanges{
   constructor(
     private genreControllerService: GenreControllerService,
     private activatedRoute: ActivatedRoute,
-    private mangaControllerService: MangaControllerService
+    private mangaControllerService: MangaControllerService,
+    private dialogService: DialogService,
   ) {
     this.mangaFoundList = new Array<GetMangaResponseDTO>()
     this.page = 0
@@ -48,9 +51,8 @@ export class GenreComponent implements OnInit, OnChanges{
   private getGenreData = async () : Promise<void> => {
     if (!this.idGenre) return
     let idGenreTypeNum = parseInt(this.idGenre!)
-    this.genreControllerService
-      .getGenreById(idGenreTypeNum)
-      .subscribe((response) => {
+    this.genreControllerService.getGenreById(idGenreTypeNum).subscribe(
+      (response) => {
         if (response.responseCode === StatusCodes.OK) {
           this.genreData = response.result
         }
@@ -72,6 +74,12 @@ export class GenreComponent implements OnInit, OnChanges{
         if (response.responseCode === StatusCodes.OK) {
           this.mangaFoundList = response.result?.content ?? []
           this.totalElementData = response.result?.totalElements
+        } else {
+          let snackBarData: SnackbarData = {
+            message: response.message ?? ""
+          }
+
+          this.dialogService.showSnackBar(snackBarData)
         }
     })
   }

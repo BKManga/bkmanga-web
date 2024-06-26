@@ -9,9 +9,10 @@ import {
   ViewChild
 } from '@angular/core';
 import {AppRouter} from "../../../constant/constants";
-import {Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 import {SharingService} from "../../../service/sharing.service";
 import {ApiResponseListGenre, Genre, GenreControllerService} from "../../../bkmanga-svc";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-navigation-bar',
@@ -29,7 +30,7 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
 
   classShowExtendValue: string = ''
 
-  protected showNavigationBar: boolean
+  showNavigationBar: boolean
 
   constructor(
     private router: Router,
@@ -74,9 +75,17 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
   }
 
   async ngOnInit(): Promise<void> {
-    this.sharingService.awaitDataShowAuthButton().subscribe(result => {
-      this.showNavigationBar = result
-    })
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(
+      (event) => {
+        event as NavigationEnd
+        if (event instanceof NavigationEnd) {
+          this.showNavigationBar = !event.url.includes(AppRouter.Login) && !event.url.includes(AppRouter.Register)
+        }
+      }
+    )
 
     this.genreControllerService.getAllGenre().subscribe((result: ApiResponseListGenre) => {
       if (result?.responseCode === 200) {

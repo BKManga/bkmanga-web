@@ -37,7 +37,7 @@
       </div>
     </ng-template>
   </div>
-  <ng-template [ngIf]="showAuthButton">
+  <ng-template [ngIf]="showInputHeaderSearch">
     <div class="header-content__search" fxLayout="column" fxLayoutAlign="center start">
       <form [formGroup]="fromGroup" fxLayout="row" (keydown.enter)="redirectToSearchPage()" fxLayoutAlign="end center">
         <input formControlName="search"

@@ -10,6 +10,7 @@ import {Chapter} from "../../../../bkmanga-svc";
 })
 export class ChapterListComponent implements OnInit{
   @Input() listChapter: Array<Chapter> = new Array<Chapter>()
+  @Input() mangaId?: number
 
   constructor(
     private router : Router
@@ -17,15 +18,15 @@ export class ChapterListComponent implements OnInit{
 
   ngOnInit(): void {}
 
-  redirectToChapterDetail = async (idChapter: number | undefined) : Promise<void> => {
-    if (!idChapter) return
+  redirectToChapterDetail = async (chapterId: number | undefined) : Promise<void> => {
+    if (!chapterId && !this.mangaId) return
 
     await this.router.navigate([
       AppRouter.Main,
       AppRouter.MangaDetail,
-      idChapter,
+      this.mangaId,
       AppRouter.ChapterDetail,
-      idChapter
+      chapterId
     ])
   }
 }

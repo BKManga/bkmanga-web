@@ -9,6 +9,8 @@ import {
 } from "../../../../bkmanga-svc";
 import {PageEvent} from "@angular/material/paginator";
 import {StatusCodes} from "http-status-codes";
+import {DialogService} from "../../../../service/dialog.service";
+import {SnackbarData} from "../../../../interface/snackbar-data";
 
 @Component({
   selector: 'app-main',
@@ -27,13 +29,13 @@ export class MainComponent implements OnInit, AfterViewInit{
     private sharingService: SharingService,
     private mangaControllerService: MangaControllerService,
     private router: Router,
+    private dialogService: DialogService,
   ) {
     this.page = 0
     this.size = 10
   }
 
   async ngOnInit(): Promise<void> {
-    await this.sharingService.setShowAuthButton(true)
     await this.getMangaListOrderByLastUploadChapter()
   }
 
@@ -49,6 +51,12 @@ export class MainComponent implements OnInit, AfterViewInit{
         if (response.responseCode === StatusCodes.OK) {
           this.mangaDataList = response.result?.content ?? []
           this.totalElementData = response.result?.totalElements ?? 0
+        } else {
+          let snackBarData: SnackbarData = {
+            message: response.message ?? ""
+          }
+
+          this.dialogService.showSnackBar(snackBarData)
         }
     })
   }

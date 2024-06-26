@@ -10,11 +10,15 @@
   align-items: center;
 
   span {
-    text-transform: capitalize;
     height: fit-content;
+  }
+
+  .label-page__text {
+    text-transform: capitalize;
   }
 
   .label-page__param_label {
     font-weight: bold;
+    color: $color-f0ad4e;
   }
 }

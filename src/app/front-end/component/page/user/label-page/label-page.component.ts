@@ -6,6 +6,6 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./label-page.component.scss']
 })
 export class LabelPageComponent {
-  @Input() labelPage: string = 'Label Page'
+  @Input() labelPage?: string
   @Input() paramLabel?: string
 }

@@ -1,0 +1,135 @@
+<div fxLayout="column" class="profile">
+  <div class="profile-content">
+    <div fxLayout="column" class="profile__change-box">
+      <div fxLayout class="profile__change-box-element" (click)="changeSelectedBoxInfo(ProfilePage.INFO)">
+        <mat-icon>person</mat-icon>
+        <span>
+          {{ "Quản lý tài khoản" }}
+        </span>
+      </div>
+      <div fxLayout class="profile__change-box-element" (click)="changeSelectedBoxInfo(ProfilePage.CHANGE_PASSWORD)">
+        <mat-icon>vpn_key</mat-icon>
+        <span>
+          {{ "Đổi mật khẩu" }}
+        </span>
+      </div>
+    </div>
+    <ng-container *ngIf="selectedBox === ProfilePage.INFO, then profileDetail, else changePassword">
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #profileDetail>
+  <div fxLayout="column" fxFlexAlign="center center" class="profile-content__detail">
+    <div class="profile-content__detail-avatar">
+      <div class="profile-content__detail-image">
+      </div>
+      <div class="button-element button-element-upload-image">
+        {{ "Chọn hình" }}
+      </div>
+      <div class="upload-image-alert">
+        {{ "Dùng hình 18+ sẽ bị ban tài khoản vĩnh viễn" }}
+      </div>
+    </div>
+    <div class="profile-content__detail-level">
+      <div class="profile-content__detail-level-box">
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="profile-content__detail-level-box-label">
+            <span>
+              Level 1
+            </span>
+          <span>
+              Level 2
+            </span>
+        </div>
+      </div>
+      <div class="profile-content__detail-level-exp-box">
+      </div>
+    </div>
+    <div fxLayout="column" class="profile-content__detail__info">
+      <form [formGroup]="formGroup" fxLayoutGap="16" fxLayout="column">
+        <h2 class="profile-content__detail__info-label">
+          {{ "Thông tin tài khoản" }}
+        </h2>
+        <mat-form-field>
+          <mat-label>
+            {{ "Username" }}
+          </mat-label>
+          <input formControlName="username" matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>
+            {{ "Email"|translate }}
+          </mat-label>
+          <input formControlName="email" matInput>
+        </mat-form-field>
+        <h2 class="profile-content__detail__info-label">
+          {{ "Thông tin cá nhân" }}
+        </h2>
+        <mat-form-field>
+          <mat-label>
+            {{ "Full name"|translate }}
+          </mat-label>
+          <input formControlName="fullName" matInput>
+        </mat-form-field>
+        <mat-radio-group fxLayout fxLayoutGap="8" formControlName="gender">
+          <mat-radio-button [value]="Gender.MALE.at(0)">
+              <span class="gender-info">
+                {{ Gender.MALE.at(1) }}
+              </span>
+          </mat-radio-button>
+          <mat-radio-button [value]="Gender.FEMALE.at(0)">
+              <span class="gender-info">
+                {{ Gender.FEMALE.at(1) }}
+              </span>
+          </mat-radio-button>
+          <mat-radio-button [value]="Gender.OTHER.at(0)">
+              <span class="gender-info">
+                {{ Gender.OTHER.at(1) }}
+              </span>
+          </mat-radio-button>
+        </mat-radio-group>
+        <div fxLayout="row" fxFlex fxFlexAlign="center">
+          <div class="button-element button-element-upload-image">
+            {{ "Lưu thông tin" }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #changePassword>
+  <div fxLayout="column" fxFlexAlign="center center" class="change-password">
+    <div class="change-password__detail">
+      <form [formGroup]="formGroupChangePassword" fxLayoutGap="16" fxLayout="column">
+        <h2 class="change-password__detail-label">
+          {{ "Đổi mật khẩu" }}
+        </h2>
+        <mat-form-field>
+          <mat-label>
+            {{ "Mật khẩu cũ" }}
+          </mat-label>
+          <input type="password" formControlName="oldPassword" matInput>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>
+            {{ "Mật khẩu mới" }}
+          </mat-label>
+          <input type="password" formControlName="newPassword" matInput>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>
+            {{ "Xác nhận mật khẩu mới" }}
+          </mat-label>
+          <input type="password" formControlName="confirmPassword" matInput>
+        </mat-form-field>
+        <div fxLayout="row" fxFlex fxFlexAlign="center">
+          <div class="button-element button-element-upload-image">
+            {{ "Đổi mật khẩu" }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>

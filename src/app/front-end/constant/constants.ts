@@ -46,7 +46,8 @@ export const AppRouter = {
   History: "history",
   Genre: "genre",
   Author: "author",
-  PrivacyPolicy: "privacy-policy"
+  PrivacyPolicy: "privacy-policy",
+  Profile: "profile",
 }
 
 export const AppRouterAdmin = {
@@ -100,4 +101,15 @@ export const MangaStatus = {
   DONE: 1,
   IN_PROCESS: 2,
   DROPPED: 3
+}
+
+export const Gender = {
+  MALE: [1, "male"],
+  FEMALE: [2, "female"],
+  OTHER: [3, "other"],
+}
+
+export const ProfilePage = {
+  INFO: "info",
+  CHANGE_PASSWORD: "changePassword",
 }

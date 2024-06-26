@@ -4,6 +4,8 @@ import {DataOrderBy, RouteSearch} from "../../../../constant/constants";
 import {GetMangaByNameRequestDTO, GetMangaResponseDTO, MangaControllerService} from "../../../../bkmanga-svc";
 import {PageEvent} from "@angular/material/paginator";
 import {StatusCodes} from "http-status-codes";
+import {DialogService} from "../../../../service/dialog.service";
+import {SnackbarData} from "../../../../interface/snackbar-data";
 
 @Component({
   selector: 'app-search',
@@ -24,6 +26,7 @@ export class SearchComponent implements OnInit{
   constructor(
     private activatedRoute: ActivatedRoute,
     private mangaControllerService: MangaControllerService,
+    private dialogService: DialogService,
   ) {
     this.page = 0
     this.size = 10
@@ -55,6 +58,12 @@ export class SearchComponent implements OnInit{
         if (response.responseCode === StatusCodes.OK) {
           this.mangaFoundList = response.result?.content ?? []
           this.totalElementData = response.result?.totalElements
+        } else {
+          let snackBarData: SnackbarData = {
+            message: response.message ?? ""
+          }
+
+          this.dialogService.showSnackBar(snackBarData)
         }
       })
   }

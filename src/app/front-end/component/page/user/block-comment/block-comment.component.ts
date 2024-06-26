@@ -14,6 +14,9 @@ import {
 import {CommentBlockArea, DataOrderBy, RouteChapter, RouteManga} from "../../../../constant/constants";
 import {ActivatedRoute} from "@angular/router";
 import {StatusCodes} from "http-status-codes";
+import {SnackbarData} from "../../../../interface/snackbar-data";
+import {DialogService} from "../../../../service/dialog.service";
+import {JwtDecodeService} from "../../../../service/jwt-decode.service";
 
 @Component({
   selector: 'app-block-comment',
@@ -47,6 +50,8 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
     private chapterCommentControllerService: ChapterCommentControllerService,
     private mangaCommentControllerService: MangaCommentControllerService,
     private activatedRoute: ActivatedRoute,
+    private dialogService: DialogService,
+    private jwtDecodeService: JwtDecodeService,
   ) {
     this.formGroup = formBuilder.group({
       comment: [""]
@@ -102,12 +107,13 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
   private deleteMangaComment = async (mangaCommentId: number, userId: number) : Promise<void> => {
     let deleteMangaCommentRequest: DeleteMangaCommentRequestDTO = {
       mangaCommentId: mangaCommentId,
-      userId: userId
     }
       this.mangaCommentControllerService.deleteMangaComment(deleteMangaCommentRequest).subscribe(
         async (response) => {
           if (response.responseCode === StatusCodes.OK) {
             await this.getMangaCommentData()
+          } else {
+            this.showSnackBarDialog(response.message)
           }
       })
   }
@@ -115,12 +121,13 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
   private deleteChapterComment = async (chapterCommentId: number, userId: number) : Promise<void> => {
     let deleteChapterCommentRequest: DeleteChapterCommentRequestDTO = {
       chapterCommentId: chapterCommentId,
-      userId: userId
     }
     this.chapterCommentControllerService.deleteChapterComment(deleteChapterCommentRequest).subscribe(
        async (response) => {
         if (response.responseCode === StatusCodes.OK) {
           await this.getChapterCommentData()
+        } else {
+          this.showSnackBarDialog(response.message)
         }
     })
   }
@@ -139,6 +146,8 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
         if (response.responseCode === StatusCodes.OK) {
           this.totalComment = response.result?.totalElements ?? 0
           this.listComment = response.result?.content ?? []
+        } else {
+          this.showSnackBarDialog(response.message)
         }
       })
   }
@@ -157,8 +166,17 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
         if (response.responseCode === StatusCodes.OK) {
           this.totalComment = response.result?.totalElements ?? 0
           this.listComment = response.result?.content ?? []
+        } else {
+          this.showSnackBarDialog(response.message)
         }
       })
   }
 
+  private showSnackBarDialog = (message: string | undefined) => {
+    let snackBarData: SnackbarData = {
+      message: message ?? ""
+    }
+
+    this.dialogService.showSnackBar(snackBarData)
+  }
 }

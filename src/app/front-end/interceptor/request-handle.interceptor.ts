@@ -1,15 +1,10 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor, HttpErrorResponse
-} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {catchError, finalize, Observable, of, retry} from 'rxjs';
 import {Router} from "@angular/router";
 import {DialogService} from "../service/dialog.service";
 import {CookieService} from "ngx-cookie-service";
-import {AuthToken, TokenPrefix} from "../constant/constants";
+import {AppRouter, AuthToken, TokenPrefix} from "../constant/constants";
 import {JwtDecodeService} from "../service/jwt-decode.service";
 
 @Injectable()
@@ -29,12 +24,14 @@ export class RequestHandleInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.totalRequest++;
     if (this.totalRequest === 1) {
-      this.dialogService.showLoadingData()
+      if (!this.ignoreLoadingAnimation(request.url)) {
+        this.dialogService.showLoadingData()
+      }
     }
 
     const dubReq = request.clone({
       setHeaders: {
-        Authorization: `${TokenPrefix} ${this.cookieService.get(AuthToken)}`
+        Authorization: `${TokenPrefix}${this.cookieService.get(AuthToken)}`
       }
     })
 
@@ -61,9 +58,21 @@ export class RequestHandleInterceptor implements HttpInterceptor {
 
   private handleBaseErrorStatus(error: HttpErrorResponse): Observable<any> {
     switch (error.status) {
+      case 403:
+        this.jwtDecodeService.deleteAuthToken()
+        this.router.navigate([AppRouter.Auth, AppRouter.Login]).then()
+        break
       default:
         break
     }
     return of()
+  }
+
+  private ignoreLoadingAnimation = (urlTarget: string) => {
+    let ignoreUrlTargetList: Array<string> = [
+      "api/v1/manga/search/by/name"
+    ]
+
+    return ignoreUrlTargetList.some((element) => urlTarget.includes(element))
   }
 }

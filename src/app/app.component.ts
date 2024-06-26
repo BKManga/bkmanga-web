@@ -11,7 +11,12 @@ export class AppComponent {
 
   public translateService: TranslateService
 
-  constructor(translateService: TranslateService) {
+  isAdminSite?: boolean
+
+  constructor(
+    translateService: TranslateService
+
+  ) {
     this.translateService = translateService;
     translateService.addLangs(['en', 'vi'])
     translateService.setDefaultLang('vi')

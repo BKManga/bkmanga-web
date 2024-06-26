@@ -19,6 +19,7 @@ export class MangaCardComponent implements OnInit, AfterViewInit{
   @ViewChild('mangaCardExpand') mangaCardExpand: ElementRef
   @ViewChild('mangaCardName') mangaCardName: ElementRef
   @Input() inputData?: GetMangaResponseDTO | HistoryResponse
+  @Input() removeElement: boolean = false
   manga?: GetMangaResponseDTO
   lastChapter?: Chapter
 
@@ -46,7 +47,6 @@ export class MangaCardComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit(): void {
-
     if (this.isGetMangaResponseDTO(this.inputData)) {
       this.manga = this.inputData as GetMangaResponseDTO
       this.lastChapter = this.manga.chapterList?.at(0)
@@ -142,19 +142,7 @@ export class MangaCardComponent implements OnInit, AfterViewInit{
     await this.router.navigate([AppRouter.Main, AppRouter.MangaDetail, this.manga?.id])
   }
 
-  redirectToChapterDetailPage = async (idChapter: number | undefined) : Promise<any> => {
-    if (!this.manga?.id) return
-
-    await this.router.navigate([
-      AppRouter.Main,
-      AppRouter.MangaDetail,
-      idChapter,
-      AppRouter.ChapterDetail,
-      idChapter
-    ])
-  }
-
-  redirectToChapterDetail = async (
+  redirectToChapterDetailPage = async (
     mangaId: number | undefined,
     chapterId: number | undefined
   ) : Promise<void> => {
@@ -178,6 +166,6 @@ export class MangaCardComponent implements OnInit, AfterViewInit{
   }
 
   private isHistoryResponse = (value: any) : value is HistoryResponse => {
-    return "manga" in value
+    return "getMangaResponseDTO" in value
   }
 }

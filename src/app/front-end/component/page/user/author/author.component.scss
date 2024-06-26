@@ -1,0 +1,14 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.author-page {
+  background-color: $color-18191a;
+  padding: $value-10;
+  align-items: center;
+  justify-content: center;
+
+  .author-page-content {
+    max-width: $width-large;
+    width: 100%;
+  }
+}

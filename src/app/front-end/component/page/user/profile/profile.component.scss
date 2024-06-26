@@ -1,0 +1,139 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.profile {
+  background-color: $color-18191a;
+  padding: $value-10;
+  align-items: center;
+  justify-content: center;
+
+  .profile-content {
+    max-width: $width-large;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: $color-242526;
+    padding: $value-15;
+    border-radius: $value-5;
+
+    .profile__change-box {
+      background-color: $color-e4e6eb;
+      width: 25%;
+      height: fit-content;
+      padding: $value-10 $value-20;
+
+      .profile__change-box-element {
+        padding: $value-10 0 $value-10 $value-10;
+        align-items: center;
+        font-size: $value-16;
+        gap: $value-8;
+      }
+    }
+
+    .profile-content__detail,
+    .change-password
+    {
+      width: 75%;
+      padding: $value-10 $value-20;
+      justify-content: center;
+      align-items: center;
+
+      .profile-content__detail-avatar {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .profile-content__detail-image {
+          width: $value-160;
+          height: $value-160;
+          position: relative;
+          border-radius: calc($value-160 / 2);
+          background-color: white;
+        }
+
+        .upload-image-alert {
+          padding: $value-10 $value-20;
+          color: $color-e4e6eb;
+        }
+      }
+
+      .profile-content__detail-level {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 75%;
+
+        .profile-content__detail-level-box {
+          width: 100%;
+
+          .profile-content__detail-level-box-label {
+            color: $color-e4e6eb;
+            margin-bottom: $value-4;
+          }
+        }
+
+        .profile-content__detail-level-exp-box {
+          height: $value-16;
+          border-radius: calc($value-16 / 2);
+          background-color: $color-e4e6eb;
+          width: 100%;
+        }
+      }
+
+      .profile-content__detail__info,
+      .change-password__detail
+      {
+        width: 100%;
+        justify-content: start;
+        padding: $value-10 $value-20;
+
+        .profile-content__detail__info-label,
+        .change-password__detail-label {
+          color: $color-e4e6eb;
+        }
+      }
+    }
+  }
+
+  .button-element {
+    display: flex;
+    align-items: center;
+    column-gap: $value-4;
+    min-width: $value-125;
+    justify-content: center;
+    padding: $value-10;
+    border-radius: $value-5;
+    font-size: $value-15;
+    cursor: pointer;
+    margin: $value-10 0;
+  }
+
+  .button-element-upload-image {
+    background-color: $color-ff2853;
+    color: $color-e4e6eb;
+  }
+
+  .gender-info {
+    color: $color-e4e6eb;
+    text-transform: capitalize;
+  }
+
+  @mixin styling() {
+    .profile-content {
+      flex-direction: column;
+
+      .profile__change-box,
+      .profile-content__detail,
+      .change-password {
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and (max-width: $limit-header-width-large) {
+    @include styling()
+  }
+}

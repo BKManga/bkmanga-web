@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./front-end/component/page/auth/login/login.component";
 import {MainComponent} from "./front-end/component/page/user/main/main.component";
 import {
-  AppRouter,
+  AppRouter, AppRouterAdmin,
   RouteAuthor,
   RouteChapter,
   RouteGenre,
@@ -20,6 +20,8 @@ import {GenreComponent} from "./front-end/component/page/user/genre/genre.compon
 import {PrivacyPolicyComponent} from "./front-end/component/page/user/privacy-policy/privacy-policy.component";
 import {SearchComponent} from "./front-end/component/page/user/search/search.component";
 import {AuthorComponent} from "./front-end/component/page/user/author/author.component";
+import {authenticationGuard} from "./front-end/guard/auth.guard";
+import {ProfileComponent} from "./front-end/component/page/user/profile/profile.component";
 
 const routes: Routes = [
   {
@@ -66,10 +68,12 @@ const routes: Routes = [
       {
         path: AppRouter.Follow,
         component: FollowComponent,
+        canActivate: [authenticationGuard]
       },
       {
         path: AppRouter.History,
         component: HistoryComponent,
+        canActivate: [authenticationGuard]
       },
       {
         path: AppRouter.Filter,
@@ -86,9 +90,22 @@ const routes: Routes = [
       {
         path: `${AppRouter.PrivacyPolicy}`,
         component: PrivacyPolicyComponent,
+      },
+      {
+        path: `${AppRouter.Profile}`,
+        component: ProfileComponent
       }
     ]
   },
+  // {
+  //   path: AppRouterAdmin.Admin,
+  //   children: [
+  //     {
+  //       path: AppRouterAdmin.Empty,
+  //
+  //     }
+  //   ]
+  // }
 ];
 
 @NgModule({

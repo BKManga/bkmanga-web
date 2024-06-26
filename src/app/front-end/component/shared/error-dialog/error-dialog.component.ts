@@ -12,7 +12,8 @@ export class ErrorDialogComponent {
   public data: ErrorDialogData = {
     title: "ERROR",
     description: "DESCRIPTION",
-    buttonText: "TEXT"
+    buttonText: "TEXT",
+    onAccept: () => {}
   }
   constructor(
   ) {

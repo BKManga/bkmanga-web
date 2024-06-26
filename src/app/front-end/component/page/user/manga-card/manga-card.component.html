@@ -48,7 +48,7 @@
   </div>
 
   <ng-template [ngIf]="lastChapter">
-    <span class="manga-card__last__chapter" (click)="redirectToChapterDetail(manga?.id, lastChapter.id)">
+    <span class="manga-card__last__chapter" (click)="redirectToChapterDetailPage(manga?.id, lastChapter.id)">
       {{ lastChapter.name }}
     </span>
   </ng-template>
