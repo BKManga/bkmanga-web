@@ -1,17 +1,17 @@
 <div fxLayout="column" class="genre-add">
   <form [formGroup]="formGroup" fxLayoutGap="16" fxLayout="column">
     <h2 class="genre-add__label">
-      {{ "Thêm mới truyện tranh" }}
+      {{ "Thêm mới nội quy sử dụng" }}
     </h2>
     <mat-form-field>
       <mat-label>
-        {{ "Tên thể loại" }}
+        {{ "Câu hỏi" }}
       </mat-label>
-      <input formControlName="name" matInput>
+      <input formControlName="question" matInput>
     </mat-form-field>
     <mat-form-field>
       <mat-label>
-        {{ "Mô tả thể loại" }}
+        {{ "Trả lời" }}
       </mat-label>
       <textarea
         matInput
@@ -20,11 +20,11 @@
         cdkAutosizeMinRows="1"
         cdkAutosizeMaxRows="5"
         maxlength="255"
-        formControlName="description">
+        formControlName="answer">
       </textarea>
     </mat-form-field>
     <div fxLayout="row">
-      <div class="button-element button-add" (click)="createGenre()">
+      <div class="button-element button-add" (click)="createPrivacyPolicy()">
         {{ "Lưu thông tin" }}
       </div>
     </div>

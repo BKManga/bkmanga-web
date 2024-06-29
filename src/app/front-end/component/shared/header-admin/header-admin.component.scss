@@ -22,5 +22,8 @@
     border-radius: 50%;
     border: $color-e4e6eb 1px solid;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

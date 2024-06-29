@@ -1,0 +1,45 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.manga-detail-manage {
+  padding: $value-16;
+
+  .manga-detail-form {
+    width: 100%;
+  }
+
+  .detail-field-form {
+    width: 100%;
+
+    .detail-field-text {
+      width: 60%;
+    }
+
+    .detail-field-image {
+      width: 35%;
+
+      .logo-upload {
+        position: relative;
+        width: 174px;
+        height: 232px;
+        border: $color-56ccf2 1px solid;
+        margin-bottom: $value-12;
+      }
+
+      .image-large-upload {
+        position: relative;
+        width: 210px;
+        height: 140px;
+        border: $color-56ccf2 1px solid;
+      }
+
+      .button-upload {
+        height: fit-content;
+      }
+    }
+
+    .detail-form-element {
+      width: 100%;
+    }
+  }
+}

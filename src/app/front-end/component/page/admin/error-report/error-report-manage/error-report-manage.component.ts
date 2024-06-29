@@ -1,7 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ErrorChapterReport, ErrorChapterReportControllerService} from "../../../../bkmanga-svc";
-import {PaginatorData} from "../../../../interface/paginator-data";
+import {
+  ErrorChapterReport,
+  ErrorChapterReportControllerService,
+  GetListErrorChapterReportRequestDTO
+} from "../../../../../bkmanga-svc";
+import {PaginatorData} from "../../../../../interface/paginator-data";
 import {PageEvent} from "@angular/material/paginator";
+import {StatusCodes} from "http-status-codes";
 
 @Component({
   selector: 'app-error-report-manage',
@@ -10,7 +15,7 @@ import {PageEvent} from "@angular/material/paginator";
 })
 export class ErrorReportManageComponent implements OnInit{
   dataSource: Array<ErrorChapterReport> = new Array<ErrorChapterReport>()
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol']
+  displayedColumns: string[] = ['id', 'description', 'uploadedBy','status', 'createdAt', 'action']
 
   private page: number
   private size: number
@@ -39,7 +44,18 @@ export class ErrorReportManageComponent implements OnInit{
   }
 
   private getErrorReportData = async (): Promise<void> => {
+    let getListErrorChapterReportRequestDTO: GetListErrorChapterReportRequestDTO = {
+      page: this.page,
+      size: this.size
+    }
 
+    this.errorChapterReportControllerService.getListErrorChapterReport(getListErrorChapterReportRequestDTO).subscribe(
+      (response) => {
+        if (response.responseCode === StatusCodes.OK) {
+          this.dataSource = response.result?.content ?? []
+          this.totalElementData = response.result?.totalElements ?? 0
+        }
+    })
   }
 
   paginationData = async ($event: PageEvent): Promise<void> => {

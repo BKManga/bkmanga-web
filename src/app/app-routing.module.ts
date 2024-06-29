@@ -7,7 +7,7 @@ import {
   RouteAuthor,
   RouteChapter,
   RouteGenre,
-  RouteManga,
+  RouteManga, RoutePrivacyPolicy,
   RouteSearch
 } from "./front-end/constant/constants";
 import {RegisterComponent} from "./front-end/component/page/auth/register/register.component";
@@ -22,17 +22,6 @@ import {SearchComponent} from "./front-end/component/page/user/search/search.com
 import {AuthorComponent} from "./front-end/component/page/user/author/author.component";
 import {authenticationGuard} from "./front-end/guard/auth.guard";
 import {ProfileComponent} from "./front-end/component/page/user/profile/profile.component";
-import {MangaManageComponent} from "./front-end/component/page/admin/manga-manage/manga-manage.component";
-import {UserManageComponent} from "./front-end/component/page/admin/user-manage/user-manage.component";
-import {
-  ErrorReportManageComponent
-} from "./front-end/component/page/admin/error-report-manage/error-report-manage.component";
-import {
-  OutLawReportManageComponent
-} from "./front-end/component/page/admin/out-law-report-manage/out-law-report-manage.component";
-import {
-  PrivacyPolicyManageComponent
-} from "./front-end/component/page/admin/privacy-policy-manage/privacy-policy-manage.component";
 import {adminRoleGuard} from "./front-end/guard/admin-role.guard";
 import {NotFoundComponent} from "./front-end/component/page/user/not-found/not-found.component";
 import {ErrorPageComponent} from "./front-end/component/page/user/error-page/error-page.component";
@@ -42,6 +31,27 @@ import {GenreAddComponent} from "./front-end/component/page/admin/genre/genre-ad
 import {AuthorManageComponent} from "./front-end/component/page/admin/author/author-manage/author-manage.component";
 import {AuthorDetailComponent} from "./front-end/component/page/admin/author/author-detail/author-detail.component";
 import {AuthorAddComponent} from "./front-end/component/page/admin/author/author-add/author-add.component";
+import {MangaManageComponent} from "./front-end/component/page/admin/manga/manga-manage/manga-manage.component";
+import {UserManageComponent} from "./front-end/component/page/admin/user/user-manage/user-manage.component";
+import {
+  ErrorReportManageComponent
+} from "./front-end/component/page/admin/error-report/error-report-manage/error-report-manage.component";
+import {
+  OutLawReportManageComponent
+} from "./front-end/component/page/admin/out-law-report/out-law-report-manage/out-law-report-manage.component";
+import {
+  PrivacyPolicyManageComponent
+} from "./front-end/component/page/admin/privacy-policy/privacy-policy-manage/privacy-policy-manage.component";
+import {
+  PrivacyPolicyDetailComponent
+} from "./front-end/component/page/admin/privacy-policy/privacy-policy-detail/privacy-policy-detail.component";
+import {
+  PrivacyPolicyAddComponent
+} from "./front-end/component/page/admin/privacy-policy/privacy-policy-add/privacy-policy-add.component";
+import {MangaAddComponent} from "./front-end/component/page/admin/manga/manga-add/manga-add.component";
+import {
+  MangaDetailManageComponent
+} from "./front-end/component/page/admin/manga/manga-detail-manage/manga-detail-manage.component";
 
 const routes: Routes = [
   {
@@ -128,7 +138,20 @@ const routes: Routes = [
       },
       {
         path: AppRouterAdmin.Manga,
-        component: MangaManageComponent
+        children: [
+          {
+            path: AppRouterAdmin.Empty,
+            component: MangaManageComponent
+          },
+          {
+            path: AppRouterAdmin.Add,
+            component: MangaAddComponent
+          },
+          {
+            path: `${AppRouterAdmin.Detail}/:${RouteManga.Param}`,
+            component: MangaDetailManageComponent
+          }
+        ]
       },
       {
         path: AppRouterAdmin.Author,
@@ -166,19 +189,47 @@ const routes: Routes = [
       },
       {
         path: AppRouterAdmin.User,
-        component: UserManageComponent
+        children: [
+          {
+            path: AppRouterAdmin.Empty,
+            component: UserManageComponent
+          }
+        ]
       },
       {
         path: AppRouterAdmin.ErrorReport,
-        component: ErrorReportManageComponent
+        children: [
+          {
+            path: AppRouterAdmin.Empty,
+            component: ErrorReportManageComponent
+          }
+        ]
       },
       {
         path: AppRouterAdmin.OutLawReport,
-        component: OutLawReportManageComponent
+        children: [
+          {
+            path: AppRouterAdmin.Empty,
+            component: OutLawReportManageComponent
+          }
+        ]
       },
       {
         path: AppRouterAdmin.PrivacyPolicy,
-        component: PrivacyPolicyManageComponent,
+        children: [
+          {
+            path: AppRouterAdmin.Empty,
+            component: PrivacyPolicyManageComponent,
+          },
+          {
+            path: `${AppRouterAdmin.Detail}/:${RoutePrivacyPolicy.Param}`,
+            component: PrivacyPolicyDetailComponent,
+          },
+          {
+            path: AppRouterAdmin.Add,
+            component: PrivacyPolicyAddComponent
+          }
+        ]
       }
     ]
   },

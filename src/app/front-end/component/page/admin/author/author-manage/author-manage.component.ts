@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {
   Author,
-  AuthorControllerService, GetListAuthorByName,
+  AuthorControllerService, GetListAuthorByNameDTO,
   GetListAuthorRequestDTO,
   GetMangaByNameRequestDTO
 } from "../../../../../bkmanga-svc";
@@ -94,7 +94,7 @@ export class AuthorManageComponent implements OnInit{
 
     if (isPressEnter) this.paginator?.firstPage()
 
-    let getListAuthorByName: GetListAuthorByName = {
+    let getListAuthorByName: GetListAuthorByNameDTO = {
       name: valueSearch,
       page: page,
       size: size,

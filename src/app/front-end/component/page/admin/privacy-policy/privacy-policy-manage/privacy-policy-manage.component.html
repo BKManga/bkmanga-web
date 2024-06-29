@@ -1,4 +1,11 @@
 <div fxLayout="column" class="privacy-policy-manage">
+  <div class="top-handle" fxLayout>
+    <div class="button-element button-add" (click)="redirectToAddPrivacyPolicyPage()">
+        <span>
+          Thêm nội quy sử dụng
+        </span>
+    </div>
+  </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="id">
@@ -19,7 +26,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let element">
-        <div class="button-element button-detail">
+        <div class="button-element button-detail" (click)="redirectToPrivacyPolicyDetailPage(element.id)">
           <span>
             Chi tiết
           </span>

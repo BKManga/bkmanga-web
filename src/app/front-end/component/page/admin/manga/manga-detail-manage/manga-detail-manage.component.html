@@ -1,0 +1,136 @@
+<div fxLayout="column" class="manga-detail-manage">
+  <div fxLayoutGap="16" class="manga-detail-form" fxLayout="column">
+    <h2 class="genre-add__label">
+      {{ "Thông tin truyện tranh" }}
+    </h2>
+    <div fxLayout fxLayoutAlign="space-between" class="detail-field-form">
+      <div class="detail-field-text">
+        <form [formGroup]="formGroup" fxLayout="column" class="detail-form-element" fxLayoutGap="8">
+          <mat-form-field>
+            <mat-label>
+              {{ "Tên truyện" }}
+            </mat-label>
+            <input formControlName="name" matInput>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>
+              {{ "Tên khác của truyện" }}
+            </mat-label>
+            <input formControlName="otherName" matInput>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>
+              {{ "Mô tả truyện" }}
+            </mat-label>
+            <textarea
+              matInput
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5"
+              maxlength="255"
+              formControlName="description">
+          </textarea>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Truyện dành cho độ tuổi</mat-label>
+            <select class="register-content__body-gender" matNativeControl formControlName="ageRange">
+              <option [value]="AgeRange.AllAge.at(0)">
+                {{ AgeRange.AllAge.at(1) }}
+              </option>
+              <option [value]="AgeRange.Upper12.at(0)">
+                {{ AgeRange.Upper12.at(1) }}
+              </option>
+              <option [value]="AgeRange.Upper16.at(0)">
+                {{ AgeRange.Upper16.at(1) }}
+              </option>
+              <option [value]="AgeRange.Upper18.at(0)">
+                {{ AgeRange.Upper18.at(1) }}
+              </option>
+            </select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Thể loại</mat-label>
+            <mat-select formControlName="listGenre" multiple="{{true}}">
+              <mat-select-trigger>
+              <span *ngIf="(formGroup.value['listGenre'].length || 0) >= 1">
+                {{(formGroup.value['listGenre'].length || 0)}} {{"thể loại được lựa chọn"}}
+              </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let genre of genreList" [value]="genre.id">{{genre.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Tác giả</mat-label>
+            <mat-select formControlName="listAuthor" multiple="{{true}}">
+              <mat-select-trigger>
+              <span *ngIf="(formGroup.value['listAuthor'].length || 0) >= 1">
+                {{(formGroup.value['listAuthor'].length || 0)}} {{"tác giả được chọn"}}
+              </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let author of authorList" [value]="author.id">{{author.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </form>
+      </div>
+      <div fxLayout="column" class="detail-field-image">
+        <h2>
+          Logo truyện
+        </h2>
+        <div fxLayout fxLayoutAlign="space-between">
+          <div class="logo-upload">
+            <img [lazyLoad]="environment.apiBaseUrl + MiddlePrefixHandleImage.Prefix + GetImage.MANGA_IMAGE_LOGO + mangaId"
+                 [useSrcset]="true"
+                 width="100%"
+                 alt=""
+            >
+          </div>
+          <div class="button-upload button-element button-delete">
+            <span>
+              Upload
+            </span>
+          </div>
+        </div>
+
+        <h2>
+          Ảnh lớn của truyện
+        </h2>
+        <div fxLayout fxLayoutAlign="space-between">
+          <div class="image-large-upload">
+            <img [lazyLoad]="environment.apiBaseUrl + MiddlePrefixHandleImage.Prefix + GetImage.MANGA_IMAGE_LARGE + mangaId"
+                 [useSrcset]="true"
+                 width="100%"
+                 alt=""
+            >
+          </div>
+          <div class="button-upload button-element button-delete">
+            <span>
+              Upload
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <div class="button-element button-add" (click)="updateManga()">
+        {{ "Lưu thông tin" }}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<div fxLayout fxLayoutAlign="space-between center">
+            <mat-form-field>
+              <mat-label>
+                {{ "Tên chapter đầu tiên" }}
+              </mat-label>
+              <input formControlName="firstChapterName" matInput>
+            </mat-form-field>
+            <div class="button-element button-add">
+            <span>
+              Upload file nén của chương truyện
+            </span>
+            </div>
+          </div>-->

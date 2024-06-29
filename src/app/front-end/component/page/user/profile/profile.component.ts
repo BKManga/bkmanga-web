@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   ) {
     this.formGroup = formBuilder.group({
       username: ["", Validators.required],
-      email: ["", Validators.required],
+      email: [{value: "", disabled: true}, Validators.required],
       fullName: ["", Validators.required],
       gender: [Gender.MALE.at(0), Validators.required],
     })

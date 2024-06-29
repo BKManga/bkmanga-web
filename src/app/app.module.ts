@@ -60,13 +60,8 @@ import { AuthorComponent } from './front-end/component/page/user/author/author.c
 import { SearchComponent } from './front-end/component/page/user/search/search.component';
 import { ProfileComponent } from './front-end/component/page/user/profile/profile.component';
 import { HeaderAdminComponent } from './front-end/component/shared/header-admin/header-admin.component';
-import { MangaManageComponent } from './front-end/component/page/admin/manga-manage/manga-manage.component';
 import { DashboardAdminComponent } from './front-end/component/shared/dashboard-admin/dashboard-admin.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
-import { UserManageComponent } from './front-end/component/page/admin/user-manage/user-manage.component';
-import { ErrorReportManageComponent } from './front-end/component/page/admin/error-report-manage/error-report-manage.component';
-import { OutLawReportManageComponent } from './front-end/component/page/admin/out-law-report-manage/out-law-report-manage.component';
-import { PrivacyPolicyManageComponent } from './front-end/component/page/admin/privacy-policy-manage/privacy-policy-manage.component';
 import {MatTableModule} from "@angular/material/table";
 import { NotFoundComponent } from './front-end/component/page/user/not-found/not-found.component';
 import { ErrorPageComponent } from './front-end/component/page/user/error-page/error-page.component';
@@ -76,6 +71,22 @@ import {GenreManageComponent} from "./front-end/component/page/admin/genre/genre
 import {AuthorManageComponent} from "./front-end/component/page/admin/author/author-manage/author-manage.component";
 import { AuthorAddComponent } from './front-end/component/page/admin/author/author-add/author-add.component';
 import { AuthorDetailComponent } from './front-end/component/page/admin/author/author-detail/author-detail.component';
+import {UserManageComponent} from "./front-end/component/page/admin/user/user-manage/user-manage.component";
+import {
+  ErrorReportManageComponent
+} from "./front-end/component/page/admin/error-report/error-report-manage/error-report-manage.component";
+import {MangaManageComponent} from "./front-end/component/page/admin/manga/manga-manage/manga-manage.component";
+import {
+  PrivacyPolicyManageComponent
+} from "./front-end/component/page/admin/privacy-policy/privacy-policy-manage/privacy-policy-manage.component";
+import {
+  OutLawReportManageComponent
+} from "./front-end/component/page/admin/out-law-report/out-law-report-manage/out-law-report-manage.component";
+import { PrivacyPolicyAddComponent } from './front-end/component/page/admin/privacy-policy/privacy-policy-add/privacy-policy-add.component';
+import { PrivacyPolicyDetailComponent } from './front-end/component/page/admin/privacy-policy/privacy-policy-detail/privacy-policy-detail.component';
+import { MangaAddComponent } from './front-end/component/page/admin/manga/manga-add/manga-add.component';
+import { MangaDetailManageComponent } from './front-end/component/page/admin/manga/manga-detail-manage/manga-detail-manage.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -125,6 +136,10 @@ import { AuthorDetailComponent } from './front-end/component/page/admin/author/a
     GenreDetailComponent,
     AuthorAddComponent,
     AuthorDetailComponent,
+    PrivacyPolicyAddComponent,
+    PrivacyPolicyDetailComponent,
+    MangaAddComponent,
+    MangaDetailManageComponent,
   ],
   imports: [
     BrowserModule,
@@ -167,6 +182,7 @@ import { AuthorDetailComponent } from './front-end/component/page/admin/author/a
     MatExpansionModule,
     MatSidenavModule,
     MatTableModule,
+    MatSelectModule,
   ],
   exports: [
     HeaderComponent,

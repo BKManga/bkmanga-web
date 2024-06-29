@@ -4,13 +4,14 @@ import {
   GetMangaRequestDTO,
   GetMangaResponseDTO,
   MangaControllerService
-} from "../../../../bkmanga-svc";
-import {PaginatorData} from "../../../../interface/paginator-data";
+} from "../../../../../bkmanga-svc";
+import {PaginatorData} from "../../../../../interface/paginator-data";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {StatusCodes} from "http-status-codes";
-import {DataOrderBy, GetImage, MiddlePrefixHandleImage} from "../../../../constant/constants";
-import {environment} from "../../../../../../environments/environment.development";
+import {AppRouterAdmin, DataOrderBy, GetImage, MiddlePrefixHandleImage} from "../../../../../constant/constants";
+import {environment} from "../../../../../../../environments/environment.development";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-manga-manage',
@@ -36,6 +37,7 @@ export class MangaManageComponent implements OnInit{
   constructor(
     private mangaControllerService: MangaControllerService,
     formBuilder: FormBuilder,
+    private router: Router,
   ) {
     this.paginatorData = {
       pageIndex: 0,
@@ -113,7 +115,19 @@ export class MangaManageComponent implements OnInit{
     })
   }
 
+  redirectToAddMangaPage = async (): Promise<void> => {
+    await this.router.navigate([AppRouterAdmin.Admin, AppRouterAdmin.Manga, AppRouterAdmin.Add])
+  }
+
+  redirectToDetailMangaPage = async (mangaId?: number): Promise<void> => {
+    if (!mangaId) return
+
+    await this.router.navigate([AppRouterAdmin.Admin, AppRouterAdmin.Manga, AppRouterAdmin.Detail, mangaId])
+  }
+
   protected readonly MiddlePrefixHandleImage = MiddlePrefixHandleImage;
   protected readonly GetImage = GetImage;
   protected readonly environment = environment;
+
+
 }

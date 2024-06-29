@@ -81,6 +81,10 @@ export const RouteGenre = {
   Param: 'idGenre'
 }
 
+export const RoutePrivacyPolicy = {
+  Param: 'idPrivacyPolicy'
+}
+
 export const Role = {
   User: "USER",
   Moderator: "MODERATOR",
@@ -126,6 +130,18 @@ export const MiddlePrefixHandleImage = {
 
 export const GetImage = {
   MANGA_IMAGE_LOGO: "manga/image-logo/",
+  MANGA_IMAGE_LARGE: "manga/image-large/",
   USER_PROFILE_LOGO: "user/profile/"
 }
 
+// all age
+// 12+
+// 16+
+// 18+
+
+export const AgeRange = {
+  AllAge: [1, "All Age"],
+  Upper12: [2, "12+"],
+  Upper16: [3, "16+"],
+  Upper18: [4, "18+"],
+}

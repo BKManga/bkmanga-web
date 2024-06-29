@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {PrivacyPolicy, PrivacyPolicyControllerService} from "../../../../bkmanga-svc";
+import {PrivacyPolicy, PrivacyPolicyControllerService} from "../../../../../bkmanga-svc";
 import {StatusCodes} from "http-status-codes";
+import {Router} from "@angular/router";
+import {AppRouterAdmin} from "../../../../../constant/constants";
 
 @Component({
   selector: 'app-privacy-policy-manage',
@@ -12,7 +14,8 @@ export class PrivacyPolicyManageComponent implements OnInit{
   displayedColumns: string[] = ['id', 'question', 'answer', 'action'];
 
   constructor(
-    private privacyPolicyControllerService: PrivacyPolicyControllerService
+    private privacyPolicyControllerService: PrivacyPolicyControllerService,
+    private router: Router,
   ) {
   }
 
@@ -27,5 +30,18 @@ export class PrivacyPolicyManageComponent implements OnInit{
           this.dataSource = response.result ?? []
         }
     })
+  }
+
+  redirectToAddPrivacyPolicyPage = async (): Promise<void> => {
+    await this.router.navigate([AppRouterAdmin.Admin, AppRouterAdmin.PrivacyPolicy, AppRouterAdmin.Add])
+  }
+
+  redirectToPrivacyPolicyDetailPage = async (privacyPolicyId?: number): Promise<void> => {
+    await this.router.navigate([
+      AppRouterAdmin.Admin,
+      AppRouterAdmin.PrivacyPolicy,
+      AppRouterAdmin.Detail,
+      privacyPolicyId
+    ])
   }
 }

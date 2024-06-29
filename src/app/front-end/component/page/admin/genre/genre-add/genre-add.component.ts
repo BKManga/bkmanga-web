@@ -15,7 +15,6 @@ import {SnackbarData} from "../../../../../interface/snackbar-data";
 export class GenreAddComponent implements OnInit{
 
   formGroup: FormGroup;
-  genre?: Genre;
 
   constructor(
     formBuilder: FormBuilder,

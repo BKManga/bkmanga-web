@@ -36,7 +36,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   align-items: center;
   column-gap: $value-4;
   min-width: $value-125;
-  max-width: $value-125;
+  width: fit-content;
   justify-content: center;
   padding: $value-10;
   border-radius: $value-5;
