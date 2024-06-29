@@ -27,6 +27,7 @@
         align-items: center;
         font-size: $value-16;
         gap: $value-8;
+        cursor: pointer;
       }
     }
 
@@ -49,6 +50,9 @@
           width: $value-160;
           height: $value-160;
           position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           border-radius: calc($value-160 / 2);
           background-color: white;
         }

@@ -11,12 +11,19 @@ import {
   MangaComment,
   MangaCommentControllerService,
 } from "../../../../bkmanga-svc";
-import {CommentBlockArea, DataOrderBy, RouteChapter, RouteManga} from "../../../../constant/constants";
+import {
+  CommentBlockArea,
+  DataOrderBy, GetImage,
+  MiddlePrefixHandleImage,
+  RouteChapter,
+  RouteManga
+} from "../../../../constant/constants";
 import {ActivatedRoute} from "@angular/router";
 import {StatusCodes} from "http-status-codes";
 import {SnackbarData} from "../../../../interface/snackbar-data";
 import {DialogService} from "../../../../service/dialog.service";
 import {JwtDecodeService} from "../../../../service/jwt-decode.service";
+import {environment} from "../../../../../../environments/environment.development";
 
 @Component({
   selector: 'app-block-comment',
@@ -179,4 +186,7 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
 
     this.dialogService.showSnackBar(snackBarData)
   }
+  protected readonly MiddlePrefixHandleImage = MiddlePrefixHandleImage;
+  protected readonly GetImage = GetImage;
+  protected readonly environment = environment;
 }

@@ -1,0 +1,60 @@
+<div fxLayout="column" class="author-manage">
+  <div fxLayout="column" fxLayoutGap="8">
+    <div class="top-handle" fxLayout>
+      <form [formGroup]="fromGroup" (keydown.enter)="searchAuthor(0, 10, true)" fxLayout="row" fxLayoutAlign="end center">
+        <input formControlName="search"
+               (click)="$event.stopPropagation()"
+               type="text" class="manage__search"
+               [placeholder]="placeHolder"
+        >
+      </form>
+      <div class="button-element button-add" (click)="redirectToAuthorAddPage()">
+        <span>
+          Thêm tác giả
+        </span>
+      </div>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Tên tác giả </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="button-element button-detail" (click)="redirectToAuthorDetailPage(element.id)">
+            <span>
+              Chi tiết
+            </span>
+          </div>
+          <div class="button-element button-delete">
+            <span>
+              Xóa
+            </span>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [length]="totalElementData"
+                   [pageSize]="paginatorData.pageSize"
+                   [showFirstLastButtons]="paginatorData.showFirstLastButtons"
+                   [hidePageSize]="paginatorData.hidePageSize"
+                   [pageSizeOptions]="paginatorData.pageSizeOptions"
+                   (page)="paginationData($event)"
+                   aria-label="Select page"
+                   #paginator
+    >
+    </mat-paginator>
+  </div>
+</div>

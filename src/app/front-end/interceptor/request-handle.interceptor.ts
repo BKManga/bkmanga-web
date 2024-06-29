@@ -58,11 +58,16 @@ export class RequestHandleInterceptor implements HttpInterceptor {
 
   private handleBaseErrorStatus(error: HttpErrorResponse): Observable<any> {
     switch (error.status) {
+      case 401:
       case 403:
         this.jwtDecodeService.deleteAuthToken()
         this.router.navigate([AppRouter.Auth, AppRouter.Login]).then()
         break
+      case 500:
+        this.router.navigate([AppRouter.Error]).then()
+        break
       default:
+        this.router.navigate([AppRouter.NotFound]).then()
         break
     }
     return of()
@@ -70,7 +75,8 @@ export class RequestHandleInterceptor implements HttpInterceptor {
 
   private ignoreLoadingAnimation = (urlTarget: string) => {
     let ignoreUrlTargetList: Array<string> = [
-      "api/v1/manga/search/by/name"
+      "api/v1/manga/search/by/name",
+      "/api/v1/file/manga/image-logo"
     ]
 
     return ignoreUrlTargetList.some((element) => urlTarget.includes(element))

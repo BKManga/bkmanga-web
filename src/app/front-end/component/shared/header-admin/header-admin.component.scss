@@ -1,0 +1,26 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.header {
+  background-color: $color-18191a;
+  padding: $value-10 $value-28;
+  align-items: center;
+  justify-content: space-between;
+
+  .header-content__contain__logo__large {
+    position: relative;
+  }
+
+  .header-content__logo__large {
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .avatar {
+    height: $value-52;
+    width: $value-52;
+    border-radius: 50%;
+    border: $color-e4e6eb 1px solid;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,18 @@
+<div fxLayout="column" class="author-add">
+  <form [formGroup]="formGroup" fxLayoutGap="16" fxLayout="column">
+    <h2 class="genre-add__label">
+      {{ "Thêm mới tác giả" }}
+    </h2>
+    <mat-form-field>
+      <mat-label>
+        {{ "Tên tác giả" }}
+      </mat-label>
+      <input formControlName="name" matInput>
+    </mat-form-field>
+    <div fxLayout="row">
+      <div class="button-element button-add" (click)="createAuthor()">
+        {{ "Lưu thông tin" }}
+      </div>
+    </div>
+  </form>
+</div>

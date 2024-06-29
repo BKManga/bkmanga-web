@@ -58,8 +58,24 @@ import { PrivacyPolicyComponent } from './front-end/component/page/user/privacy-
 import {MatExpansionModule} from "@angular/material/expansion";
 import { AuthorComponent } from './front-end/component/page/user/author/author.component';
 import { SearchComponent } from './front-end/component/page/user/search/search.component';
-import {NavigationEnd, Router} from "@angular/router";
 import { ProfileComponent } from './front-end/component/page/user/profile/profile.component';
+import { HeaderAdminComponent } from './front-end/component/shared/header-admin/header-admin.component';
+import { MangaManageComponent } from './front-end/component/page/admin/manga-manage/manga-manage.component';
+import { DashboardAdminComponent } from './front-end/component/shared/dashboard-admin/dashboard-admin.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import { UserManageComponent } from './front-end/component/page/admin/user-manage/user-manage.component';
+import { ErrorReportManageComponent } from './front-end/component/page/admin/error-report-manage/error-report-manage.component';
+import { OutLawReportManageComponent } from './front-end/component/page/admin/out-law-report-manage/out-law-report-manage.component';
+import { PrivacyPolicyManageComponent } from './front-end/component/page/admin/privacy-policy-manage/privacy-policy-manage.component';
+import {MatTableModule} from "@angular/material/table";
+import { NotFoundComponent } from './front-end/component/page/user/not-found/not-found.component';
+import { ErrorPageComponent } from './front-end/component/page/user/error-page/error-page.component';
+import {GenreDetailComponent} from "./front-end/component/page/admin/genre/genre-detail/genre-detail.component";
+import {GenreAddComponent} from "./front-end/component/page/admin/genre/genre-add/genre-add.component";
+import {GenreManageComponent} from "./front-end/component/page/admin/genre/genre-manage/genre-manage.component";
+import {AuthorManageComponent} from "./front-end/component/page/admin/author/author-manage/author-manage.component";
+import { AuthorAddComponent } from './front-end/component/page/admin/author/author-add/author-add.component';
+import { AuthorDetailComponent } from './front-end/component/page/admin/author/author-detail/author-detail.component';
 
 @NgModule({
   declarations: [
@@ -94,47 +110,64 @@ import { ProfileComponent } from './front-end/component/page/user/profile/profil
     AuthorComponent,
     SearchComponent,
     ProfileComponent,
+    HeaderAdminComponent,
+    MangaManageComponent,
+    DashboardAdminComponent,
+    AuthorManageComponent,
+    GenreManageComponent,
+    UserManageComponent,
+    ErrorReportManageComponent,
+    OutLawReportManageComponent,
+    PrivacyPolicyManageComponent,
+    NotFoundComponent,
+    ErrorPageComponent,
+    GenreAddComponent,
+    GenreDetailComponent,
+    AuthorAddComponent,
+    AuthorDetailComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FlexModule,
-        MatButtonModule,
-        MatDialogModule,
-        HttpClientModule,
-        MatProgressSpinnerModule,
-        MatSnackBarModule,
-        ApiModule.forRoot(() => {
-            return new Configuration({
-                basePath: `${ApiBaseUrl}`
-            })
-        }),
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: httpTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-        MatIconModule,
-        NgOptimizedImage,
-        FlexLayoutModule,
-        FormsModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatNativeDateModule,
-        MatRadioModule,
-        MatListModule,
-        MatPaginatorModule,
-        MatTooltipModule,
-        LazyLoadImageModule,
-        MatExpansionModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FlexModule,
+    MatButtonModule,
+    MatDialogModule,
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    ApiModule.forRoot(() => {
+      return new Configuration({
+        basePath: `${ApiBaseUrl}`
+      })
+    }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+    MatIconModule,
+    NgOptimizedImage,
+    FlexLayoutModule,
+    FormsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatTooltipModule,
+    LazyLoadImageModule,
+    MatExpansionModule,
+    MatSidenavModule,
+    MatTableModule,
+  ],
   exports: [
     HeaderComponent,
     FooterComponent,

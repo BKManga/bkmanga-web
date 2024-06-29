@@ -22,6 +22,26 @@ import {SearchComponent} from "./front-end/component/page/user/search/search.com
 import {AuthorComponent} from "./front-end/component/page/user/author/author.component";
 import {authenticationGuard} from "./front-end/guard/auth.guard";
 import {ProfileComponent} from "./front-end/component/page/user/profile/profile.component";
+import {MangaManageComponent} from "./front-end/component/page/admin/manga-manage/manga-manage.component";
+import {UserManageComponent} from "./front-end/component/page/admin/user-manage/user-manage.component";
+import {
+  ErrorReportManageComponent
+} from "./front-end/component/page/admin/error-report-manage/error-report-manage.component";
+import {
+  OutLawReportManageComponent
+} from "./front-end/component/page/admin/out-law-report-manage/out-law-report-manage.component";
+import {
+  PrivacyPolicyManageComponent
+} from "./front-end/component/page/admin/privacy-policy-manage/privacy-policy-manage.component";
+import {adminRoleGuard} from "./front-end/guard/admin-role.guard";
+import {NotFoundComponent} from "./front-end/component/page/user/not-found/not-found.component";
+import {ErrorPageComponent} from "./front-end/component/page/user/error-page/error-page.component";
+import {GenreManageComponent} from "./front-end/component/page/admin/genre/genre-manage/genre-manage.component";
+import {GenreDetailComponent} from "./front-end/component/page/admin/genre/genre-detail/genre-detail.component";
+import {GenreAddComponent} from "./front-end/component/page/admin/genre/genre-add/genre-add.component";
+import {AuthorManageComponent} from "./front-end/component/page/admin/author/author-manage/author-manage.component";
+import {AuthorDetailComponent} from "./front-end/component/page/admin/author/author-detail/author-detail.component";
+import {AuthorAddComponent} from "./front-end/component/page/admin/author/author-add/author-add.component";
 
 const routes: Routes = [
   {
@@ -93,19 +113,86 @@ const routes: Routes = [
       },
       {
         path: `${AppRouter.Profile}`,
+        canActivate: [authenticationGuard],
         component: ProfileComponent
       }
     ]
   },
-  // {
-  //   path: AppRouterAdmin.Admin,
-  //   children: [
-  //     {
-  //       path: AppRouterAdmin.Empty,
-  //
-  //     }
-  //   ]
-  // }
+  {
+    path: AppRouterAdmin.Admin,
+    canActivate: [authenticationGuard, adminRoleGuard],
+    children: [
+      {
+        path: AppRouterAdmin.Empty,
+        component: MangaManageComponent
+      },
+      {
+        path: AppRouterAdmin.Manga,
+        component: MangaManageComponent
+      },
+      {
+        path: AppRouterAdmin.Author,
+        children: [
+          {
+            path: AppRouterAdmin.Empty,
+            component: AuthorManageComponent
+          },
+          {
+            path: `${AppRouterAdmin.Detail}/:${RouteAuthor.Param}`,
+            component: AuthorDetailComponent
+          },
+          {
+            path: AppRouterAdmin.Add,
+            component: AuthorAddComponent
+          }
+        ]
+      },
+      {
+        path: AppRouterAdmin.Genre,
+        children: [
+          {
+            path: AppRouterAdmin.Empty,
+            component: GenreManageComponent
+          },
+          {
+            path: `${AppRouterAdmin.Detail}/:${RouteGenre.Param}`,
+            component: GenreDetailComponent
+          },
+          {
+            path: AppRouterAdmin.Add,
+            component: GenreAddComponent
+          }
+        ]
+      },
+      {
+        path: AppRouterAdmin.User,
+        component: UserManageComponent
+      },
+      {
+        path: AppRouterAdmin.ErrorReport,
+        component: ErrorReportManageComponent
+      },
+      {
+        path: AppRouterAdmin.OutLawReport,
+        component: OutLawReportManageComponent
+      },
+      {
+        path: AppRouterAdmin.PrivacyPolicy,
+        component: PrivacyPolicyManageComponent,
+      }
+    ]
+  },
+  {
+    path: AppRouter.NotFound,
+    component: NotFoundComponent
+  },
+  {
+    path: AppRouter.Error,
+    component: ErrorPageComponent
+  },
+  {
+    path: '**', redirectTo: AppRouter.NotFound
+  }
 ];
 
 @NgModule({

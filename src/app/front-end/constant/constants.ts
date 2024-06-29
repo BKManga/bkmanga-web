@@ -52,6 +52,12 @@ export const AppRouter = {
 
 export const AppRouterAdmin = {
   Admin: "admin",
+  Manga: "manga",
+  ErrorReport: "error-report",
+  OutLawReport: "outlaw-report",
+  User: "user",
+  Detail: "detail",
+  Add: "add",
   ...AppRouter
 }
 
@@ -113,3 +119,13 @@ export const ProfilePage = {
   INFO: "info",
   CHANGE_PASSWORD: "changePassword",
 }
+
+export const MiddlePrefixHandleImage = {
+  Prefix: "/api/v1/file/"
+}
+
+export const GetImage = {
+  MANGA_IMAGE_LOGO: "manga/image-logo/",
+  USER_PROFILE_LOGO: "user/profile/"
+}
+

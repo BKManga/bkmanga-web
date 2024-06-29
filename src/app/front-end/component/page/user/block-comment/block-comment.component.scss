@@ -23,6 +23,9 @@
       .block-comment__element-avatar {
         width: $value-44;
         height: $value-44;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border: 1px solod $color-eeeeee;
         background-color: $color-white;
         border-radius: calc($value-44 / 2);

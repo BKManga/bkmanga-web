@@ -79,6 +79,11 @@ export class FilterBoxComponent implements OnInit {
   resetFilterBox = (): void => {
     _.remove(this.formGroup.controls['listExceptGenres'].value, (element) => true)
     _.remove(this.formGroup.controls['listChooseGenres'].value, (element) => true)
+
+    this.formGroup.patchValue({
+      mangaStatus: MangaStatus.IN_PROCESS,
+      orderManga: DataOrderBy.DESC
+    })
     this.triggerReset = !this.triggerReset
 
     this.getFilterValue()

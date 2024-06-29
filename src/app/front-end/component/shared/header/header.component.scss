@@ -8,11 +8,25 @@
   justify-content: center;
 }
 
+.avatar {
+  height: $value-52;
+  width: $value-52;
+  border-radius: 50%;
+  border: $color-e4e6eb 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  z-index: 10;
+}
+
 .header-content {
   max-width: $width-large;
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  padding: $value-10;
 }
 
 .header-content__logo__large {

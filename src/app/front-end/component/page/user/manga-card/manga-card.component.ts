@@ -6,8 +6,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import {Router} from "@angular/router";
-import {AppRouter} from "../../../../constant/constants";
+import {AppRouter, GetImage, MiddlePrefixHandleImage} from "../../../../constant/constants";
 import {Chapter, GetMangaResponseDTO, HistoryResponse} from "../../../../bkmanga-svc";
+import {environment} from "../../../../../../environments/environment.development";
 
 @Component({
   selector: 'app-manga-card',
@@ -168,4 +169,7 @@ export class MangaCardComponent implements OnInit, AfterViewInit{
   private isHistoryResponse = (value: any) : value is HistoryResponse => {
     return "getMangaResponseDTO" in value
   }
+  protected readonly MiddlePrefixHandleImage = MiddlePrefixHandleImage;
+  protected readonly GetImage = GetImage;
+  protected readonly environment = environment;
 }

@@ -2,7 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {jwtDecode, JwtPayload} from "jwt-decode"
 import {CookieService} from "ngx-cookie-service"
 import {SharingService} from "./sharing.service";
-import {AuthToken} from "../constant/constants";
+import {AuthToken, Role} from "../constant/constants";
 import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
@@ -36,6 +36,16 @@ export class JwtDecodeService implements OnInit{
     if (!jwtPayLoad) return new BehaviorSubject(false).asObservable()
 
     return new BehaviorSubject((jwtPayLoad?.exp ?? 0 - Date.now()) > 0).asObservable();
+  }
+
+  public checkRole = (): boolean => {
+    let jwtPayLoad: any = this.decodeToken(this.cookieService.get(AuthToken))
+
+    if (!jwtPayLoad) return false
+
+    let roles: Array<string> = jwtPayLoad?.roles[0].split("/")
+
+    return roles.includes(Role.Admin) && roles.includes(Role.Moderator)
   }
 
   public deleteAuthToken = () => {

@@ -71,8 +71,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   async ngOnDestroy(): Promise<void> {
-    await this.sharingService.setShowAuthButton(true)
 
-    this.sharingService.setHeaderSearch(true).then()
   }
 }

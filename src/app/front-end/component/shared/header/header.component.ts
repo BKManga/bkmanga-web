@@ -1,6 +1,13 @@
 import {AfterViewInit, Component, HostListener, Input, OnInit} from '@angular/core';
 import {ImageData} from "../../../interface/image-data";
-import {AppRouter, AuthToken, DataOrderBy, LogoLarge, LogoShort} from "../../../constant/constants";
+import {
+  AppRouter,
+  AuthToken,
+  DataOrderBy, GetImage,
+  LogoLarge,
+  LogoShort,
+  MiddlePrefixHandleImage
+} from "../../../constant/constants";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute, NavigationEnd, Router, RouterEvent} from "@angular/router";
 import {SharingService} from "../../../service/sharing.service";
@@ -10,6 +17,7 @@ import {CookieService} from "ngx-cookie-service";
 import {JwtDecodeService} from "../../../service/jwt-decode.service";
 import {DialogService} from "../../../service/dialog.service";
 import {filter} from "rxjs";
+import {environment} from "../../../../../environments/environment.development";
 
 @Component({
   selector: 'app-header',
@@ -26,7 +34,9 @@ export class HeaderComponent implements OnInit, AfterViewInit{
 
   showResultSearchHeader: boolean
   showInputHeaderSearch: boolean
-  readonly AppRouter = AppRouter;
+  readonly AppRouter = AppRouter
+
+  checkAuthentication?: boolean
 
   protected showAuthButton?: boolean
   constructor(
@@ -45,9 +55,12 @@ export class HeaderComponent implements OnInit, AfterViewInit{
     this.fromGroup = formBuilder.group({
       search: [""]
     })
-    // this.showAuthButton = this.jwtDecodeService.checkToken()
     this.showInputHeaderSearch = true
     this.showResultSearchHeader = false
+    this.jwtDecodeService.checkToken().subscribe((value) => {
+      this.checkAuthentication = value
+    })
+
   }
 
   mangaList: Array<GetMangaResponseDTO> = new Array<GetMangaResponseDTO>();
@@ -91,28 +104,17 @@ export class HeaderComponent implements OnInit, AfterViewInit{
   }
 
   async ngOnInit(): Promise<void> {
-    this.sharingService.awaitDataShowAuthButton().subscribe(result => {
-      this.showAuthButton = result
-    })
-
-    // this.router.events.subscribe((event) => {
-    // })
-
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(
       (event) => {
         event as NavigationEnd
         if (event instanceof NavigationEnd) {
-          this.showInputHeaderSearch = !event.url.includes(AppRouter.Login) || !event.url.includes(AppRouter.Register)
-          this.showAuthButton = !event.url.includes(AppRouter.Login) || !event.url.includes(AppRouter.Register)
+          this.showInputHeaderSearch = !event.url.includes(AppRouter.Login) && !event.url.includes(AppRouter.Register)
+          this.showAuthButton = !event.url.includes(AppRouter.Login) && !event.url.includes(AppRouter.Register)
         }
       }
     )
-
-    // this.sharingService.awaitHeaderSearchValue().subscribe(result => {
-    //   this.showInputHeaderSearch = result
-    // })
   }
 
   setSearchValueDefault = () => {
@@ -134,4 +136,12 @@ export class HeaderComponent implements OnInit, AfterViewInit{
       this.setSearchValueDefault()
     }
   }
+
+  redirectToProfilePage = async () : Promise<void> => {
+    await this.router.navigate([AppRouter.Main, AppRouter.Profile])
+  }
+
+  protected readonly MiddlePrefixHandleImage = MiddlePrefixHandleImage;
+  protected readonly GetImage = GetImage;
+  protected readonly environment = environment;
 }

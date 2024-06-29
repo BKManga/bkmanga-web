@@ -7,6 +7,12 @@
   cursor: pointer;
 }
 
+.manga-card__image {
+  height: $value-250;
+  width: $value-190;
+  position: relative;
+}
+
 .manga-card__info {
   position: relative
 }

@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, Output} from '@angular/core';
 import {SharingService} from "../../../../service/sharing.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {AppRouter, AuthToken} from "../../../../constant/constants";
+import {AppRouter, AppRouterAdmin, AuthToken} from "../../../../constant/constants";
 import {AuthControllerService, UserLoginRequestDTO} from "../../../../bkmanga-svc";
 import {CookieService} from "ngx-cookie-service";
 import {StatusCodes} from "http-status-codes";
@@ -52,18 +52,23 @@ export class LoginComponent implements OnInit, OnDestroy{
         if (response.responseCode === StatusCodes.OK) {
           if (response.result?.tokenBearer) {
             this.cookieService.set(AuthToken, response.result?.tokenBearer)
-            this.sharingService.setShowAuthButton(false).then()
-            this.router.navigate([AppRouter.Main])
+            this.sharingService.setValueCheckAuthentication(true)
+            this.redirectFollowRole()
           }
         }
     })
   }
 
-  async ngOnDestroy(): Promise<void> {
-    if (!this.cookieService.get(AuthToken)) {
-      await this.sharingService.setShowAuthButton(true)
+  private redirectFollowRole = async () => {
+    if (this.jwtDecodeService.checkRole()) {
+      await this.router.navigate([AppRouterAdmin.Main, AppRouterAdmin.Admin])
+      return
     }
 
-    this.sharingService.setHeaderSearch(true).then()
+    await this.router.navigate([AppRouter.Main])
+  }
+
+  async ngOnDestroy(): Promise<void> {
+
   }
 }

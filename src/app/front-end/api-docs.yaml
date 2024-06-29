@@ -180,6 +180,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponsePageUser'
+  /api/v1/user/detail:
+    post:
+      tags:
+      - user-controller
+      operationId: getUserDetail
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseUser'
   /api/v1/report/outlaw/get:
     post:
       tags:
@@ -378,6 +390,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponseListGetMangaResponseDTO'
+  /api/v1/manga/get:
+    post:
+      tags:
+      - manga-controller
+      operationId: getMangaList
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMangaRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponsePageGetMangaResponseDTO'
   /api/v1/manga/get/lastUpload:
     post:
       tags:
@@ -405,7 +435,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetMangaRequestDTO'
+              $ref: '#/components/schemas/GetMangaDetailRequestDTO'
         required: true
       responses:
         "200":
@@ -558,6 +588,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponseCreateFollowResponseDTO'
+  /api/v1/file/manga/image/upload:
+    post:
+      tags:
+      - file-controller
+      operationId: uploadImageManga
+      parameters:
+      - name: mangaId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: target
+        in: query
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseObject'
+  /api/v1/file/image/chapter/all:
+    post:
+      tags:
+      - file-controller
+      operationId: getAllImageUrlChapter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAllImageUrlChapterRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseListString'
   /api/v1/comment/manga/get:
     post:
       tags:
@@ -684,6 +767,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponseChapter'
+  /api/v1/author/search/byName:
+    post:
+      tags:
+      - author-controller
+      operationId: getAuthorListByName
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetListAuthorByName'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponsePageAuthor'
   /api/v1/author/get:
     post:
       tags:
@@ -841,6 +942,120 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponseListGenre'
+  /api/v1/file/user/profile:
+    get:
+      tags:
+      - file-controller
+      operationId: getImageProfileUserManga
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+  /api/v1/file/user/profile/{userId}:
+    get:
+      tags:
+      - file-controller
+      operationId: getImageProfileManga
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+  /api/v1/file/manga/image-logo/{mangaId}:
+    get:
+      tags:
+      - file-controller
+      operationId: getImageLogoManga
+      parameters:
+      - name: mangaId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+  /api/v1/file/manga/image-large/{mangaId}:
+    get:
+      tags:
+      - file-controller
+      operationId: getImageLargeManga
+      parameters:
+      - name: mangaId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+  /api/v1/file/image/manga/{mangaId}/chapter/{chapterId}/{imageName}:
+    get:
+      tags:
+      - file-controller
+      operationId: getImageChapter
+      parameters:
+      - name: mangaId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: chapterId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: imageName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
   /api/v1/author/all:
     get:
       tags:
@@ -889,6 +1104,18 @@ paths:
             application/json:
               schema:
                 type: string
+  /api/v1/auth/info:
+    get:
+      tags:
+      - auth-controller
+      operationId: getAuthInfo
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseGetAuthInfoResponseDTO'
   /api/v1/like/delete:
     delete:
       tags:
@@ -1125,12 +1352,28 @@ components:
           format: int64
         description:
           type: string
+        uploadedBy:
+          $ref: '#/components/schemas/User'
         createdAt:
           type: string
           format: date-time
         updatedAt:
           type: string
           format: date-time
+        errorReportStatus:
+          $ref: '#/components/schemas/ErrorReportStatus'
+    ErrorReportStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        chapterReportList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorChapterReport'
     UpdatePrivacyPolicyRequestDTO:
       required:
       - answer
@@ -1477,16 +1720,16 @@ components:
           format: int64
         sort:
           $ref: '#/components/schemas/SortObject'
-        paged:
-          type: boolean
-        unpaged:
-          type: boolean
         pageNumber:
           type: integer
           format: int32
         pageSize:
           type: integer
           format: int32
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
     SortObject:
       type: object
       properties:
@@ -1744,6 +1987,9 @@ components:
         numberOfLikes:
           type: integer
           format: int32
+        createdAt:
+          type: string
+          format: date-time
     PageGetMangaResponseDTO:
       type: object
       properties:
@@ -1848,6 +2094,18 @@ components:
         responseCode:
           type: integer
           format: int32
+    GetMangaRequestDTO:
+      required:
+      - page
+      - size
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
     GetMangaListByUploadChapterRequestDTO:
       required:
       - page
@@ -1860,7 +2118,7 @@ components:
         size:
           type: integer
           format: int32
-    GetMangaRequestDTO:
+    GetMangaDetailRequestDTO:
       required:
       - mangaId
       type: object
@@ -2062,6 +2320,32 @@ components:
         id:
           type: integer
           format: int64
+    GetAllImageUrlChapterRequestDTO:
+      required:
+      - chapterId
+      - mangaId
+      type: object
+      properties:
+        mangaId:
+          type: integer
+          format: int64
+        chapterId:
+          type: integer
+          format: int64
+    ApiResponseListString:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            type: string
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          type: integer
+          format: int32
     GetListMangaCommentRequestDTO:
       required:
       - mangaId
@@ -2349,12 +2633,15 @@ components:
         mangaId:
           type: integer
           format: int64
-    GetListAuthorRequestDTO:
+    GetListAuthorByName:
       required:
+      - name
       - page
       - size
       type: object
       properties:
+        name:
+          type: string
         page:
           type: integer
           format: int32
@@ -2405,6 +2692,18 @@ components:
           type: boolean
         empty:
           type: boolean
+    GetListAuthorRequestDTO:
+      required:
+      - page
+      - size
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
     GetAuthorDetailRequestDTO:
       required:
       - authorId
@@ -2608,6 +2907,47 @@ components:
         responseCode:
           type: integer
           format: int32
+    ApiResponseGetAuthInfoResponseDTO:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/GetAuthInfoResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          type: integer
+          format: int32
+    Gender:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        userList:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    GetAuthInfoResponseDTO:
+      type: object
+      properties:
+        username:
+          type: string
+        fullName:
+          type: string
+        dateOfBirth:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        gender:
+          $ref: '#/components/schemas/Gender'
+        level:
+          $ref: '#/components/schemas/Level'
     DeleteLikeMangaRequestDTO:
       required:
       - id

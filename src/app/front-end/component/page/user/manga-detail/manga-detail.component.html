@@ -11,7 +11,11 @@
     </div>
     <div class="manga-content__info">
       <div class="manga-content__info__avatar">
-        <img ngSrc="/assets/manga/image_logo.jpg" alt="" fill priority>
+        <img [lazyLoad]="environment.apiBaseUrl + MiddlePrefixHandleImage.Prefix + GetImage.MANGA_IMAGE_LOGO + mangaId"
+             alt=""
+             width="100%"
+             [useSrcset]="true"
+        >
       </div>
       <div class="manga-content__info__other" fxLayout="column">
         <h1>

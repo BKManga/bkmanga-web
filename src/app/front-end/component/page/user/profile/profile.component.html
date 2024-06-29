@@ -23,6 +23,11 @@
   <div fxLayout="column" fxFlexAlign="center center" class="profile-content__detail">
     <div class="profile-content__detail-avatar">
       <div class="profile-content__detail-image">
+        <img
+          [lazyLoad]="environment.apiBaseUrl + MiddlePrefixHandleImage.Prefix + GetImage.USER_PROFILE_LOGO + 1"
+          width="75%"
+          [useSrcset]="true"
+        >
       </div>
       <div class="button-element button-element-upload-image">
         {{ "Chọn hình" }}

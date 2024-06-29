@@ -1,6 +1,7 @@
 <div class="manga-card" fxLayout="column" fxLayoutAlign="center center">
   <div class="manga-card__image" (click)="redirectToMangaDetailPage()">
-    <img src="/assets/manga/image_logo.jpg" alt="">
+    <img [lazyLoad]="environment.apiBaseUrl + MiddlePrefixHandleImage.Prefix + GetImage.MANGA_IMAGE_LOGO + manga?.id"
+         width="100%" alt="" [useSrcset]="true">
   </div>
   <div class="manga-card__info">
     <h3 #mangaCardName class="manga-card__name" (click)="redirectToMangaDetailPage()">

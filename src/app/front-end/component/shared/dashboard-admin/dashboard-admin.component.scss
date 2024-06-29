@@ -1,0 +1,20 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.dashboard {
+  .dashboard-element {
+    border-bottom: $color-999999 1px solid;
+    padding: $value-16;
+    font-weight: bold;
+    font-size: $value-18;
+    cursor: pointer;
+  }
+
+  .dashboard-element:hover {
+    background-color: $color-999999;
+  }
+
+  .active {
+    background-color: $color-999999;
+  }
+}

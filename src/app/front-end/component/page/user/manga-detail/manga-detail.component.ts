@@ -1,13 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AppRouter, CommentBlockArea, RouteManga} from "../../../../constant/constants";
+import {
+  AppRouter,
+  CommentBlockArea,
+  GetImage,
+  MiddlePrefixHandleImage,
+  RouteManga
+} from "../../../../constant/constants";
 import {
   CreateFollowRequestDTO, CreateLikeMangaRequestDTO,
   DeleteFollowRequestDTO, DeleteLikeMangaRequestDTO,
   FollowControllerService,
   GetFollowByMangaRequestDTO,
-  GetLikeMangaRequestDTO,
-  GetMangaRequestDTO,
+  GetLikeMangaRequestDTO, GetMangaDetailRequestDTO,
   GetMangaResponseDTO,
   LikeControllerService,
   MangaControllerService
@@ -19,6 +24,7 @@ import {DialogService} from "../../../../service/dialog.service";
 import {ScrollPageService} from "../../../../service/scroll-page.service";
 import {JwtDecodeService} from "../../../../service/jwt-decode.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {environment} from "../../../../../../environments/environment.development";
 
 @Component({
   selector: 'app-manga-detail',
@@ -27,8 +33,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class MangaDetailComponent implements OnInit{
 
-  private mangaId ?: string
-  private getMangaRequestDTO ?: GetMangaRequestDTO
+  mangaId ?: string
+  private getMangaDetailRequestDTO ?: GetMangaDetailRequestDTO
 
   manga?: GetMangaResponseDTO
   followId?: number
@@ -53,7 +59,9 @@ export class MangaDetailComponent implements OnInit{
     private likeControllerService: LikeControllerService,
     private formBuilder: FormBuilder,
   ) {
-    // this.checkAuthentication = this.jwtDecodeService.checkToken()
+    this.jwtDecodeService.checkToken().subscribe((value) => {
+      this.checkAuthentication = value
+    })
     this.isFollow = false
     this.isLike = false
     this.mangaFormGroup = this.formBuilder.group({
@@ -68,11 +76,11 @@ export class MangaDetailComponent implements OnInit{
       this.mangaId = param[RouteManga.Param]
 
       if (this.mangaId && parseInt(this.mangaId)) {
-        this.getMangaRequestDTO = {
+        this.getMangaDetailRequestDTO = {
           mangaId: parseInt(this.mangaId),
         }
 
-        await this.getMangaData(this.getMangaRequestDTO)
+        await this.getMangaData(this.getMangaDetailRequestDTO)
       }
 
       if (this.checkAuthentication) {
@@ -82,8 +90,8 @@ export class MangaDetailComponent implements OnInit{
     })
   }
 
-  private getMangaData = async (getMangaRequestDTO: GetMangaRequestDTO) : Promise<void> => {
-    this.mangaControllerService.getMangaDetail(getMangaRequestDTO).subscribe(
+  private getMangaData = async (getMangaDetailRequestDTO: GetMangaDetailRequestDTO) : Promise<void> => {
+    this.mangaControllerService.getMangaDetail(getMangaDetailRequestDTO).subscribe(
       (response) => {
         if (response.responseCode === StatusCodes.OK) {
           this.manga = response.result
@@ -266,4 +274,8 @@ export class MangaDetailComponent implements OnInit{
       numberOfLikes: numberOfLikes
     })
   }
+  protected readonly environment = environment;
+  protected readonly RouteManga = RouteManga;
+  protected readonly MiddlePrefixHandleImage = MiddlePrefixHandleImage;
+  protected readonly GetImage = GetImage;
 }

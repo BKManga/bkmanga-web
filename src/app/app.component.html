@@ -1,4 +1,21 @@
-<app-header></app-header>
-<app-navigation-bar></app-navigation-bar>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+<ng-container *ngIf="isAdminSite; then adminSite; else userSite">
+</ng-container>
+
+<ng-template #userSite>
+  <app-header></app-header>
+  <app-navigation-bar></app-navigation-bar>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</ng-template>
+
+<ng-template #adminSite>
+  <app-header-admin></app-header-admin>
+  <mat-drawer-container class="mat-draw-admin">
+    <mat-drawer mode="side" opened>
+      <app-dashboard-admin></app-dashboard-admin>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</ng-template>

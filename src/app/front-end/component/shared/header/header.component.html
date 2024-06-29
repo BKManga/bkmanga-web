@@ -22,20 +22,8 @@
       </div>
       <div class="input__relative"></div>
     </div>
-    <ng-template [ngIf]="showAuthButton">
-      <div class="header-content__right" fxLayout fxLayoutAlign="center center" fxLayoutGap="8">
-        <button mat-raised-button color="primary" (click)="redirectToAuthPage(AppRouter.Register)">
-        <span>
-          {{ 'Register'|translate }}
-        </span>
-        </button>
-        <button mat-raised-button color="primary" (click)="redirectToAuthPage(AppRouter.Login)">
-        <span>
-          {{ 'Login'|translate }}
-        </span>
-        </button>
-      </div>
-    </ng-template>
+    <ng-container *ngIf="!checkAuthentication; then authButton; else auth"></ng-container>
+
   </div>
   <ng-template [ngIf]="showInputHeaderSearch">
     <div class="header-content__search" fxLayout="column" fxLayoutAlign="center start">
@@ -62,3 +50,32 @@
     </div>
   </ng-template>
 </header>
+
+<ng-template #authButton>
+  <ng-template [ngIf]="showAuthButton">
+    <div class="header-content__right" fxLayout fxLayoutAlign="center center" fxLayoutGap="8">
+      <button mat-raised-button color="primary" (click)="redirectToAuthPage(AppRouter.Register)">
+        <span>
+          {{ 'Register'|translate }}
+        </span>
+      </button>
+      <button mat-raised-button color="primary" (click)="redirectToAuthPage(AppRouter.Login)">
+        <span>
+          {{ 'Login'|translate }}
+        </span>
+      </button>
+    </div>
+  </ng-template>
+</ng-template>
+
+<ng-template #auth>
+  <div class="avatar" (click)="redirectToProfilePage()">
+    <img
+      [lazyLoad]="environment.apiBaseUrl + MiddlePrefixHandleImage.Prefix + GetImage.USER_PROFILE_LOGO + 1"
+      width="75%"
+      [useSrcset]="true"
+    >
+  </div>
+</ng-template>
+
+

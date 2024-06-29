@@ -4,3 +4,7 @@
 body {
   background: $color-242526;
 }
+
+.mat-draw-admin {
+  min-height: calc(100vh - 78px);
+}

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppRouter, CommentBlockArea, RouteChapter, RouteManga} from "../../../../constant/constants";
 import {
-  ChapterControllerService, CreateOrEditHistoryRequestDTO,
+  ChapterControllerService, CreateOrEditHistoryRequestDTO, FileControllerService, GetAllImageUrlChapterRequestDTO,
   GetChapterDetailRequestDTO,
   GetChapterDetailResponseDTO, HistoryControllerService
 } from "../../../../bkmanga-svc";
@@ -19,11 +19,12 @@ import {JwtDecodeService} from "../../../../service/jwt-decode.service";
 })
 export class ChapterDetailComponent implements OnInit{
 
-  listImage: Array<number> = [1, 2, 3, 4, 5]
   readonly commentBlockArea: string = CommentBlockArea.CHAPTER
 
   private mangaId: string
   private chapterId: string
+
+  listImageUrl : Array<string> = []
 
   chapterData?: GetChapterDetailResponseDTO
 
@@ -35,6 +36,7 @@ export class ChapterDetailComponent implements OnInit{
     private scrollPageService: ScrollPageService,
     private router: Router,
     private jwtDecodeService: JwtDecodeService,
+    private fileControllerService: FileControllerService
   ) {
     this.mangaId = ""
     this.chapterId = ""
@@ -49,6 +51,7 @@ export class ChapterDetailComponent implements OnInit{
 
       if (this.checkParamId(this.mangaId, this.chapterId)) {
         await this.getChapterData()
+        await this.getUrlImageChapterData()
       }
     })
   }
@@ -93,6 +96,22 @@ export class ChapterDetailComponent implements OnInit{
           }
 
           this.dialogService.showSnackBar(snackBarData)
+        }
+      }
+    )
+  }
+
+  private getUrlImageChapterData = async (): Promise<void> => {
+
+    let getAllImageUrlChapterRequestDTO: GetAllImageUrlChapterRequestDTO = {
+      mangaId: parseInt(this.mangaId),
+      chapterId: parseInt(this.chapterId),
+    }
+
+    this.fileControllerService.getAllImageUrlChapter(getAllImageUrlChapterRequestDTO).subscribe(
+      (response) => {
+        if (response.responseCode === StatusCodes.OK) {
+          this.listImageUrl = response.result ?? []
         }
       }
     )

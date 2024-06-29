@@ -17,3 +17,52 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-paginator-range-label {
   font-weight: 600;
 }
+
+.button-detail {
+  background-color: $color-8bc34a;
+}
+
+.button-delete {
+  background-color: $color-ff2853;
+}
+
+.button-add {
+  background-color: $color-428bca;
+}
+
+.button-element
+{
+  display: flex;
+  align-items: center;
+  column-gap: $value-4;
+  min-width: $value-125;
+  max-width: $value-125;
+  justify-content: center;
+  padding: $value-10;
+  border-radius: $value-5;
+  font-size: $value-15;
+  cursor: pointer;
+  margin: $value-5 0;
+  color: $color-e4e6eb;
+}
+
+.button-element:hover {
+  opacity: 0.8;
+}
+
+.top-handle {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.manage__search {
+  height: $height-search-input-header;
+  outline: none;
+  border: $color-3a3b3c 1px solid;
+  padding: $padding-search-input-header;
+  color: $color-3a3b3c;
+  width: $width-input-large;
+  border-radius: $width-input-large;
+  position: relative;
+}

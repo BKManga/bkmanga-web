@@ -1,0 +1,23 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.not-found-container {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: $value-10;
+  background-color: $color-423e3e;
+  min-height: 40vh;
+
+  .text-page {
+    font-weight: bold;
+    font-size: $value-28;
+    color: $color-e4e6eb;
+    padding-top: $value-20;
+  }
+
+  .not-found__icon {
+    transform: scale(3);
+    color: $color-e4e6eb;
+  }
+}

@@ -40,7 +40,9 @@ export class MangaListComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
+    if (changes?.['totalElement']) {
+      this.resetPaginationData()
+    }
   }
 
   private resetPaginationData = () => {

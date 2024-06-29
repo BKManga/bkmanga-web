@@ -36,9 +36,9 @@
     </div>
     <div class="chapter-image" fxLayout="column">
       <div class="chapter-advertisement"></div>
-      <ng-template ngFor let-image [ngForOf]="listImage">
+      <ng-template ngFor let-image [ngForOf]="listImageUrl">
         <div class="chapter-image__element">
-          <img lazyLoad="assets/manga/1_usdjq.jpg" width="100%" [useSrcset]="true" alt="">
+          <img [lazyLoad]="image" width="100%" [useSrcset]="true" alt="">
         </div>
       </ng-template>
       <div class="chapter-advertisement"></div>
