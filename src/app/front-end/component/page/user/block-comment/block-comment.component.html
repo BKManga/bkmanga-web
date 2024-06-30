@@ -49,10 +49,12 @@
             </div>
             <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8">
               <span> {{ comment.createdAt ?? "" | date:'dd/MM/yyyy' }} </span>
-              <mat-icon [matTooltip]="toolTipDeleteComment|translate"
-                        class="block-comment__element-delete"
-                        (click)="deleteComment(comment.id, comment.user?.id)"
-              >delete</mat-icon>
+              <ng-template [ngIf]="usernameSession === (comment?.user?.username ?? '')">
+                <mat-icon [matTooltip]="toolTipDeleteComment|translate"
+                          class="block-comment__element-delete"
+                          (click)="deleteComment(comment.id, comment.user?.id)"
+                >delete</mat-icon>
+              </ng-template>
             </div>
           </div>
           <mat-divider></mat-divider>

@@ -17,7 +17,7 @@ export class JwtDecodeService implements OnInit{
     private cookieService: CookieService,
   ) {}
 
-  private decodeToken = (token: string) => {
+  decodeToken = (token: string) => {
     try {
       return jwtDecode(token)
     } catch (e) {

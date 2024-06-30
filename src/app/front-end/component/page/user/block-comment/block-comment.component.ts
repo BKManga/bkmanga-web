@@ -12,6 +12,7 @@ import {
   MangaCommentControllerService,
 } from "../../../../bkmanga-svc";
 import {
+  AuthToken,
   CommentBlockArea,
   DataOrderBy, GetImage,
   MiddlePrefixHandleImage,
@@ -24,6 +25,7 @@ import {SnackbarData} from "../../../../interface/snackbar-data";
 import {DialogService} from "../../../../service/dialog.service";
 import {JwtDecodeService} from "../../../../service/jwt-decode.service";
 import {environment} from "../../../../../../environments/environment.development";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-block-comment',
@@ -35,6 +37,8 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
   formGroup: FormGroup
 
   toolTipDeleteComment: string = "delete.comment"
+
+  usernameSession?: string
 
   paginatorData: PaginatorData = {
     pageIndex: 0,
@@ -59,9 +63,16 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
     private activatedRoute: ActivatedRoute,
     private dialogService: DialogService,
     private jwtDecodeService: JwtDecodeService,
+    private cookieService: CookieService,
   ) {
     this.formGroup = formBuilder.group({
       comment: [""]
+    })
+
+    jwtDecodeService.checkToken().subscribe((value) => {
+      if (value) {
+         this.usernameSession = jwtDecodeService.decodeToken(cookieService.get(AuthToken))?.sub
+      }
     })
   }
 
