@@ -7,6 +7,8 @@ import {AuthControllerService, UserLoginRequestDTO} from "../../../../bkmanga-sv
 import {CookieService} from "ngx-cookie-service";
 import {StatusCodes} from "http-status-codes";
 import {JwtDecodeService} from "../../../../service/jwt-decode.service";
+import {DialogService} from "../../../../service/dialog.service";
+import {ErrorDialogData} from "../../../../interface/error-dialog-data";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,6 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy{
     private authControllerService: AuthControllerService,
     private cookieService: CookieService,
     private jwtDecodeService: JwtDecodeService,
+    private dialogService: DialogService,
   ) {
     this.formGroup = formBuilder.group({
       loginID: ["", Validators.required],
@@ -53,20 +56,28 @@ export class LoginComponent implements OnInit, OnDestroy{
           if (response.result?.tokenBearer) {
             this.cookieService.set(AuthToken, response.result?.tokenBearer)
             this.sharingService.setValueCheckAuthentication(true)
-            this.redirectFollowRole()
+            window.location.reload()
           }
+        } else {
+          let errorDialogData: ErrorDialogData = {
+            title: response.errorCode,
+            description: response.message,
+            buttonText: "Đóng",
+            onAccept: () => {}
+          }
+          this.dialogService.showErrorDialog(errorDialogData)
         }
     })
   }
 
-  private redirectFollowRole = async () => {
-    if (this.jwtDecodeService.checkRole()) {
-      await this.router.navigate([AppRouterAdmin.Main, AppRouterAdmin.Admin])
-      return
-    }
-
-    await this.router.navigate([AppRouter.Main])
-  }
+  // private redirectFollowRole = async () => {
+  //   if (this.jwtDecodeService.checkRole()) {
+  //     await this.router.navigate([AppRouterAdmin.Main, AppRouterAdmin.Admin])
+  //     return
+  //   }
+  //
+  //   await this.router.navigate([AppRouter.Main])
+  // }
 
   async ngOnDestroy(): Promise<void> {
 

@@ -1,6 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {PaginatorData} from "../../../../../interface/paginator-data";
-import {GetUserListRequestDTO, User, UserControllerService} from "../../../../../bkmanga-svc";
+import {
+  GetUserListRequestDTO,
+  GetUserManagementResponseDTO,
+  User,
+  UserControllerService
+} from "../../../../../bkmanga-svc";
 import {PageEvent} from "@angular/material/paginator";
 import {StatusCodes} from "http-status-codes";
 import {DialogService} from "../../../../../service/dialog.service";
@@ -13,7 +18,7 @@ import {SnackbarData} from "../../../../../interface/snackbar-data";
   styleUrls: ['./user-manage.component.scss']
 })
 export class UserManageComponent implements OnInit{
-  dataSource: Array<User> = new Array<User>();
+  dataSource: Array<GetUserManagementResponseDTO> = new Array<GetUserManagementResponseDTO>();
   displayedColumns: string[] = ['username', 'email', 'status', 'createdAt','action'];
 
   totalElementData: number

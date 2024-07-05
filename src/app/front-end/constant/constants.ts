@@ -128,16 +128,16 @@ export const MiddlePrefixHandleImage = {
   Prefix: "/api/v1/file/"
 }
 
-export const GetImage = {
-  MANGA_IMAGE_LOGO: "manga/image-logo/",
-  MANGA_IMAGE_LARGE: "manga/image-large/",
-  USER_PROFILE_LOGO: "user/profile/"
+export const TargetImage = {
+  IMAGE_LARGE: "image_large",
+  IMAGE_LOGO: "image_logo"
 }
 
-// all age
-// 12+
-// 16+
-// 18+
+export const GetImage = {
+  MANGA_IMAGE_LOGO: `manga/${TargetImage.IMAGE_LOGO}/`,
+  MANGA_IMAGE_LARGE: `manga/${TargetImage.IMAGE_LARGE}/`,
+  USER_PROFILE_LOGO: "user/profile/"
+}
 
 export const AgeRange = {
   AllAge: [1, "All Age"],

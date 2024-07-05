@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit, AfterViewInit{
   readonly AppRouter = AppRouter
 
   checkAuthentication?: boolean
+  urlImageProfile?: string
 
   protected showAuthButton?: boolean
   constructor(
@@ -59,8 +60,13 @@ export class HeaderComponent implements OnInit, AfterViewInit{
     this.showResultSearchHeader = false
     this.jwtDecodeService.checkToken().subscribe((value) => {
       this.checkAuthentication = value
+      if (value) {
+        this.urlImageProfile = environment.apiBaseUrl +
+          MiddlePrefixHandleImage.Prefix +
+          GetImage.USER_PROFILE_LOGO +
+          jwtDecodeService.decodeToken(cookieService.get(AuthToken))?.sub ?? ""
+      }
     })
-
   }
 
   mangaList: Array<GetMangaResponseDTO> = new Array<GetMangaResponseDTO>();

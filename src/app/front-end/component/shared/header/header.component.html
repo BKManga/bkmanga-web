@@ -71,7 +71,7 @@
 <ng-template #auth>
   <div class="avatar" (click)="redirectToProfilePage()">
     <img
-      [lazyLoad]="environment.apiBaseUrl + MiddlePrefixHandleImage.Prefix + GetImage.USER_PROFILE_LOGO + 1"
+      [lazyLoad]="urlImageProfile ?? ''"
       width="75%"
       [useSrcset]="true"
     >

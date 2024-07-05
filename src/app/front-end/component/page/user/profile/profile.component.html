@@ -13,6 +13,12 @@
           {{ "Đổi mật khẩu" }}
         </span>
       </div>
+      <div fxLayout class="profile__change-box-element" (click)="logoutUser()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>
+          {{ "Đăng xuất" }}
+        </span>
+      </div>
     </div>
     <ng-container *ngIf="selectedBox === ProfilePage.INFO, then profileDetail, else changePassword">
     </ng-container>
@@ -24,14 +30,16 @@
     <div class="profile-content__detail-avatar">
       <div class="profile-content__detail-image">
         <img
-          [lazyLoad]="environment.apiBaseUrl + MiddlePrefixHandleImage.Prefix + GetImage.USER_PROFILE_LOGO + 1"
+          [lazyLoad]="urlImageProfile ?? ''"
           width="75%"
           [useSrcset]="true"
+          #imageProfile
         >
       </div>
-      <div class="button-element button-element-upload-image">
+      <label for="profile-upload" class="button-element button-element-upload-image">
         {{ "Chọn hình" }}
-      </div>
+      </label>
+      <input type="file" accept="image/png" id="profile-upload" (change)="onChangeImage($event)">
       <div class="upload-image-alert">
         {{ "Dùng hình 18+ sẽ bị ban tài khoản vĩnh viễn" }}
       </div>
@@ -77,25 +85,28 @@
           </mat-label>
           <input formControlName="fullName" matInput>
         </mat-form-field>
-        <mat-radio-group fxLayout fxLayoutGap="8" formControlName="gender">
+        <mat-radio-group fxLayout fxLayoutAlign="start center" fxLayoutGap="8" formControlName="gender">
+          <mat-label class="label-gender">
+            {{ "gender.name"| translate }}
+          </mat-label>
           <mat-radio-button [value]="Gender.MALE.at(0)">
               <span class="gender-info">
-                {{ Gender.MALE.at(1) }}
+                {{ "gender.type." + Gender.MALE.at(1) | translate}}
               </span>
           </mat-radio-button>
           <mat-radio-button [value]="Gender.FEMALE.at(0)">
               <span class="gender-info">
-                {{ Gender.FEMALE.at(1) }}
+                {{ "gender.type." + Gender.FEMALE.at(1) | translate }}
               </span>
           </mat-radio-button>
           <mat-radio-button [value]="Gender.OTHER.at(0)">
               <span class="gender-info">
-                {{ Gender.OTHER.at(1) }}
+                {{ "gender.type." + Gender.OTHER.at(1) | translate}}
               </span>
           </mat-radio-button>
         </mat-radio-group>
         <div fxLayout="row" fxFlex fxFlexAlign="center">
-          <div class="button-element button-element-upload-image">
+          <div class="button-element button-element-upload-image" (click)="updateAuthInfo()">
             {{ "Lưu thông tin" }}
           </div>
         </div>
@@ -123,13 +134,7 @@
           </mat-label>
           <input type="password" formControlName="newPassword" matInput>
         </mat-form-field>
-        <mat-form-field>
-          <mat-label>
-            {{ "Xác nhận mật khẩu mới" }}
-          </mat-label>
-          <input type="password" formControlName="confirmPassword" matInput>
-        </mat-form-field>
-        <div fxLayout="row" fxFlex fxFlexAlign="center">
+        <div fxLayout="row" fxFlex fxFlexAlign="center" (click)="updateAuthPassword()">
           <div class="button-element button-element-upload-image">
             {{ "Đổi mật khẩu" }}
           </div>

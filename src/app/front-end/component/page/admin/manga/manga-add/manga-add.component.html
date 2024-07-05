@@ -71,18 +71,23 @@
               <mat-option *ngFor="let author of authorList" [value]="author.id">{{author.name}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <div fxLayout fxLayoutAlign="space-between center">
-            <mat-form-field>
-              <mat-label>
-                {{ "Tên chapter đầu tiên" }}
-              </mat-label>
-              <input formControlName="firstChapterName" matInput>
-            </mat-form-field>
-            <div class="button-element button-add">
-            <span>
+          <mat-form-field>
+            <mat-label>
+              {{ "Tên chapter đầu tiên" }}
+            </mat-label>
+            <input formControlName="firstChapterName" matInput>
+          </mat-form-field>
+          <div class="zip-file" fxLayout fxLayoutAlign="space-between center">
+            <label for="imageChapterZipFile" class="button-upload button-element button-delete">
               Upload file nén của chương truyện
-            </span>
-            </div>
+            </label>
+            <input type="file" id="imageChapterZipFile" accept="application/zip" (change)="onChangeChapterUpload($event)">
+            <mat-form-field class="zip-file__upload">
+              <mat-label>
+                {{ "File nén chương truyện đầu" }}
+              </mat-label>
+              <input formControlName="chapterMangaNameUpload" matInput>
+            </mat-form-field>
           </div>
         </form>
       </div>
@@ -92,13 +97,12 @@
         </h2>
         <div fxLayout fxLayoutAlign="space-between">
           <div class="logo-upload">
-            <img lazyLoad="" [useSrcset]="true" width="100%" alt="">
+            <img [lazyLoad]="imageLogoManga ?? ''" [useSrcset]="true" width="100%" alt="">
           </div>
-          <div class="button-upload button-element button-delete">
-            <span>
-              Upload
-            </span>
-          </div>
+          <label for="imageLogoManga" class="button-upload button-element button-delete">
+            Upload
+          </label>
+          <input type="file" id="imageLogoManga" accept="image/png" (change)="onChangeImage($event)">
         </div>
 
         <h2>
@@ -106,13 +110,12 @@
         </h2>
         <div fxLayout fxLayoutAlign="space-between">
           <div class="image-large-upload">
-            <img lazyLoad="" [useSrcset]="true" width="100%" alt="">
+            <img [lazyLoad]="imageLargeManga ?? ''" [useSrcset]="true" width="100%" alt="">
           </div>
-          <div class="button-upload button-element button-delete">
-            <span>
-              Upload
-            </span>
-          </div>
+          <label for="imageLargeManga" class="button-upload button-element button-delete">
+            Upload
+          </label>
+          <input type="file" id="imageLargeManga" accept="image/png" (change)="onChangeImage($event, false)">
         </div>
       </div>
   </div>

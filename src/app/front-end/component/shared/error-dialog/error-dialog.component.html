@@ -11,7 +11,7 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="center center" style="padding-bottom: 10px">
-    <button mat-raised-button color="warn" mat-dialog-close>
+    <button mat-raised-button color="warn" mat-dialog-close (click)="data.onAccept">
       {{data.buttonText}}
     </button>
   </div>

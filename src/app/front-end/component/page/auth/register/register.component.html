@@ -35,19 +35,19 @@
           <mat-label>
             {{ "Phone number" }}
           </mat-label>
-          <input formControlName="phoneNumber" type="number" matInput>
+          <input formControlName="phoneNumber" matInput>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Gender</mat-label>
           <select class="register-content__body-gender" matNativeControl formControlName="gender">
             <option [value]="Gender.MALE.at(0)">
-              {{ Gender.MALE.at(1) }}
+              {{ "gender.type." + Gender.MALE.at(1)|translate }}
             </option>
             <option [value]="Gender.FEMALE.at(0)">
-              {{ Gender.FEMALE.at(1)}}
+              {{ "gender.type." + Gender.FEMALE.at(1)|translate }}
             </option>
             <option [value]="Gender.OTHER.at(0)">
-              {{ Gender.OTHER.at(1) }}
+              {{ "gender.type." + Gender.OTHER.at(1)|translate }}
             </option>
           </select>
         </mat-form-field>

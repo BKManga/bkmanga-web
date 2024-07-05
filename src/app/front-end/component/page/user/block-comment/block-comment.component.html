@@ -11,27 +11,37 @@
     </div>
   </div>
 
-  <form [formGroup]="formGroup" fxLayout="column" (keydown.enter)="postComment()">
-    <mat-form-field appearance="fill">
-      <mat-label>{{ "Leave a comment" }}</mat-label>
-      <textarea
-        matInput
-        cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        cdkAutosizeMinRows="1"
-        cdkAutosizeMaxRows="5"
-        maxlength="255"
-        formControlName="comment">
-      </textarea>
-    </mat-form-field>
-  </form>
+  <ng-template [ngIf]="checkToken">
+    <div class="block-upload">
+      <form [formGroup]="formGroup" class="input-comment" fxLayout="column">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ "Leave a comment" }}</mat-label>
+          <textarea
+            matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+            maxlength="255"
+            formControlName="comment">
+          </textarea>
+        </mat-form-field>
+      </form>
+      <div class="button-element button-add" (click)="postComment()">
+        <span>
+          Gửi bình luận
+        </span>
+      </div>
+    </div>
+
+  </ng-template>
 
   <div class="block-comment__list" fxLayout="column" fxLayoutGap="8">
     <ng-template ngFor let-comment [ngForOf]="listComment">
       <div class="block-content__element" fxLayout fxLayoutAlign="start cenrer" fxLayoutGap="8">
         <div class="block-comment__element-avatar">
           <img
-            [lazyLoad]="environment.apiBaseUrl + MiddlePrefixHandleImage.Prefix + GetImage.USER_PROFILE_LOGO + comment.user?.id"
+            [lazyLoad]="environment.apiBaseUrl + MiddlePrefixHandleImage.Prefix + GetImage.USER_PROFILE_LOGO + comment.user?.username"
             alt=""
             width="80%"
             [useSrcset]="true"

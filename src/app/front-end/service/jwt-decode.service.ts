@@ -50,7 +50,7 @@ export class JwtDecodeService implements OnInit{
 
   public deleteAuthToken = () => {
     if (this.cookieService.check(AuthToken)) {
-      this.cookieService.delete(AuthToken)
+      this.cookieService.delete(AuthToken, '/main')
       this.sharingService.setValueCheckAuthentication(false).then(() => false)
     }
   }

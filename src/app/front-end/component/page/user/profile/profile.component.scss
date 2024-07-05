@@ -99,6 +99,13 @@
           color: $color-e4e6eb;
         }
       }
+
+      .label-gender {
+        text-transform: capitalize;
+        font-size: $value-20;
+        font-weight: bold;
+        color: $color-e4e6eb;
+      }
     }
   }
 

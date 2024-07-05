@@ -28,6 +28,8 @@ export class ChapterDetailComponent implements OnInit{
 
   chapterData?: GetChapterDetailResponseDTO
 
+  checkToken: boolean = false
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private chapterControllerService: ChapterControllerService,
@@ -40,6 +42,10 @@ export class ChapterDetailComponent implements OnInit{
   ) {
     this.mangaId = ""
     this.chapterId = ""
+
+    this.jwtDecodeService.checkToken().subscribe((value) => {
+      this.checkToken = value
+    })
   }
 
   async ngOnInit(): Promise<void> {
@@ -81,7 +87,8 @@ export class ChapterDetailComponent implements OnInit{
   }
 
   private handleHistoryData = async (): Promise<void> => {
-    if (!this.jwtDecodeService.checkToken()) return
+
+    if (!this.checkToken) return
 
     let createOrEditHistoryRequestDTO: CreateOrEditHistoryRequestDTO = {
       mangaId: parseInt(this.mangaId),

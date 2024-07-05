@@ -24,14 +24,16 @@
           {{ '(Cập nhật lúc ' }}{{ chapterData?.chapter?.updatedAt ?? "" |date:"HH:mm dd/MM/yyyy" }}{{ ')' }}
         </span>
       </div>
-      <div fxLayout fxLayoutAlign="center center">
-        <div class="button-element button-report__error">
-          <mat-icon>warning</mat-icon>
-          <span>
+      <ng-template [ngIf]="checkToken">
+        <div fxLayout fxLayoutAlign="center center">
+          <div class="button-element button-report__error">
+            <mat-icon>warning</mat-icon>
+            <span>
             Báo lỗi chương
           </span>
+          </div>
         </div>
-      </div>
+      </ng-template>
       <ng-container *ngTemplateOutlet="actionChapter"></ng-container>
     </div>
     <div class="chapter-image" fxLayout="column">

@@ -80,17 +80,16 @@
         </h2>
         <div fxLayout fxLayoutAlign="space-between">
           <div class="logo-upload">
-            <img [lazyLoad]="environment.apiBaseUrl + MiddlePrefixHandleImage.Prefix + GetImage.MANGA_IMAGE_LOGO + mangaId"
+            <img [lazyLoad]="imageLogoManga ?? ''"
                  [useSrcset]="true"
                  width="100%"
                  alt=""
             >
           </div>
-          <div class="button-upload button-element button-delete">
-            <span>
-              Upload
-            </span>
-          </div>
+          <label for="imageLogoManga" class="button-upload button-element button-delete">
+            Upload
+          </label>
+          <input type="file" id="imageLogoManga" accept="image/png" (change)="onChangeImage($event)">
         </div>
 
         <h2>
@@ -98,17 +97,16 @@
         </h2>
         <div fxLayout fxLayoutAlign="space-between">
           <div class="image-large-upload">
-            <img [lazyLoad]="environment.apiBaseUrl + MiddlePrefixHandleImage.Prefix + GetImage.MANGA_IMAGE_LARGE + mangaId"
+            <img [lazyLoad]="imageLargeManga ?? ''"
                  [useSrcset]="true"
                  width="100%"
                  alt=""
             >
           </div>
-          <div class="button-upload button-element button-delete">
-            <span>
-              Upload
-            </span>
-          </div>
+          <label for="imageLargeManga" class="button-upload button-element button-delete">
+            Upload
+          </label>
+          <input type="file" id="imageLargeManga" accept="image/png" (change)="onChangeImage($event, false)">
         </div>
       </div>
     </div>

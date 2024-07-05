@@ -40,6 +40,14 @@
 
     .form-element {
       width: 100%;
+
+      .zip-file {
+        width: 100%;
+
+        .zip-file__upload {
+          width: 60%;
+        }
+      }
     }
   }
 }

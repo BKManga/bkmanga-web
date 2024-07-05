@@ -4,7 +4,7 @@ import {PaginatorData} from "../../../../interface/paginator-data";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {
   ChapterComment,
-  ChapterCommentControllerService,
+  ChapterCommentControllerService, CreateChapterCommentRequestDTO, CreateMangaCommentRequestDTO,
   DeleteChapterCommentRequestDTO,
   DeleteMangaCommentRequestDTO, GetListChapterCommentRequestDTO,
   GetListMangaCommentRequestDTO,
@@ -51,6 +51,7 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
   totalComment: number = 0
   dataOrderBy = DataOrderBy.ASC
   id: number = 0
+  checkToken: boolean = false
 
   listComment: Array<MangaComment> | Array<ChapterComment> = []
   @Input() commentBlockArea: string = ""
@@ -70,8 +71,9 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
     })
 
     jwtDecodeService.checkToken().subscribe((value) => {
+      this.checkToken = value
       if (value) {
-         this.usernameSession = jwtDecodeService.decodeToken(cookieService.get(AuthToken))?.sub
+        this.usernameSession = jwtDecodeService.decodeToken(cookieService.get(AuthToken))?.sub
       }
     })
   }
@@ -93,8 +95,41 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
   }
 
   postComment = () => {
-    console.log(this.formGroup.controls['comment'].value)
-    this.formGroup.controls['comment'].reset()
+    let valueComment = this.formGroup.value.comment.trim()
+
+    if (!valueComment || !this.id) return
+
+    if (this.commentBlockArea === CommentBlockArea.MANGA) {
+      let createMangaCommentRequestDTO: CreateMangaCommentRequestDTO = {
+        content: valueComment,
+        mangaId: this.id
+      }
+
+      this.mangaCommentControllerService.createMangaComment(createMangaCommentRequestDTO).subscribe(
+        (response) => {
+          if (response.responseCode === StatusCodes.OK) {
+            this.getMangaCommentData().then()
+          } else {
+            this.showSnackBarDialog(response.message)
+          }
+      })
+    } else if (this.commentBlockArea === CommentBlockArea.CHAPTER) {
+      let createChapterCommentRequestDTO: CreateChapterCommentRequestDTO = {
+        content: valueComment,
+        chapterId: this.id
+      }
+
+      this.chapterCommentControllerService.createChapterComment(createChapterCommentRequestDTO).subscribe(
+        (response) => {
+          if (response.responseCode === StatusCodes.OK) {
+            this.getChapterCommentData().then()
+          } else {
+            this.showSnackBarDialog(response.message)
+          }
+        })
+    }
+
+    this.formGroup.reset()
     this.paginator?.firstPage()
   }
 

@@ -6,6 +6,7 @@ import {ErrorDialogComponent} from "../component/shared/error-dialog/error-dialo
 import {ErrorDialogData} from "../interface/error-dialog-data";
 import {SnackbarData} from "../interface/snackbar-data";
 import {SnackBarConfig} from "../constant/constants";
+import {result} from "lodash";
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +35,13 @@ export class DialogService {
       data: {
         title: `${errorDialog.title}`,
         description: `${errorDialog.description}`,
-        buttonText: `${errorDialog.buttonText}`
-      }
-    }).afterClosed().subscribe(() => {})
+        buttonText: `${errorDialog.buttonText}`,
+        onAccept: errorDialog.onAccept
+      },
+      disableClose: true
+    }).afterClosed().subscribe(result => {
+      errorDialog.onAccept
+    })
   }
 
   public showLoadingData = () => {

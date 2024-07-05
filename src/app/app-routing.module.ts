@@ -52,10 +52,12 @@ import {MangaAddComponent} from "./front-end/component/page/admin/manga/manga-ad
 import {
   MangaDetailManageComponent
 } from "./front-end/component/page/admin/manga/manga-detail-manage/manga-detail-manage.component";
+import {noAuthGuard} from "./front-end/guard/no-auth.guard";
 
 const routes: Routes = [
   {
     path: AppRouter.Auth,
+    canActivate: [noAuthGuard],
     children: [
       {
         path: AppRouter.Login,
