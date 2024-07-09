@@ -10,8 +10,11 @@
       </span>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="center center" style="padding-bottom: 10px">
-    <button mat-raised-button color="warn" mat-dialog-close (click)="closeDialog()">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10" style="padding-bottom: 10px">
+    <button mat-raised-button mat-dialog-close>
+      {{"Đóng"}}
+    </button>
+    <button mat-raised-button color="warn" (click)="confirmDialog()">
       {{data.buttonText}}
     </button>
   </div>

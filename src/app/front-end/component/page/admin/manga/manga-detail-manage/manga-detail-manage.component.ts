@@ -14,7 +14,6 @@ import {
   GetImage,
   MangaStatus,
   MiddlePrefixHandleImage,
-  RouteGenre,
   RouteManga
 } from "../../../../../constant/constants";
 import {SnackbarData} from "../../../../../interface/snackbar-data";

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {
   Author,
   AuthorControllerService, CreateMangaRequestDTO, FileControllerService, Genre,
@@ -8,7 +8,7 @@ import {
 } from "../../../../../bkmanga-svc";
 import {Router} from "@angular/router";
 import {DialogService} from "../../../../../service/dialog.service";
-import {AgeRange, TargetImage} from "../../../../../constant/constants";
+import {AgeRange, AppRouterAdmin, TargetImage} from "../../../../../constant/constants";
 import {StatusCodes} from "http-status-codes";
 import {SnackbarData} from "../../../../../interface/snackbar-data";
 import {ErrorDialogData} from "../../../../../interface/error-dialog-data";
@@ -18,7 +18,7 @@ import {ErrorDialogData} from "../../../../../interface/error-dialog-data";
   templateUrl: './manga-add.component.html',
   styleUrls: ['./manga-add.component.scss']
 })
-export class MangaAddComponent implements OnInit{
+export class MangaAddComponent implements OnInit {
 
   formGroup: FormGroup
 
@@ -62,6 +62,14 @@ export class MangaAddComponent implements OnInit{
       return
     }
 
+    if (!this.formGroup.controls["chapterMangaNameUpload"].value.trim()) {
+      this.showDialog(
+        "ERROR",
+        "Cần phải tải lên file nén của chương truyện đầu tiên"
+      )
+      return
+    }
+
     let createMangaRequestDTO: CreateMangaRequestDTO = {
       name: this.formGroup.value.name.trim(),
       otherName: this.formGroup.value.otherName.trim(),
@@ -75,37 +83,21 @@ export class MangaAddComponent implements OnInit{
     this.mangaControllerService.createManga(createMangaRequestDTO).subscribe(
       (response) => {
         if (response.responseCode === StatusCodes.OK) {
-          this.showDialog(
-            response.message ?? "",
-            "Tạo truyện mới thành công"
-          )
-
-          let mangaId = response.result?.id
+          let mangaId = response.result?.createdManga?.id
+          let chapterId = response.result?.createdChapter?.id
 
           if (mangaId) {
-            if (this.uploadImageLogo) {
-              this.fileControllerService.uploadImageManga(
-                mangaId,
-                TargetImage.IMAGE_LOGO,
-                this.uploadImageLogo
-              ).subscribe((res) => {
-                if (res.responseCode !== StatusCodes.OK) {
-                  this.showSnackBarAlert(res.message)
-                }
-              })
-            }
+            if (this.uploadImageLogo) this.uploadImageLogoManga(mangaId)
 
-            if (this.uploadImageLarge) {
-              this.fileControllerService.uploadImageManga(
-                mangaId,
-                TargetImage.IMAGE_LARGE,
-                this.uploadImageLarge
-              ).subscribe((res) => {
-                if (res.responseCode !== StatusCodes.OK) {
-                  this.showSnackBarAlert(res.message)
-                }
-              })
-            }
+            if (this.uploadImageLarge) this.uploadImageLargeManga(mangaId)
+
+            if (chapterId && this.uploadChapterManga) this.uploadChapterMangaFile(chapterId, mangaId)
+
+            this.showDialog(
+              response.message ?? "",
+              "Tạo truyện mới thành công",
+              () => this.redirectToDetailPage(mangaId!)
+            )
           }
         } else {
           this.showDialog(
@@ -138,6 +130,40 @@ export class MangaAddComponent implements OnInit{
     })
   }
 
+  private uploadImageLogoManga = async (mangaId: number): Promise<void> => {
+    this.fileControllerService.uploadImageManga(
+      mangaId,
+      TargetImage.IMAGE_LOGO,
+      this.uploadImageLogo!
+    ).subscribe((res) => {
+      if (res.responseCode !== StatusCodes.OK) {
+        this.showSnackBarAlert(res.message)
+      }
+    })
+  }
+
+  private uploadImageLargeManga = async (mangaId: number): Promise<void> => {
+    this.fileControllerService.uploadImageManga(
+      mangaId,
+      TargetImage.IMAGE_LARGE,
+      this.uploadImageLarge!
+    ).subscribe((res) => {
+      if (res.responseCode !== StatusCodes.OK) {
+        this.showSnackBarAlert(res.message)
+      }
+    })
+  }
+
+  private uploadChapterMangaFile = async (chapterId: number, mangaId: number) : Promise<void> => {
+    this.fileControllerService.uploadChapterManga(chapterId, mangaId, this.uploadChapterManga!).subscribe(
+      (response) => {
+        if (response.responseCode !== StatusCodes.OK) {
+          this.showSnackBarAlert(response.message)
+        }
+      }
+    )
+  }
+
   private showSnackBarAlert = (message?: string) => {
     let snackBarData: SnackbarData = {
       message: message ?? ""
@@ -161,7 +187,6 @@ export class MangaAddComponent implements OnInit{
         "Error",
         "Chỉ upload định dạng ảnh là png"
       )
-
       return
     }
 
@@ -176,6 +201,10 @@ export class MangaAddComponent implements OnInit{
         this.uploadImageLarge = new Blob([files[0]], { type: mimeType })
       }
     }
+  }
+
+  redirectToDetailPage = async (mangaId: number): Promise<void> => {
+    await this.router.navigate([AppRouterAdmin.Admin, AppRouterAdmin.Manga, AppRouterAdmin.Detail, mangaId])
   }
 
   private showDialog = (

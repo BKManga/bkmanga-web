@@ -3,13 +3,13 @@ import {
   Author,
   AuthorControllerService, GetListAuthorByNameDTO,
   GetListAuthorRequestDTO,
-  GetMangaByNameRequestDTO
 } from "../../../../../bkmanga-svc";
 import {PaginatorData} from "../../../../../interface/paginator-data";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {AppRouterAdmin, DataOrderBy} from "../../../../../constant/constants";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
+import {DialogService} from "../../../../../service/dialog.service";
 
 @Component({
   selector: 'app-author-manage',
@@ -34,7 +34,8 @@ export class AuthorManageComponent implements OnInit{
   constructor(
     private authorControllerService: AuthorControllerService,
     formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private dialogService: DialogService,
   ) {
     this.paginatorData = {
       pageIndex: 0,

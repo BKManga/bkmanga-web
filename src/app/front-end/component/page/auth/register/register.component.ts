@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     await this.sharingService.setHeaderSearch(false)
   }
 
-  async redirectToLoginPage() {
+  redirectToLoginPage = async (): Promise<void> => {
     await this.router.navigate([AppRouter.Auth, AppRouter.Login])
   }
 

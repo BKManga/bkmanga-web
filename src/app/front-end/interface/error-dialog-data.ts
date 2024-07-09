@@ -1,6 +1,5 @@
-export interface ErrorDialogData {
-  title?: string,
-  description?: string,
-  buttonText?: string,
-  onAccept: Function
+import {DialogData} from "./dialog-data";
+
+export interface ErrorDialogData extends DialogData {
+
 }

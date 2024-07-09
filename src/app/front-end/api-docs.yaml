@@ -545,7 +545,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponseManga'
+                $ref: '#/components/schemas/ApiResponseCreateMangaResponseDTO'
   /api/v1/like/get:
     post:
       tags:
@@ -766,7 +766,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponseObject'
-  /api/v1/file/image/chapter/all:
+  /api/v1/file/chapter/upload:
+    post:
+      tags:
+      - file-controller
+      operationId: uploadChapterManga
+      parameters:
+      - name: chapterId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: mangaId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseObject'
+  /api/v1/file/chapter/image/all:
     post:
       tags:
       - file-controller
@@ -802,6 +838,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponsePageMangaComment'
+  /api/v1/comment/manga/detail:
+    post:
+      tags:
+      - manga-comment-controller
+      operationId: getMangaCommentDetail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMangaCommentDetailRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseMangaComment'
   /api/v1/comment/manga/create:
     post:
       tags:
@@ -838,6 +892,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponsePageChapterComment'
+  /api/v1/comment/chapter/detail:
+    post:
+      tags:
+      - chapter-comment-controller
+      operationId: getChapterCommentDetail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetChapterCommentDetailRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseChapterComment'
   /api/v1/comment/chapter/create:
     post:
       tags:
@@ -1128,7 +1200,7 @@ paths:
                 items:
                   type: string
                   format: byte
-  /api/v1/file/manga/image-logo/{mangaId}:
+  /api/v1/file/manga/image_logo/{mangaId}:
     get:
       tags:
       - file-controller
@@ -1150,7 +1222,7 @@ paths:
                 items:
                   type: string
                   format: byte
-  /api/v1/file/manga/image-large/{mangaId}:
+  /api/v1/file/manga/image_large/{mangaId}:
     get:
       tags:
       - file-controller
@@ -1997,9 +2069,9 @@ components:
       properties:
         empty:
           type: boolean
-        sorted:
-          type: boolean
         unsorted:
+          type: boolean
+        sorted:
           type: boolean
     GetUserDetailRequestDTO:
       required:
@@ -2462,6 +2534,25 @@ components:
         ageRangeId:
           type: integer
           format: int32
+    ApiResponseCreateMangaResponseDTO:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/CreateMangaResponseDTO'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          type: integer
+          format: int32
+    CreateMangaResponseDTO:
+      type: object
+      properties:
+        createdManga:
+          $ref: '#/components/schemas/Manga'
+        createdChapter:
+          $ref: '#/components/schemas/Chapter'
     GetLikeMangaRequestDTO:
       required:
       - mangaId
@@ -2702,6 +2793,26 @@ components:
           type: boolean
         empty:
           type: boolean
+    GetMangaCommentDetailRequestDTO:
+      required:
+      - mangaCommentId
+      type: object
+      properties:
+        mangaCommentId:
+          type: integer
+          format: int64
+    ApiResponseMangaComment:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/MangaComment'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          type: integer
+          format: int32
     CreateMangaCommentRequestDTO:
       required:
       - content
@@ -2809,6 +2920,26 @@ components:
           type: boolean
         empty:
           type: boolean
+    GetChapterCommentDetailRequestDTO:
+      required:
+      - chapterCommentId
+      type: object
+      properties:
+        chapterCommentId:
+          type: integer
+          format: int64
+    ApiResponseChapterComment:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/ChapterComment'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          type: integer
+          format: int32
     CreateChapterCommentRequestDTO:
       required:
       - chapterId

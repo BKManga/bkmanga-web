@@ -1,0 +1,21 @@
+<div class="confirm-background" fxLayout="column" fxLayoutGap="36px">
+  <div fxLayout="row" fxLayoutAlign="center center" class="confirm-title" >
+      <span class="confirm-title-text">
+        {{data.title}}
+      </span>
+  </div>
+
+  <div fxLayout="row" class="confirm-description" fxLayoutAlign="center center">
+      <span class="confirm-description-text" [innerHTML]="data.description">
+      </span>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10" style="padding-bottom: 10px">
+    <button mat-raised-button mat-dialog-close>
+      {{"Đóng"}}
+    </button>
+    <button mat-raised-button color="warn" (click)="confirmDialog()">
+      {{data.buttonText}}
+    </button>
+  </div>
+</div>

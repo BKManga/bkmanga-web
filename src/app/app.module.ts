@@ -87,6 +87,12 @@ import { PrivacyPolicyDetailComponent } from './front-end/component/page/admin/p
 import { MangaAddComponent } from './front-end/component/page/admin/manga/manga-add/manga-add.component';
 import { MangaDetailManageComponent } from './front-end/component/page/admin/manga/manga-detail-manage/manga-detail-manage.component';
 import {MatSelectModule} from "@angular/material/select";
+import { ErrorReportDialogComponent } from './front-end/component/shared/error-report-dialog/error-report-dialog.component';
+import { OutLawReportDialogComponent } from './front-end/component/shared/out-law-report-dialog/out-law-report-dialog.component';
+import { ErrorReportDetailComponent } from './front-end/component/page/admin/error-report/error-report-detail/error-report-detail.component';
+import { OutLawReportDetailComponent } from './front-end/component/page/admin/out-law-report/out-law-report-detail/out-law-report-detail.component';
+import { UserDetailComponent } from './front-end/component/page/admin/user/user-detail/user-detail.component';
+import { ConfirmDialogComponent } from './front-end/component/shared/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -140,6 +146,12 @@ import {MatSelectModule} from "@angular/material/select";
     PrivacyPolicyDetailComponent,
     MangaAddComponent,
     MangaDetailManageComponent,
+    ErrorReportDialogComponent,
+    OutLawReportDialogComponent,
+    ErrorReportDetailComponent,
+    OutLawReportDetailComponent,
+    UserDetailComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
