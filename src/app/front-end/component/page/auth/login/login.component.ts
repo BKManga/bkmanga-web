@@ -70,14 +70,14 @@ export class LoginComponent implements OnInit, OnDestroy{
     })
   }
 
-  // private redirectFollowRole = async () => {
-  //   if (this.jwtDecodeService.checkRole()) {
-  //     await this.router.navigate([AppRouterAdmin.Main, AppRouterAdmin.Admin])
-  //     return
-  //   }
-  //
-  //   await this.router.navigate([AppRouter.Main])
-  // }
+  private redirectFollowRole = async () => {
+    if (this.jwtDecodeService.checkRole()) {
+      await this.router.navigate([AppRouterAdmin.Main, AppRouterAdmin.Admin])
+      return
+    }
+
+    await this.router.navigate([AppRouter.Main])
+  }
 
   async ngOnDestroy(): Promise<void> {
 

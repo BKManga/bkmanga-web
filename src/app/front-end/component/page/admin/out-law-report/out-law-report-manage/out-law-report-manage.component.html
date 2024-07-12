@@ -30,7 +30,7 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let element">
-          <div class="button-element button-detail">
+          <div class="button-element button-detail" (click)="redirectToOutLawReportDetail(element.id)">
             <span>
               Chi tiết
             </span>

@@ -1,0 +1,22 @@
+@import "src/app/front-end/component/common/color";
+@import "src/app/front-end/component/common/value";
+
+.out-law-report__detail {
+  padding: $value-16;
+
+  .out-law__element {
+    display: flex;
+    align-items: center;
+    font-size: $value-18;
+
+    .out-law__element-label {
+      font-weight: bold;
+      color: $color-3a3b3c;
+      min-width: $value-190;
+    }
+
+    .out-law__element-content {
+      color: $color-ff2853;
+    }
+  }
+}

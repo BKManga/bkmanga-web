@@ -7,6 +7,8 @@ import {
 import {PaginatorData} from "../../../../../interface/paginator-data";
 import {PageEvent} from "@angular/material/paginator";
 import {StatusCodes} from "http-status-codes";
+import {Router} from "@angular/router";
+import {AppRouterAdmin} from "../../../../../constant/constants";
 
 @Component({
   selector: 'app-error-report-manage',
@@ -24,7 +26,8 @@ export class ErrorReportManageComponent implements OnInit{
   paginatorData: PaginatorData
 
   constructor(
-    private errorChapterReportControllerService: ErrorChapterReportControllerService
+    private errorChapterReportControllerService: ErrorChapterReportControllerService,
+    private router: Router,
   ) {
     this.paginatorData = {
       pageIndex: 0,
@@ -64,4 +67,14 @@ export class ErrorReportManageComponent implements OnInit{
     await this.getErrorReportData()
   }
 
+  redirectToErrorReportDetail = async (errorReportId?: number): Promise<void> => {
+    if (!errorReportId) return
+
+    await this.router.navigate([
+      AppRouterAdmin.Admin,
+      AppRouterAdmin.ErrorReport,
+      AppRouterAdmin.Detail,
+      errorReportId
+    ])
+  }
 }

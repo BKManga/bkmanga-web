@@ -92,13 +92,13 @@ export class MangaAddComponent implements OnInit {
             if (this.uploadImageLarge) this.uploadImageLargeManga(mangaId)
 
             if (chapterId && this.uploadChapterManga) this.uploadChapterMangaFile(chapterId, mangaId)
-
-            this.showDialog(
-              response.message ?? "",
-              "Tạo truyện mới thành công",
-              () => this.redirectToDetailPage(mangaId!)
-            )
           }
+
+          this.showDialog(
+            response.message ?? "",
+            "Tạo truyện mới thành công",
+            () => this.redirectToDetailPage(mangaId!)
+          )
         } else {
           this.showDialog(
             response.errorCode ?? "",

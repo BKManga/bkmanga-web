@@ -26,11 +26,11 @@
       </div>
       <ng-template [ngIf]="checkToken">
         <div fxLayout fxLayoutAlign="center center">
-          <div class="button-element button-report__error">
+          <div class="button-element button-report__error" (click)="showErrorReportDialog()">
             <mat-icon>warning</mat-icon>
             <span>
-            Báo lỗi chương
-          </span>
+              {{ "Báo lỗi chương" }}
+            </span>
           </div>
         </div>
       </ng-template>

@@ -25,6 +25,11 @@
   height: 49%;
   position: relative;
   color: $color-e4e6eb;
+
+  img {
+    position: absolute;
+    height: 100%;
+  }
 }
 
 .main-content__top__manga__side-info {
@@ -34,6 +39,7 @@
   justify-content: space-between;
   height: 100%;
   cursor: pointer;
+  z-index: 15;
 }
 
 .main-content__top__manga__chapter-title {
@@ -66,6 +72,13 @@
   background-color: $color-f29c57
 }
 
+.main-content__top__manga__chapter-title-4 {
+  background-color: $color-8bc34a;
+}
+
+.main-content__top__manga__chapter-title-5 {
+  background-color: $color-bd10e0
+}
 .main-content__top__manga__middle {
   width: 49%;
 }

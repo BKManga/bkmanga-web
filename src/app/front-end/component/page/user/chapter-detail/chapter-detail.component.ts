@@ -11,6 +11,7 @@ import {SnackbarData} from "../../../../interface/snackbar-data";
 import {DialogService} from "../../../../service/dialog.service";
 import {ScrollPageService} from "../../../../service/scroll-page.service";
 import {JwtDecodeService} from "../../../../service/jwt-decode.service";
+import {ErrorReportDialogData} from "../../../../interface/error-report-dialog-data";
 
 @Component({
   selector: 'app-chapter-detail',
@@ -159,5 +160,19 @@ export class ChapterDetailComponent implements OnInit{
     await this.router.navigate([
       AppRouter.Main
     ])
+  }
+
+  showErrorReportDialog() {
+    if (!parseInt(this.mangaId) && !parseInt(this.chapterId)) return
+
+    let errorReportDialogData: ErrorReportDialogData = {
+      title: "Báo lỗi chương",
+      description: "",
+      buttonText: "Xác nhận",
+      onAccept: () => {},
+      mangaId: parseInt(this.mangaId),
+      chapterId: parseInt(this.chapterId),
+    }
+    this.dialogService.showErrorReportDialog(errorReportDialogData)
   }
 }

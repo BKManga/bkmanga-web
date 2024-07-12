@@ -1,1 +1,79 @@
-<p>out-law-report-detail works!</p>
+<div fxLayout="column" class="out-law-report__detail" fxLayoutGap="16">
+  <h2 class="out-law-report__detail_label">
+    {{ "Chi tiết báo cáo phạm quy" }}
+  </h2>
+  <div fxLayout="column" fxLayoutGap="16">
+    <div class="out-law__element" fxLayout fxLayoutGap="12">
+      <span class="out-law__element-label">
+        {{ "Người đăng" }}
+      </span>
+      <span class="out-law__element-content">
+        {{ outLawReport?.uploadedBy?.username }}
+      </span>
+    </div>
+    <div class="out-law__element" fxLayout fxLayoutGap="12">
+      <span class="out-law__element-label">
+        {{ "Người bị tố cáo" }}
+      </span>
+      <span class="out-law__element-content">
+        {{ outLawReport?.userReported?.username }}
+      </span>
+    </div>
+    <div class="out-law__element" fxLayout fxLayoutGap="12">
+      <span class="out-law__element-label">
+        {{ "Mô tả tố cáo" }}
+      </span>
+      <span class="out-law__element-content">
+        {{ outLawReport?.description }}
+      </span>
+    </div>
+    <div class="out-law__element" fxLayout fxLayoutGap="12">
+      <span class="out-law__element-label">
+        {{ "Loại tố cáo" }}
+      </span>
+      <span class="out-law__element-content">
+        {{ "out_law_type." + outLawReport?.outLawType?.name | translate }}
+      </span>
+    </div>
+    <div class="out-law__element" fxLayout fxLayoutGap="12">
+      <span class="out-law__element-label">
+        {{ "Người xử lý tố cáo" }}
+      </span>
+      <span class="out-law__element-content">
+        {{ outLawReport?.updatedBy?.username ?? "Chưa xử lý" }}
+      </span>
+    </div>
+    <div class="out-law__element" fxLayout fxLayoutGap="12">
+      <span class="out-law__element-label">
+        {{ "Thời gian tạo tố cáo" }}
+      </span>
+      <span class="out-law__element-content">
+        {{ outLawReport?.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}
+      </span>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <ng-template [ngIf]="outLawReport?.commentReported && dataComment">
+    <h2 class="out-law-report__detail_label">
+      {{ "Chi tiết vi phạm" }}
+    </h2>
+    <div fxLayout="column" fxLayoutGap="16">
+      <div class="out-law__element" fxLayout fxLayoutGap="12">
+        <span class="out-law__element-label">
+          {{ "Nội dung vi phạm" }}
+        </span>
+        <span class="out-law__element-content">
+          {{ dataComment.content }}
+        </span>
+      </div>
+      <div class="out-law__element" fxLayout fxLayoutGap="12">
+        <span class="out-law__element-label">
+          {{ "Thời điểm đăng tải" }}
+        </span>
+        <span class="out-law__element-content">
+          {{ dataComment.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}
+        </span>
+      </div>
+    </div>
+  </ng-template>
+</div>

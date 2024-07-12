@@ -8,6 +8,21 @@
     width: 100%;
   }
 
+  .table-chapter {
+    margin-top: $value-16;
+    max-height: $value-300;
+    overflow: auto;
+    margin-bottom: $value-16;
+  }
+
+  .zip-file {
+    width: 100%;
+
+    .zip-file__upload {
+      width: 60%;
+    }
+  }
+
   .detail-field-form {
     width: 100%;
 

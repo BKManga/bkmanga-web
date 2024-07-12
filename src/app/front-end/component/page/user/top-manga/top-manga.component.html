@@ -1,24 +1,42 @@
 <div class="main-content__top__manga" #top_manga [ngStyle]="{height: heightMangaTop}">
   <div class="main-content__top__manga__side">
-    <div class="main-content__top__manga__side-element">
-      <img ngSrc="assets/images/image_large.jpg" alt="" fill priority>
+    <div class="main-content__top__manga__side-element"
+         (click)="redirectToChapterDetail(topMangaList?.at(1)?.id, topMangaList?.at(1)?.lastChapter?.id)"
+    >
+      <img [lazyLoad]="urlImage + topMangaList.at(1)?.id" alt="" [useSrcset]="true" width="100%">
       <div class="main-content__top__manga__side-info">
         <div fxLayout class="main-content__top__manga__chapter-title">
           <div class="main-content__top__manga__chapter-title-1">
             <span>
-              Chapter 1
+              {{ topMangaList?.at(1)?.lastChapter?.name ?? ""}}
             </span>
           </div>
         </div>
         <div class="main-content__top__manga__name">
           <span>
-            Lmao Lmao Lmao Lmao Lmao Lmao Lmao
+            {{ topMangaList?.at(1)?.name ?? ""}}
           </span>
         </div>
       </div>
     </div>
-    <div class="main-content__top__manga__side-element">
-      <img ngSrc="assets/images/image_large.jpg" alt="" fill priority>
+    <div class="main-content__top__manga__side-element"
+         (click)="redirectToChapterDetail(topMangaList?.at(2)?.id, topMangaList?.at(2)?.lastChapter?.id)"
+    >
+      <img [lazyLoad]="urlImage + topMangaList.at(2)?.id" alt="" [useSrcset]="true" width="100%">
+      <div class="main-content__top__manga__side-info">
+        <div fxLayout class="main-content__top__manga__chapter-title">
+          <div class="main-content__top__manga__chapter-title-2">
+            <span>
+              {{ topMangaList?.at(2)?.lastChapter?.name ?? ""}}
+            </span>
+          </div>
+        </div>
+        <div class="main-content__top__manga__name">
+          <span>
+            {{ topMangaList?.at(2)?.name ?? ""}}
+          </span>
+        </div>
+      </div>
     </div>
   </div>
   <div class="main-content__top__manga__middle">
@@ -30,11 +48,43 @@
     </div>
   </div>
   <div class="main-content__top__manga__side">
-    <div class="main-content__top__manga__side-element">
-      <img ngSrc="assets/images/image_large.jpg" alt="" fill priority>
+    <div class="main-content__top__manga__side-element"
+         (click)="redirectToChapterDetail(topMangaList?.at(3)?.id, topMangaList?.at(3)?.lastChapter?.id)"
+    >
+      <img [lazyLoad]="urlImage + topMangaList.at(3)?.id" alt="" [useSrcset]="true" width="100%">
+      <div class="main-content__top__manga__side-info">
+        <div fxLayout class="main-content__top__manga__chapter-title">
+          <div class="main-content__top__manga__chapter-title-4">
+            <span>
+              {{ topMangaList?.at(3)?.lastChapter?.name ?? ""}}
+            </span>
+          </div>
+        </div>
+        <div class="main-content__top__manga__name">
+          <span>
+            {{ topMangaList?.at(3)?.name ?? ""}}
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="main-content__top__manga__side-element">
-      <img ngSrc="assets/images/image_large.jpg" alt="" fill priority>
+    <div class="main-content__top__manga__side-element"
+         (click)="redirectToChapterDetail(topMangaList?.at(4)?.id, topMangaList?.at(4)?.lastChapter?.id)"
+    >
+      <img [lazyLoad]="urlImage + topMangaList.at(4)?.id" alt="" [useSrcset]="true" width="100%">
+      <div class="main-content__top__manga__side-info">
+        <div fxLayout class="main-content__top__manga__chapter-title">
+          <div class="main-content__top__manga__chapter-title-5">
+            <span>
+              {{ topMangaList?.at(4)?.lastChapter?.name ?? ""}}
+            </span>
+          </div>
+        </div>
+        <div class="main-content__top__manga__name">
+          <span>
+            {{ topMangaList?.at(4)?.name ?? ""}}
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

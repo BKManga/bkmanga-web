@@ -128,6 +128,4 @@ export class MangaManageComponent implements OnInit{
   protected readonly MiddlePrefixHandleImage = MiddlePrefixHandleImage;
   protected readonly GetImage = GetImage;
   protected readonly environment = environment;
-
-
 }

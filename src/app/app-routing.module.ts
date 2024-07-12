@@ -5,10 +5,10 @@ import {MainComponent} from "./front-end/component/page/user/main/main.component
 import {
   AppRouter, AppRouterAdmin,
   RouteAuthor,
-  RouteChapter,
+  RouteChapter, RouteErrorReport,
   RouteGenre,
-  RouteManga, RoutePrivacyPolicy,
-  RouteSearch
+  RouteManga, RouteOutLawReport, RoutePrivacyPolicy,
+  RouteSearch, RouteUser
 } from "./front-end/constant/constants";
 import {RegisterComponent} from "./front-end/component/page/auth/register/register.component";
 import {MangaDetailComponent} from "./front-end/component/page/user/manga-detail/manga-detail.component";
@@ -53,6 +53,13 @@ import {
   MangaDetailManageComponent
 } from "./front-end/component/page/admin/manga/manga-detail-manage/manga-detail-manage.component";
 import {noAuthGuard} from "./front-end/guard/no-auth.guard";
+import {UserDetailComponent} from "./front-end/component/page/admin/user/user-detail/user-detail.component";
+import {
+  ErrorReportDetailComponent
+} from "./front-end/component/page/admin/error-report/error-report-detail/error-report-detail.component";
+import {
+  OutLawReportDetailComponent
+} from "./front-end/component/page/admin/out-law-report/out-law-report-detail/out-law-report-detail.component";
 
 const routes: Routes = [
   {
@@ -195,7 +202,11 @@ const routes: Routes = [
           {
             path: AppRouterAdmin.Empty,
             component: UserManageComponent
-          }
+          },
+          {
+            path: `${AppRouterAdmin.Detail}/:${RouteUser.Param}`,
+            component: UserDetailComponent
+          },
         ]
       },
       {
@@ -204,6 +215,10 @@ const routes: Routes = [
           {
             path: AppRouterAdmin.Empty,
             component: ErrorReportManageComponent
+          },
+          {
+            path: `${AppRouterAdmin.Detail}/:${RouteErrorReport.Param}`,
+            component: ErrorReportDetailComponent
           }
         ]
       },
@@ -213,6 +228,10 @@ const routes: Routes = [
           {
             path: AppRouterAdmin.Empty,
             component: OutLawReportManageComponent
+          },
+          {
+            path: `${AppRouterAdmin.Detail}/:${RouteOutLawReport.Param}`,
+            component: OutLawReportDetailComponent
           }
         ]
       },

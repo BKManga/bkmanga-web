@@ -49,10 +49,16 @@
         </div>
         <div class="block-comment__element-content" fxFlex fxLayout="column" fxLayoutGap="8">
           <div fxLayout fxLayoutAlign="space-between center">
-            <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8">
+            <div fxLayout fxLayoutAlign="start center" fxLayoutGap="12">
               <span class="block-comment__element-name">
                 {{ comment?.user?.username ?? ""}}
               </span>
+              <ng-template [ngIf]="comment?.user?.username != usernameSession">
+                <button mat-raised-button color="accent" (click)="showOutLawReportDialog(comment?.user?.username, comment?.id)">
+                  {{ "Báo cáo" }}
+                </button>
+              </ng-template>
+
 <!--              <div class="block-comment__element-level" [appLevelDecoration]="'8'" >-->
 <!--                <span>Lmao level</span>-->
 <!--              </div>-->

@@ -3,6 +3,8 @@ import {PaginatorData} from "../../../../../interface/paginator-data";
 import {GetListOutLawReportRequestDTO, OutLawReport, OutLawReportControllerService} from "../../../../../bkmanga-svc";
 import {PageEvent} from "@angular/material/paginator";
 import {StatusCodes} from "http-status-codes";
+import {Router} from "@angular/router";
+import {AppRouterAdmin} from "../../../../../constant/constants";
 
 @Component({
   selector: 'app-out-law-report-report-manage',
@@ -21,7 +23,8 @@ export class OutLawReportManageComponent implements OnInit{
   paginatorData: PaginatorData
 
   constructor(
-    private outLawReportControllerService: OutLawReportControllerService
+    private outLawReportControllerService: OutLawReportControllerService,
+    private router: Router,
   ) {
     this.paginatorData = {
       pageIndex: 0,
@@ -60,4 +63,14 @@ export class OutLawReportManageComponent implements OnInit{
     await this.getOutLawData()
   }
 
+  redirectToOutLawReportDetail = async (outLawReportId?: number): Promise<void> => {
+    if (!outLawReportId) return
+
+    await this.router.navigate([
+      AppRouterAdmin.Admin,
+      AppRouterAdmin.OutLawReport,
+      AppRouterAdmin.Detail,
+      outLawReportId
+    ])
+  }
 }

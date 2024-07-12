@@ -114,6 +114,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponsePrivacyPolicy'
+  /api/v1/privacyPolicy/delete:
+    put:
+      tags:
+      - privacy-policy-controller
+      operationId: deletePrivacyPolicy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePrivacyPolicyRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseObject'
   /api/v1/manga/update:
     put:
       tags:
@@ -1448,6 +1466,7 @@ components:
           type: string
     UpdateInfoUserRequestDTO:
       required:
+      - dateOfBirth
       - fullName
       - genderId
       - userId
@@ -1461,6 +1480,8 @@ components:
         genderId:
           type: integer
           format: int32
+        dateOfBirth:
+          type: string
     UpdateOutLawReportRequestDTO:
       required:
       - outLawReportId
@@ -1533,6 +1554,8 @@ components:
           type: string
         uploadedBy:
           $ref: '#/components/schemas/User'
+        updatedBy:
+          $ref: '#/components/schemas/User'
         createdAt:
           type: string
           format: date-time
@@ -1600,126 +1623,6 @@ components:
         errorReportStatusId:
           type: integer
           format: int32
-    ApiResponseErrorChapterReport:
-      type: object
-      properties:
-        result:
-          $ref: '#/components/schemas/ErrorChapterReport'
-        errorCode:
-          type: string
-        message:
-          type: string
-        responseCode:
-          type: integer
-          format: int32
-    ErrorChapterReport:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        description:
-          type: string
-        uploadedBy:
-          $ref: '#/components/schemas/User'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        errorReportStatus:
-          $ref: '#/components/schemas/ErrorReportStatus'
-    ErrorReportStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        chapterReportList:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorChapterReport'
-    UpdatePrivacyPolicyRequestDTO:
-      required:
-      - answer
-      - id
-      - question
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        question:
-          type: string
-        answer:
-          type: string
-    ApiResponsePrivacyPolicy:
-      type: object
-      properties:
-        result:
-          $ref: '#/components/schemas/PrivacyPolicy'
-        errorCode:
-          type: string
-        message:
-          type: string
-        responseCode:
-          type: integer
-          format: int32
-    PrivacyPolicy:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        question:
-          type: string
-        answer:
-          type: string
-        updatedBy:
-          $ref: '#/components/schemas/User'
-        updatedAt:
-          type: string
-          format: date-time
-    UpdateMangaRequestDTO:
-      required:
-      - ageRangeId
-      - description
-      - listAuthorId
-      - listGenreId
-      - mangaId
-      - mangaStatusId
-      - name
-      - otherName
-      type: object
-      properties:
-        mangaId:
-          type: integer
-          format: int64
-        name:
-          type: string
-        otherName:
-          type: string
-        description:
-          type: string
-        listGenreId:
-          type: array
-          items:
-            type: integer
-            format: int32
-        listAuthorId:
-          type: array
-          items:
-            type: integer
-            format: int32
-        ageRangeId:
-          type: integer
-          format: int32
-        mangaStatusId:
-          type: integer
-          format: int32
     AgeRange:
       type: object
       properties:
@@ -1728,11 +1631,11 @@ components:
           format: int32
         name:
           type: string
-    ApiResponseManga:
+    ApiResponseErrorChapterReport:
       type: object
       properties:
         result:
-          $ref: '#/components/schemas/Manga'
+          $ref: '#/components/schemas/ErrorChapterReport'
         errorCode:
           type: string
         message:
@@ -1759,6 +1662,48 @@ components:
         updatedAt:
           type: string
           format: date-time
+    ErrorChapterReport:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        manga:
+          $ref: '#/components/schemas/Manga'
+        description:
+          type: string
+        uploadedBy:
+          $ref: '#/components/schemas/User'
+        updatedBy:
+          $ref: '#/components/schemas/User'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        errorType:
+          $ref: '#/components/schemas/ErrorType'
+        chapter:
+          $ref: '#/components/schemas/Chapter'
+        errorReportStatus:
+          $ref: '#/components/schemas/ErrorReportStatus'
+    ErrorReportStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+    ErrorType:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
     Follow:
       type: object
       properties:
@@ -1852,6 +1797,104 @@ components:
         numberOfViews:
           type: integer
           format: int64
+    UpdatePrivacyPolicyRequestDTO:
+      required:
+      - answer
+      - id
+      - question
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        question:
+          type: string
+        answer:
+          type: string
+    ApiResponsePrivacyPolicy:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/PrivacyPolicy'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          type: integer
+          format: int32
+    PrivacyPolicy:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        question:
+          type: string
+        answer:
+          type: string
+        updatedBy:
+          $ref: '#/components/schemas/User'
+        updatedAt:
+          type: string
+          format: date-time
+    DeletePrivacyPolicyRequestDTO:
+      required:
+      - privacyPolicyId
+      type: object
+      properties:
+        privacyPolicyId:
+          type: integer
+          format: int32
+    UpdateMangaRequestDTO:
+      required:
+      - ageRangeId
+      - description
+      - listAuthorId
+      - listGenreId
+      - mangaId
+      - mangaStatusId
+      - name
+      - otherName
+      type: object
+      properties:
+        mangaId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        otherName:
+          type: string
+        description:
+          type: string
+        listGenreId:
+          type: array
+          items:
+            type: integer
+            format: int32
+        listAuthorId:
+          type: array
+          items:
+            type: integer
+            format: int32
+        ageRangeId:
+          type: integer
+          format: int32
+        mangaStatusId:
+          type: integer
+          format: int32
+    ApiResponseManga:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/Manga'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          type: integer
+          format: int32
     UpdateGenreRequestDTO:
       required:
       - description
@@ -2035,11 +2078,11 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/SortObject'
-        pageable:
-          $ref: '#/components/schemas/PageableObject'
         numberOfElements:
           type: integer
           format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
         first:
           type: boolean
         last:
@@ -2054,24 +2097,24 @@ components:
           format: int64
         sort:
           $ref: '#/components/schemas/SortObject'
-        paged:
-          type: boolean
-        unpaged:
-          type: boolean
         pageNumber:
           type: integer
           format: int32
         pageSize:
           type: integer
           format: int32
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
     SortObject:
       type: object
       properties:
         empty:
           type: boolean
-        unsorted:
-          type: boolean
         sorted:
+          type: boolean
+        unsorted:
           type: boolean
     GetUserDetailRequestDTO:
       required:
@@ -2138,11 +2181,11 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/SortObject'
-        pageable:
-          $ref: '#/components/schemas/PageableObject'
         numberOfElements:
           type: integer
           format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
         first:
           type: boolean
         last:
@@ -2162,12 +2205,11 @@ components:
       - description
       - outLawAreaId
       - outLawTypeId
-      - userReportedId
+      - usernameReported
       type: object
       properties:
-        userReportedId:
-          type: integer
-          format: int64
+        usernameReported:
+          type: string
         commentReportedId:
           type: integer
           format: int64
@@ -2224,11 +2266,11 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/SortObject'
-        pageable:
-          $ref: '#/components/schemas/PageableObject'
         numberOfElements:
           type: integer
           format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
         first:
           type: boolean
         last:
@@ -2375,11 +2417,11 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/SortObject'
-        pageable:
-          $ref: '#/components/schemas/PageableObject'
         numberOfElements:
           type: integer
           format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
         first:
           type: boolean
         last:
@@ -2782,11 +2824,11 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/SortObject'
-        pageable:
-          $ref: '#/components/schemas/PageableObject'
         numberOfElements:
           type: integer
           format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
         first:
           type: boolean
         last:
@@ -2909,11 +2951,11 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/SortObject'
-        pageable:
-          $ref: '#/components/schemas/PageableObject'
         numberOfElements:
           type: integer
           format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
         first:
           type: boolean
         last:
@@ -3092,11 +3134,11 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/SortObject'
-        pageable:
-          $ref: '#/components/schemas/PageableObject'
         numberOfElements:
           type: integer
           format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
         first:
           type: boolean
         last:
@@ -3227,8 +3269,7 @@ components:
         description:
           type: string
         updatedBy:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/User'
         mangaStatus:
           $ref: '#/components/schemas/MangaStatus'
         viewManga:

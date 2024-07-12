@@ -77,12 +77,24 @@ export const RouteChapter = {
   Param: 'idChapter'
 }
 
+export const RouteUser = {
+  Param: 'idUser'
+}
+
 export const RouteGenre = {
   Param: 'idGenre'
 }
 
 export const RoutePrivacyPolicy = {
   Param: 'idPrivacyPolicy'
+}
+
+export const RouteErrorReport = {
+  Param: 'idErrorReport'
+}
+
+export const RouteOutLawReport = {
+  Param: 'idOutLawReport'
 }
 
 export const Role = {
@@ -144,4 +156,31 @@ export const AgeRange = {
   Upper12: [2, "12+"],
   Upper16: [3, "16+"],
   Upper18: [4, "18+"],
+}
+
+export const ErrorType = {
+  TRANSLATION: [1, "translation"],
+  IMAGE_QUANTITY: [2, "image quality"],
+  DUPLICATE: [3, "duplicate"],
+  LOAD_IMAGE: [4, "load image"],
+}
+
+export const OutLawType = {
+  HATRED: [1, "hatred"],
+  SEXUAL: [2, "sexual"],
+  VIOLENCE: [3, "violence"],
+  OTHER: [4, "other"]
+}
+
+export const OutLawArea = {
+  ACCOUNT: 1,
+  MANGA_COMMENT: 2,
+  CHAPTER_COMMENT: 3
+}
+
+export const ProcessStatusHandle = {
+  NEW: 1,
+  IN_PROCESS: 2,
+  RESOLVED: 3,
+  REJECTED: 4
 }

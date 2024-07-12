@@ -115,20 +115,63 @@
         {{ "Lưu thông tin" }}
       </div>
     </div>
+    <mat-divider></mat-divider>
+    <div fxLayout fxLayoutAlign="start center" fxLayoutGap="16">
+      <form [formGroup]="formUploadChapter" fxLayout="column" style="width: 60%" fxLayoutGap="12">
+        <mat-form-field>
+          <mat-label>
+            {{ "Tên chapter đầu tiên" }}
+          </mat-label>
+          <input formControlName="nameChapter" matInput>
+        </mat-form-field>
+        <div class="zip-file" fxLayout fxLayoutAlign="space-between center">
+          <label for="imageChapterZipFile" class="button-upload button-element button-delete">
+            Upload file nén của chương truyện
+          </label>
+          <input type="file" id="imageChapterZipFile" accept="application/zip" (change)="onChangeChapterUpload($event)">
+          <mat-form-field class="zip-file__upload">
+            <mat-label>
+              {{ "File nén chương truyện đầu" }}
+            </mat-label>
+            <input formControlName="chapterMangaNameUpload" matInput>
+          </mat-form-field>
+        </div>
+      </form>
+      <div class="button-element button-add" (click)="createNewChapter()">
+        {{ "Thêm chương truyện mới" }}
+      </div>
+    </div>
+    <div class="table-chapter">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Tên chương truyện </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="created_at">
+          <th mat-header-cell *matHeaderCellDef> Ngày tạo chương truyện </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <label [for]="'imageChapterZipFile' + element.id" class="button-upload button-element button-delete">
+              Upload file nén của chương truyện
+            </label>
+            <input type="file" [id]="'imageChapterZipFile' + element.id" accept="application/zip"
+                   (change)="onChangeChapterUpload($event, element.id)"
+            >
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
   </div>
 </div>
 
-
-<!--<div fxLayout fxLayoutAlign="space-between center">
-            <mat-form-field>
-              <mat-label>
-                {{ "Tên chapter đầu tiên" }}
-              </mat-label>
-              <input formControlName="firstChapterName" matInput>
-            </mat-form-field>
-            <div class="button-element button-add">
-            <span>
-              Upload file nén của chương truyện
-            </span>
-            </div>
-          </div>-->

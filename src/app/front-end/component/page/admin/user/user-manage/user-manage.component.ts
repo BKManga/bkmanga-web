@@ -3,7 +3,6 @@ import {PaginatorData} from "../../../../../interface/paginator-data";
 import {
   GetUserListRequestDTO,
   GetUserManagementResponseDTO,
-  User,
   UserControllerService
 } from "../../../../../bkmanga-svc";
 import {PageEvent} from "@angular/material/paginator";
@@ -11,6 +10,8 @@ import {StatusCodes} from "http-status-codes";
 import {DialogService} from "../../../../../service/dialog.service";
 import {Router} from "@angular/router";
 import {SnackbarData} from "../../../../../interface/snackbar-data";
+import {AppRouterAdmin} from "../../../../../constant/constants";
+import {A} from "@angular/cdk/keycodes";
 
 @Component({
   selector: 'app-user-manage',
@@ -74,5 +75,16 @@ export class UserManageComponent implements OnInit{
 
   async ngOnInit(): Promise<void> {
     await this.getUserData()
+  }
+
+  redirectToUserDetail = async(userId?: number): Promise<void> => {
+    if (!userId) return
+
+    await this.router.navigate([
+      AppRouterAdmin.Admin,
+      AppRouterAdmin.User,
+      AppRouterAdmin.Detail,
+      userId
+    ])
   }
 }

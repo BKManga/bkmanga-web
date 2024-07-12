@@ -36,6 +36,18 @@
       "other": "khác"
     }
   },
+  "error_type": {
+    "translation": "Dịch truyện sai",
+    "image quality": "Chất lượng ảnh không tốt",
+    "duplicate": "Lặp ảnh",
+    "load image": "Lỗi tải ảnh"
+  },
+  "out_law_type": {
+    "hatred": "Phát ngôn thù hận",
+    "sexual": "Có yếu tố khiêu gợi",
+    "violence": "Có yếu tố bạo lực",
+    "other": "Khác"
+  },
   "action": "action",
   "adventure": "adventure",
   "anime":  "anime",

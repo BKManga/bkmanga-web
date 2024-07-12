@@ -1,14 +1,51 @@
-<div class="error-background" fxLayout="column" fxLayoutGap="36px">
-  <div fxLayout="row" fxLayoutAlign="center center" class="error-title" >
-      <span class="error-title-text">
+<div class="out-law-report-background" fxLayout="column" fxLayoutGap="36px">
+  <div fxLayout="row" fxLayoutAlign="center center" class="out-law-report-title" >
+      <span class="out-law-report-title-text">
         {{data.title}}
       </span>
   </div>
 
-  <div fxLayout="row" class="error-description" fxLayoutAlign="center center">
-      <span class="error-description-text" [innerHTML]="data.description">
-      </span>
-  </div>
+  <form [formGroup]="formGroup" fxLayout="column" class="out-law-report-description" fxLayoutGap="8">
+    <div fxLayout fxLayoutAlign="space-between center">
+      <h3>
+        {{ "Lỗi vi phạm" }}
+      </h3>
+      <mat-form-field style="width: 65%" appearance="outline">
+        <mat-label>Loại lỗi</mat-label>
+        <select class="register-content__body-gender" matNativeControl formControlName="outLawType">
+          <option [value]="OutLawType.HATRED.at(0)">
+            {{ "out_law_type." + OutLawType.HATRED.at(1)|translate }}
+          </option>
+          <option [value]="OutLawType.SEXUAL.at(0)">
+            {{ "out_law_type." + OutLawType.SEXUAL.at(1)|translate }}
+          </option>
+          <option [value]="OutLawType.VIOLENCE.at(0)">
+            {{ "out_law_type." + OutLawType.VIOLENCE.at(1)|translate }}
+          </option>
+          <option [value]="OutLawType.OTHER.at(0)">
+            {{ "out_law_type." + OutLawType.OTHER.at(1)|translate }}
+          </option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div fxLayout fxLayoutAlign="space-between center">
+      <h3>
+        {{ "Mô tả vi phạm" }}
+      </h3>
+      <mat-form-field style="width: 65%" appearance="outline">
+        <mat-label>{{ "Mô tả vi phạm" }}</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="3"
+          maxlength="512"
+          formControlName="description">
+        </textarea>
+      </mat-form-field>
+    </div>
+  </form>
 
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10" style="padding-bottom: 10px">
     <button mat-raised-button mat-dialog-close>

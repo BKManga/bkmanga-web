@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {PrivacyPolicy, PrivacyPolicyControllerService} from "../../../../../bkmanga-svc";
+import {DeletePrivacyPolicyRequestDTO, PrivacyPolicy, PrivacyPolicyControllerService} from "../../../../../bkmanga-svc";
 import {StatusCodes} from "http-status-codes";
 import {Router} from "@angular/router";
 import {AppRouterAdmin} from "../../../../../constant/constants";
+import {DialogService} from "../../../../../service/dialog.service";
+import {SnackbarData} from "../../../../../interface/snackbar-data";
 
 @Component({
   selector: 'app-privacy-policy-manage',
@@ -16,6 +18,7 @@ export class PrivacyPolicyManageComponent implements OnInit{
   constructor(
     private privacyPolicyControllerService: PrivacyPolicyControllerService,
     private router: Router,
+    private dialogService: DialogService,
   ) {
   }
 
@@ -43,5 +46,23 @@ export class PrivacyPolicyManageComponent implements OnInit{
       AppRouterAdmin.Detail,
       privacyPolicyId
     ])
+  }
+
+  private deletePrivacyPolicy = async (privacyPolicyId: number): Promise<void> => {
+    let deletePrivacyPolicyRequestDTO: DeletePrivacyPolicyRequestDTO = {
+      privacyPolicyId: privacyPolicyId
+    }
+
+    this.privacyPolicyControllerService.deletePrivacyPolicy(deletePrivacyPolicyRequestDTO).subscribe(
+      (response) => {
+        if (response.responseCode === StatusCodes.OK) {
+          this.getPrivacyPolicyData()
+        }
+
+        let snackBarData: SnackbarData = {
+          message: response.message ?? ""
+        }
+        this.dialogService.showSnackBar(snackBarData)
+    })
   }
 }

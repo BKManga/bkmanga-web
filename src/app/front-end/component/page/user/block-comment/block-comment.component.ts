@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {PaginatorData} from "../../../../interface/paginator-data";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
@@ -15,7 +15,7 @@ import {
   AuthToken,
   CommentBlockArea,
   DataOrderBy, GetImage,
-  MiddlePrefixHandleImage,
+  MiddlePrefixHandleImage, OutLawArea,
   RouteChapter,
   RouteManga
 } from "../../../../constant/constants";
@@ -26,6 +26,7 @@ import {DialogService} from "../../../../service/dialog.service";
 import {JwtDecodeService} from "../../../../service/jwt-decode.service";
 import {environment} from "../../../../../../environments/environment.development";
 import {CookieService} from "ngx-cookie-service";
+import {OutLawReportDialogData} from "../../../../interface/out-law-report-dialog-data";
 
 @Component({
   selector: 'app-block-comment',
@@ -40,6 +41,10 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
 
   usernameSession?: string
 
+  protected readonly MiddlePrefixHandleImage = MiddlePrefixHandleImage
+  protected readonly GetImage = GetImage
+  protected readonly environment = environment
+
   paginatorData: PaginatorData = {
     pageIndex: 0,
     pageSize: 5,
@@ -49,7 +54,7 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
   }
 
   totalComment: number = 0
-  dataOrderBy = DataOrderBy.ASC
+  dataOrderBy = DataOrderBy.DESC
   id: number = 0
   checkToken: boolean = false
 
@@ -232,7 +237,22 @@ export class BlockCommentComponent implements OnInit, AfterViewInit{
 
     this.dialogService.showSnackBar(snackBarData)
   }
-  protected readonly MiddlePrefixHandleImage = MiddlePrefixHandleImage;
-  protected readonly GetImage = GetImage;
-  protected readonly environment = environment;
+
+  showOutLawReportDialog = (username?: string, commentReportedId?: number) => {
+    if (!username) return
+
+    let outLawReportDialogData: OutLawReportDialogData = {
+      title: "Báo cáo người dùng vi phạm",
+      description: "",
+      buttonText: "Xác nhận",
+      onAccept: () => {},
+      usernameReported: username,
+      commentReportedId: commentReportedId,
+      outLawArea: this.commentBlockArea === CommentBlockArea.MANGA
+        ? OutLawArea.MANGA_COMMENT
+        : OutLawArea.CHAPTER_COMMENT
+    }
+
+    this.dialogService.showOutLawReportDialog(outLawReportDialogData)
+  }
 }

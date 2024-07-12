@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import {ImageData} from "../../../interface/image-data";
-import {AppRouterAdmin, GetImage, LogoLarge, MiddlePrefixHandleImage} from "../../../constant/constants";
+import {AppRouterAdmin, AuthToken, GetImage, LogoLarge, MiddlePrefixHandleImage} from "../../../constant/constants";
 import {Router} from "@angular/router";
 import {environment} from "../../../../../environments/environment.development";
+import {JwtDecodeService} from "../../../service/jwt-decode.service";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-header-admin',
@@ -10,13 +12,24 @@ import {environment} from "../../../../../environments/environment.development";
   styleUrls: ['./header-admin.component.scss']
 })
 export class HeaderAdminComponent {
-  logoLarge: ImageData
 
+  logoLarge: ImageData
+  urlImageProfile?: string
 
   constructor(
     private router: Router,
+    private jwtDecodeService: JwtDecodeService,
+    private cookieService: CookieService,
   ) {
     this.logoLarge = LogoLarge
+    this.jwtDecodeService.checkToken().subscribe((value) => {
+      if (value) {
+        this.urlImageProfile = environment.apiBaseUrl +
+          MiddlePrefixHandleImage.Prefix +
+          GetImage.USER_PROFILE_LOGO +
+          jwtDecodeService.decodeToken(cookieService.get(AuthToken))?.sub ?? ""
+      }
+    })
   }
 
   redirectToMainManagePage = async () => {
